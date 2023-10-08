@@ -1219,10 +1219,61 @@ Rich Herrington
 </div>
 
 </section>
+<section id="conda-for-high-performance-computing-hpc" class="slide level2">
+<h2>Conda for High-Performance Computing (HPC)</h2>
+<ul>
+<li class="fragment">Conda: An open-source package management and environment management system.</li>
+<li class="fragment">Purpose: Facilitates the installation, management, and deployment of software packages and libraries.</li>
+<li class="fragment">Cross-Platform: Available for Windows, macOS, and Linux.</li>
+</ul>
+</section>
+<section id="conda-in-the-context-of-hpc" class="slide level2">
+<h2>Conda in the Context of HPC</h2>
+<ul>
+<li class="fragment">Environment Management: Conda allows users to create isolated environments to manage dependencies and versions of software, ensuring consistency and reproducibility across different stages of the project and among different team members.</li>
+<li class="fragment">Package Management: It simplifies the process of installing, updating, and managing software packages from various repositories, which can be crucial for managing complex HPC applications.</li>
+</ul>
+</section>
 <section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
-<p>This presentation will guide you through the installation and usage of Conda and Mamba on TACC’s LS6 system.</p>
+<section id="key-features-beneficial-for-hpc" class="title-slide slide level1 center">
+<h1>Key Features Beneficial for HPC</h1>
+
+</section>
+<section id="reproducibility" class="slide level2">
+<h2>Reproducibility</h2>
+<ul>
+<li class="fragment">Ensures that computational experiments and applications are reproducible by managing specific versions of packages and dependencies.</li>
+<li class="fragment">Facilitates sharing of environments using environment.yml files, ensuring that other researchers and practitioners can recreate the same computational environment.</li>
+</ul>
+</section>
+<section id="dependency-management" class="slide level2">
+<h2>Dependency Management</h2>
+<ul>
+<li class="fragment">Automatically resolves and manages dependencies, ensuring that all software libraries are compatible.</li>
+<li class="fragment">Reduces the “Dependency Hell” by handling library versions and resolving conflicts, which is crucial in HPC where multiple libraries might be used for parallel computing, numerical analysis, data processing, etc.</li>
+</ul>
+</section>
+<section id="cross-language-support" class="slide level2">
+<h2>Cross-Language Support</h2>
+<ul>
+<li class="fragment">Supports various programming languages like Python, R, Julia, Scala, C/C++, SQL, etc., which are commonly used in data analysis, machine learning, scientific computing, and more in the HPC context.</li>
+<li class="fragment">Allows for the integration of packages from different languages into a single computational environment, facilitating cross-language development and execution.</li>
+</ul>
+</section>
+<section id="binary-package-management" class="slide level2">
+<h2>Binary Package Management:</h2>
+<ul>
+<li class="fragment">Provides pre-compiled binary packages, which reduces the need to compile code and manage compilers, thereby simplifying software deployment on HPC systems.</li>
+<li class="fragment">Provides binaries that are compatible with various CPU and GPU architectures, ensuring wide applicability in diverse HPC setups.</li>
+<li class="fragment">Conda supports binary packages for Windows, macOS, and Linux, ensuring that software can be consistently deployed across various platforms.</li>
+</ul>
+</section>
+<section id="channel-and-repository-management" class="slide level2">
+<h2>Channel and Repository Management:</h2>
+<ul>
+<li class="fragment">Allows users to access packages from different repositories and channels, providing a wide array of scientific and computational libraries and tools optimized for various use cases.</li>
+<li class="fragment">Enables organizations to host their own repositories to manage and distribute software efficiently.</li>
+</ul>
 </section>
 <section id="installing-conda-on-ls6" class="slide level2 smaller" style="font-size: 0.63em">
 <h2>Installing Conda on LS6</h2>
