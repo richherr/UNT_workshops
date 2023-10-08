@@ -1,0 +1,120 @@
+---
+title: "An Introduction to Conda and Mamba on LS6"
+subtitle: "An Easier Path to Computing"
+author: "Rich Herrington"
+format: 
+  revealjs: 
+    theme: white
+    transition: slide
+code-tools: true
+incremental: true
+---
+
+# Introduction
+
+This presentation will guide you through the installation and usage of Conda and Mamba on TACC's LS6 system.
+
+## Installing Conda on LS6 {.smaller style="font-size: 0.63em"}
+ 
+1. Change into your work directory; then download the miniforge mamba/conda installer from the 
+github site. [https://github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge)
+
+::: {.fragment}
+```bash
+login1.ls6(672)$ pwd
+/home1/07723/richherr
+login2.ls6(549)$ cd /home1/07723/richherr/work
+login1.ls6(658)$ wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+```
+:::
+
+2. Change the permissions on the installer to executable (+x).  
+Then run the executable and follow the directions. Make sure to use the path to your **work** 
+directory when installing. You don't want to install into your **home** directory.   
+
+3. Respond **yes** the question: "Do you wish the installer to initialize Miniforge3
+by running conda init? [yes|no]"
+
+::: {.fragment}
+```bash
+login1.ls6(670)$ pwd
+/home1/07723/richherr/work
+login1.ls6(662)$ ls -la Miniforge3-Linux-x86_64.sh
+-rw------- 1 richherr G-824114 87007851 Sep  3 18:22 Miniforge3-Linux-x86_64.sh
+login1.ls6(663)$ chmod +x Miniforge3-Linux-x86_64.sh
+login1.ls6(664)$ ls -la Miniforge3-Linux-x86_64.sh
+-rwx------ 1 richherr G-824114 87007851 Sep  3 18:22 Miniforge3-Linux-x86_64.sh
+login1.ls6(665)$ ./Miniforge3-Linux-x86_64.sh
+
+Welcome to Miniforge3 23.3.1-1
+
+In order to continue the installation process, please review the license
+agreement.
+Please, press ENTER to continue
+>>>
+
+```
+:::
+
+## Creating a <span style="color: red;">conda.init</span> File {.smaller style="font-size: 0.68em"}
+
+4. We need to remove the conda lines added to your **.bashrc** file and place them in a
+seperate file called **conda.init**.  We'll grab the last 20 lines to make sure we get 
+all of the lines. We may need to delete some of the lines that are not part of the conda 
+init lines. Use **nano** to edit the file.  Scroll through the file and **Ctl-k** (delete) 
+any lines that are before the conda init lines then **Ctl-o** to save the file. Your **conda.init** 
+file should contain something similar to the lines displayed using the **more** command.
+
+::: {.fragment}
+```bash
+login2.ls6(564)$ cd ~
+login2.ls6(564)$ tail -20 .bashrc > conda.init
+login2.ls6(564)$ nano conda.init [delete any lines not contained within the conda init lines]
+login2.ls6(564)$ more conda.init
+
+## >>> conda initialize >>>
+## !! Contents within this block are managed by 'conda init' !!
+   __conda_setup="$('/work/07723/richherr/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null
+)"
+   if [ $? -eq 0 ]; then
+       eval "$__conda_setup"
+   else
+       if [ -f "/work/07723/richherr/miniconda3/etc/profile.d/conda.sh" ]; then
+           . "/work/07723/richherr/miniconda3/etc/profile.d/conda.sh"
+       else
+           export PATH="/work/07723/richherr/miniconda3/bin:$PATH"
+       fi
+   fi
+   unset __conda_setup
+## <<< conda initialize <<<
+```
+:::
+
+## Editing <span style="color: red;">.bashrc</span> and Activating Conda {style="font-size: 0.80em"}
+
+5. Now we need to remove the conda init lines from our **.bashrc** file.  Use **nano** editor again 
+to edit the **.bashrc** file.  Scroll to the bottom of the file and use **Ctl-k** to delete all of
+the conda init lines (see lines above).  When finished use **Ctl-o** to save to your **.bashrc** file.  Now 
+you can use the **source** command to source the **conda.init** file rather than having conda active
+everytime you login to LS6. This gives you the ability to use **conda activate** in a bash shell. 
+
+::: {.fragment}
+```bash
+login2.ls6(564)$ cd ~
+login2.ls6(564)$ nano .bashrc [delete all of the conda init lines - see above]
+login2.ls6(564)$ source conda.init
+login2.ls6(564)$ conda activate
+(base) login1.ls6(622)$ conda env list
+# conda environments:
+#
+base                  *  /work/07723/richherr/miniconda3
+>>>
+```
+:::
+
+
+
+
+
+
+
