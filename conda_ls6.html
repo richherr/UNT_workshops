@@ -1243,14 +1243,14 @@ Rich Herrington
 <h2>Reproducibility</h2>
 <ul>
 <li class="fragment">Ensures that computational experiments and applications are reproducible by managing specific versions of packages and dependencies.</li>
-<li class="fragment">Facilitates sharing of environments using environment.yml files, ensuring that other researchers and practitioners can recreate the same computational environment.</li>
+<li class="fragment">Facilitates sharing of environments using environment.yml files, ensuring that other researchers can recreate the same computational environment.</li>
 </ul>
 </section>
 <section id="dependency-management" class="slide level2">
 <h2>Dependency Management</h2>
 <ul>
 <li class="fragment">Automatically resolves and manages dependencies, ensuring that all software libraries are compatible.</li>
-<li class="fragment">Reduces the “Dependency Hell” by handling library versions and resolving conflicts, which is crucial in HPC where multiple libraries might be used for parallel computing, numerical analysis, data processing, etc.</li>
+<li class="fragment">Reduces the dependency problems by handling library versions and resolving conflicts, which is crucial in HPC where multiple libraries might be used for parallel computing, numerical analysis, data processing, etc.</li>
 </ul>
 </section>
 <section id="cross-language-support" class="slide level2">
@@ -1282,6 +1282,24 @@ Rich Herrington
 <li class="fragment">Users can install software packages locally within a Conda environment, bypassing the need for system administrator permissions usually required for global installations.</li>
 <li class="fragment">Conda provides access to pre-compiled binary packages, eliminating the need to compile software from source which might require system-level dependencies and administrator privileges.</li>
 </ul>
+</section>
+<section id="one-last-important-point-about-performance" class="slide level2">
+<h2>One Last Important Point About Performance</h2>
+<div class="fragment">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Conda and its generic binary packages may not always provide the level of optimization and performance tuning that specialized HPC compilers and networking solutions can offer. The convenience and ease of use provided by Conda might come at the cost of potentially lower performance in some HPC scenarios. However, Conda still remains a valuable tool for managing and deploying software, especially in environments where ease of use, reproducibility, and rapid deployment are prioritized over squeezing out every last bit of performance.</p>
+</div>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="installing-conda-on-ls6" class="title-slide slide level1 center">
@@ -1318,7 +1336,7 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <span id="cb2-11"><a href="#cb2-11"></a></span>
 <span id="cb2-12"><a href="#cb2-12"></a><span class="ex">In</span> order to continue the installation process, please review the license</span>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="ex">agreement.</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="ex">Please,</span> press ENTER to continue</span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="ex">Plea</span> se, press ENTER to continue</span>
 <span id="cb2-15"><a href="#cb2-15"></a><span class="op">&gt;&gt;&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
