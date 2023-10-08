@@ -6,6 +6,7 @@ format:
   revealjs: 
     theme: white
     transition: slide
+    self-contained: true
 code-tools: true
 incremental: true
 ---
