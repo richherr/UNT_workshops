@@ -1,7 +1,7 @@
 ---
 title: "An Introduction to Conda and Mamba on LS6"
 subtitle: "Streamlining Scientific Computing with Effective Package Management"
-author: "Richard Herrington"
+author: "Rich Herrington"
 format: 
   revealjs: 
     theme: white
