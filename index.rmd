@@ -7,7 +7,9 @@ author:
     url: 
     affiliation: University of North Texas
     affiliation_url: https://research.unt.edu/research-services/research-computing
-output: distill::distill_article
+output: 
+    distill::distill_article:
+      css: themes.css
 ---
 
 ### An Introduction to Conda and Mamba on LS6 - Streamlining Scientific Computing with Effective Package Management
