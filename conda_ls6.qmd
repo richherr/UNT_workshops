@@ -9,6 +9,10 @@ format:
     self-contained: true
 code-tools: true
 incremental: true
+title-slide-attributes: 
+  data-background-image: unt.png
+  data-background-size: 15%
+  data-background-position: 2% 2%
 ---
 
 ## Conda for High-Performance Computing (HPC)
