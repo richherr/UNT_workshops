@@ -353,7 +353,111 @@ zstd                      1.5.5                hfc55251_0    conda-forge
 ```
 :::
 
-## Using Our H2o Conda Environment with a SLURM Batch Job {style="font-size: 0.68em"}
+## Using Our H2o Conda Environment with a SLURM Batch Job {style="font-size: 0.64em"}
 
-9. 
+9. Next we will use our H2o conda environment with the SLURM batch system on LS6.  We will build a build a randomForest classifier with H2o using the **Data Expo 2009 - Airline on-time performance** data. [https://community.amstat.org/jointscsg-section/dataexpo/dataexpo2009](https://community.amstat.org/jointscsg-section/dataexpo/dataexpo2009). Our target variable is whether or not a flight has been delayed.  We use a smaller subset of this data - 2GB compressed.  The full data is 12GB compressed. The smaller data has 43978 rows with 31 variables - we will use 8 variables as predictors.   We use a subset of these variables. Our Python script **h2o_randomForesty.py** is listed below.
 
+::: fragment
+``` bash
+import h2o
+from h2o.estimators import H2ORandomForestEstimator
+# Initialize H2O cluster
+h2o.init(ip="localhost", port=54321)
+# Load the airlines dataset
+data = h2o.import_file(path="http://h2o-public-test-data.s3.amazonaws.com/smalldata/airlines/allyears2k_headers.zip")
+# Define features and target
+features = ["Year", "Month", "DayOfWeek", "DepTime", "UniqueCarrier", "Origin", "Dest", "Distance"]
+target = "IsArrDelayed"
+# Train a model
+model = H2ORandomForestEstimator()
+model.train(x=features, y=target, training_frame=data)
+# Train a model
+model = H2ORandomForestEstimator(ntrees=100, max_depth=50)
+model.train(x=features, y=target, training_frame=data)
+# Display model performance
+print(model)
+# Shutdown H2O cluster
+h2o.cluster().shutdown()
+```
+:::
+
+## Creating the SLURM Batch Job {style="font-size: 0.64em"}
+
+10. We need to create a SLURM batch script **h2o_randomForest.sh** that activates our **h2oai** environment and then submits the Python script to a compute note. 
+
+::: fragment
+``` bash
+#!/bin/bash
+#SBATCH --job-name=h2o_Job
+#SBATCH --output=h2o_Job_%A_%a.out
+#SBATCH --error=h2o_Job_%A_%a.err
+#SBATCH -N 1
+#SBATCH -p development
+#SBATCH -n 1
+#SBATCH -t 02:00:00
+#SBATCH --mail-user=richherr@unt.edu
+#SBATCH --mail-type=begin
+#SBATCH --mail-type=end
+
+# Load module or activate conda environment
+source ~/conda.init
+conda activate h2oai
+
+# Initialize H2O cluster
+srun python h2o_randomForest.py
+```
+:::
+
+## Submitting the SLURM Batch Job {style="font-size: 0.64em"}
+
+11. Make sure the python script and the slurm script are in the same directory before submitting the batch script 
+
+::: fragment
+``` bash
+login1.ls6(616)$ pwd
+/home1/07723/richherr/work/h2o
+login1.ls6(617)$ sbatch h2o_randomForest.sh
+
+-----------------------------------------------------------------
+           Welcome to the Lonestar6 Supercomputer
+-----------------------------------------------------------------
+
+No reservation for this job
+--> Verifying valid submit host (login1)...OK
+--> Verifying valid jobname...OK
+--> Verifying valid ssh keys...OK
+--> Verifying access to desired queue (development)...OK
+--> Checking available allocation (TRA21001)...OK
+--> Verifying that quota for filesystem /home1/07723/richherr is at  8.61% allocated...OK
+--> Verifying that quota for filesystem /work/07723/richherr/ls6 is at 12.70% allocated...OK
+Submitted batch job 1218654
+```
+:::
+
+::: fragment
+``` bash
+login1.ls6(617)$ squeue -u richherr      
+
+login1.ls6.tacc.utexas.edu: 
+Mon Oct  9 
+01:36:02 2023
+
+  JOBID    PARTITION          NAME     USER  ST      TIME  NODES           NODELIST(REASON)
+1218502       normal  h2o_arrayJob richherr   R   0:01:04      1           c302-017
+```
+:::
+
+## Logging Into the Compute Node and Checking the Resource Utilization {style="font-size: 0.64em"}
+
+12. We want to make sure that our H2o randomForest model is maximally using the resources on the compute node.   To do this we ssh login to the node and use **htop** to view the processor activity.  Here we see that all of the processors are being utilized. 
+
+::: fragment
+``` bash
+  login1.ls6(617)$ ssh c302-017
+c302-017.ls6(608)$ htop
+```
+:::
+
+::: fragment
+![htop view](/work/richherr/UNT_workshops/h2o_htop_view.png){.fragment width="860" height="425"}
+:::
