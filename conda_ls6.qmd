@@ -11,7 +11,7 @@ code-tools: true
 incremental: true
 title-slide-attributes: 
   data-background-image: unt.png
-  data-background-size: 25%
+  data-background-size: 23%
   data-background-position: 2% 2%
 editor: 
   markdown: 
