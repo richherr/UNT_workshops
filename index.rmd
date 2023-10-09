@@ -4,13 +4,13 @@ description: |
   Workshops Presented at UNT by Research Computing Services
 author:
   - name: Rich Herrington 
-    url: https://research.unt.edu/research-services/research-computing
+    url: 
     affiliation: University of North Texas
-    affiliation_url:
+    affiliation_url: https://research.unt.edu/research-services/research-computing
 output: distill::distill_article
 ---
 
-## Workshop 1: An Introduction to Conda and Mamba on LS6
+## An Introduction to Conda and Mamba on LS6
 Streamlining Scientific Computing with Effective Package Management
 
 - **Materials**: [An Introduction to Conda and Mamba on LS6](https://richherr.github.io/UNT_workshops/conda_ls6.html#/title-slide)
