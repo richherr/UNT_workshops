@@ -1,24 +1,19 @@
 ---
 title: "UNT Workshops"
 description: |
-  A new article created using the Distill format.
+  Workshops Presented at UNT by Research Computing Services
 author:
   - name: Rich Herrington 
     url: https://research.unt.edu/research-services/research-computing
     affiliation: University of North Texas
     affiliation_url:
 output: distill::distill_article
-    self_contained: true
-    
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
+## Workshop 1: An Introduction to Conda and Mamba on LS6
+Streamlining Scientific Computing with Effective Package Management
 
-Distill is a publication format for scientific and technical writing, native to the web. 
-
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+- **Materials**: [An Introduction to Conda and Mamba on LS6](https://richherr.github.io/UNT_workshops/conda_ls6.html#/title-slide)
 
 
 
