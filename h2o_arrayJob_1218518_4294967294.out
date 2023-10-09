@@ -1,0 +1,125 @@
+Checking whether there is an H2O instance running at http://localhost:54321..... not found.
+Attempting to start a local H2O server...
+  Java Version: openjdk version "1.8.0_345"; OpenJDK Runtime Environment (build 1.8.0_345-b01); OpenJDK 64-Bit Server VM (build 25.345-b01, mixed mode)
+  Starting server from /work/07723/richherr/miniconda3/envs/h2oai/lib/python3.8/site-packages/h2o/backend/bin/h2o.jar
+  Ice root: /tmp/tmpzwab4jj7
+  JVM stdout: /tmp/tmpzwab4jj7/h2o_richherr_started_from_python.out
+  JVM stderr: /tmp/tmpzwab4jj7/h2o_richherr_started_from_python.err
+  Server is running at http://127.0.0.1:54321
+Connecting to H2O server at http://127.0.0.1:54321 ... successful.
+--------------------------  -------------------------------
+H2O_cluster_uptime:         01 secs
+H2O_cluster_timezone:       America/Chicago
+H2O_data_parsing_timezone:  UTC
+H2O_cluster_version:        3.42.0.4
+H2O_cluster_version_age:    5 days
+H2O_cluster_name:           H2O_from_python_richherr_u1qlyr
+H2O_cluster_total_nodes:    1
+H2O_cluster_free_memory:    26.63 Gb
+H2O_cluster_total_cores:    128
+H2O_cluster_allowed_cores:  128
+H2O_cluster_status:         locked, healthy
+H2O_connection_url:         http://127.0.0.1:54321
+H2O_connection_proxy:       {"http": null, "https": null}
+H2O_internal_security:      False
+Python_version:             3.8.17 final
+--------------------------  -------------------------------
+Parse progress: |████████████████████████████████████████████████████████████████| (done) 100%
+drf Model Build progress: |██████████████████████████████████████████████████████| (done) 100%
+Model Details
+=============
+H2ORandomForestEstimator : Distributed Random Forest
+Model Key: DRF_model_python_1696829720302_1
+
+
+Model Summary: 
+    number_of_trees    number_of_internal_trees    model_size_in_bytes    min_depth    max_depth    mean_depth    min_leaves    max_leaves    mean_leaves
+--  -----------------  --------------------------  ---------------------  -----------  -----------  ------------  ------------  ------------  -------------
+    100                100                         1.01086e+07            28           41           33.69         5421          7078          6275.46
+
+ModelMetricsBinomial: drf
+** Reported on train data. **
+
+MSE: 0.19245778290965485
+RMSE: 0.4387001058920032
+LogLoss: 0.5685405955092597
+Mean Per-Class Error: 0.3303219396045163
+AUC: 0.7752525578240561
+AUCPR: 0.8142937589826034
+Gini: 0.5505051156481122
+
+Confusion Matrix (Act/Pred) for max f1 @ threshold = 0.3670802474595691
+       NO     YES    Error    Rate
+-----  -----  -----  -------  -----------------
+NO     9351   10186  0.5214   (10186.0/19537.0)
+YES    3404   21037  0.1393   (3404.0/24441.0)
+Total  12755  31223  0.309    (13590.0/43978.0)
+
+Maximum Metrics: Maximum metrics at their respective thresholds
+metric                       threshold    value     idx
+---------------------------  -----------  --------  -----
+max f1                       0.36708      0.755857  269
+max f2                       0.0951444    0.86438   374
+max f0point5                 0.603504     0.745612  170
+max accuracy                 0.501732     0.705876  212
+max precision                0.999861     0.994286  0
+max recall                   0.00661542   1         399
+max specificity              0.999861     0.999898  0
+max absolute_mcc             0.577354     0.410408  180
+max min_per_class_accuracy   0.532229     0.704305  199
+max mean_per_class_accuracy  0.577354     0.706149  180
+max tns                      0.999861     19535     0
+max fns                      0.999861     24093     0
+max fps                      0.00661542   19537     399
+max tps                      0.00661542   24441     399
+max tnr                      0.999861     0.999898  0
+max fnr                      0.999861     0.985762  0
+max fpr                      0.00661542   1         399
+max tpr                      0.00661542   1         399
+
+Gains/Lift Table: Avg response rate: 55.58 %, avg score: 54.78 %
+group    cumulative_data_fraction    lower_threshold    lift      cumulative_lift    response_rate    score     cumulative_response_rate    cumulative_score    capture_rate    cumulative_capture_rate    gain      cumulative_gain    kolmogorov_smirnov
+-------  --------------------------  -----------------  --------  -----------------  ---------------  --------  --------------------------  ------------------  --------------  -------------------------  --------  -----------------  --------------------
+1        0.010005                    0.994368           1.77073   1.77073            0.984091         0.999166  0.984091                    0.999166            0.0177161       0.0177161                  77.0727   77.0727            0.0173578
+2        0.02001                     0.980109           1.77891   1.77482            0.988636         0.986681  0.986364                    0.992923            0.017798        0.0355141                  77.8906   77.4817            0.0348999
+3        0.030015                    0.971524           1.72983   1.75982            0.961364         0.975546  0.97803                     0.987131            0.017307        0.0528211                  72.9833   75.9822            0.0513367
+4        0.04002                     0.963636           1.70121   1.74517            0.945455         0.96758   0.969886                    0.982243            0.0170206       0.0698417                  70.1207   74.5168            0.0671289
+5        0.0500023                   0.956577           1.69279   1.73471            0.940774         0.960065  0.964075                    0.977816            0.0168978       0.0867395                  69.2786   73.4711            0.0826959
+6        0.100005                    0.914274           1.64061   1.68766            0.911778         0.936153  0.937926                    0.956984            0.0820343       0.168774                   64.0611   68.7661            0.1548
+7        0.150007                    0.866243           1.53424   1.63652            0.85266          0.890093  0.909504                    0.934687            0.0767154       0.245489                   53.4237   63.652             0.214932
+8        0.200009                    0.820164           1.45241   1.59049            0.807185         0.842914  0.883925                    0.911744            0.0726239       0.318113                   45.2411   59.0493            0.265853
+9        0.300014                    0.728802           1.35667   1.51255            0.753979         0.774261  0.840609                    0.865916            0.135674        0.453787                   35.6675   51.2553            0.346145
+10       0.399995                    0.638516           1.21703   1.43868            0.67637          0.68357   0.799557                    0.820337            0.121681        0.575467                   21.7029   43.8685            0.394989
+11       0.5                         0.55136            1.06619   1.36418            0.592542         0.594921  0.758152                    0.775252            0.106624        0.682092                   6.61927   36.4183            0.40989
+12       0.600005                    0.464988           0.914405  1.28922            0.508186         0.507895  0.716489                    0.730691            0.0914447       0.773536                   -8.55945  28.9217            0.390622
+13       0.699986                    0.376043           0.797985  1.21905            0.443484         0.420355  0.677495                    0.686364            0.079784        0.85332                    -20.2015  21.9053            0.345156
+14       0.799991                    0.281715           0.624741  1.14476            0.347203         0.329347  0.636206                    0.641735            0.062477        0.915797                   -37.5259  14.476             0.260681
+15       0.899995                    0.181927           0.503639  1.07352            0.2799           0.23302   0.596614                    0.59632             0.0503662       0.966163                   -49.6361  7.35203            0.148945
+16       1                           0                  0.33835   1                  0.18804          0.111008  0.555755                    0.547786            0.0338366       1                          -66.165   0                  0
+
+Scoring History: 
+    timestamp            duration    number_of_trees    training_rmse    training_logloss    training_auc    training_pr_auc    training_lift    training_classification_error
+--  -------------------  ----------  -----------------  ---------------  ------------------  --------------  -----------------  ---------------  -------------------------------
+    2023-10-09 00:35:27  0.476 sec   0                  nan              nan                 nan             nan                nan              nan
+    2023-10-09 00:35:29  2.382 sec   1                  0.515299         5.63414             0.692323        0.704275           1.34254          0.353912
+    2023-10-09 00:35:30  3.005 sec   2                  0.510108         4.89216             0.693204        0.709189           1.36054          0.374477
+    2023-10-09 00:35:30  3.462 sec   3                  0.500814         4.3428              0.704674        0.72269            1.39428          0.360016
+    2023-10-09 00:35:31  4.039 sec   4                  0.49432          3.66988             0.708099        0.727025           1.40591          0.360578
+    2023-10-09 00:35:31  4.523 sec   5                  0.487988         3.18919             0.71399         0.73376            1.42353          0.359061
+    2023-10-09 00:35:36  9.138 sec   28                 0.445118         0.635559            0.765479        0.802987           1.68878          0.316067
+    2023-10-09 00:35:40  13.143 sec  51                 0.440962         0.581706            0.77179         0.810237           1.77073          0.31584
+    2023-10-09 00:35:44  17.161 sec  91                 0.438949         0.569314            0.774856        0.813745           1.77482          0.307267
+    2023-10-09 00:35:45  18.065 sec  100                0.4387           0.568541            0.775253        0.814294           1.77073          0.309018
+
+Variable Importances: 
+variable       relative_importance    scaled_importance    percentage
+-------------  ---------------------  -------------------  ------------
+DepTime        150226                 1                    0.370335
+Origin         66943.8                0.44562              0.165029
+Dest           59909.6                0.398797             0.147688
+DayOfWeek      47535.5                0.316427             0.117184
+Year           37655.7                0.25066              0.0928282
+Distance       25339.4                0.168675             0.0624662
+UniqueCarrier  12058.6                0.0802699            0.0297267
+Month          5980.7                 0.0398114            0.0147435
+H2O session _sid_bc8c closed.

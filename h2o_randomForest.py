@@ -8,9 +8,13 @@ h2o.init(ip="localhost", port=54321)
 data = h2o.import_file(path="http://h2o-public-test-data.s3.amazonaws.com/smalldata/airlines/allyears2k_headers.zip")
 
 # Define features and target
-features = data.columns
+features = ["Year", "Month", "DayOfWeek", "DepTime", "UniqueCarrier", "Origin", "Dest", "Distance"]
 target = "IsArrDelayed"
-features.remove(target)
+
+# Train a model
+model = H2ORandomForestEstimator()
+model.train(x=features, y=target, training_frame=data)
+
 
 # Train a model
 model = H2ORandomForestEstimator(ntrees=100, max_depth=50)
