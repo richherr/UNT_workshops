@@ -13,69 +13,119 @@ title-slide-attributes:
   data-background-image: unt.png
   data-background-size: 15%
   data-background-position: 2% 2%
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-# Slide URL 
+# Slide URL
 
 [https://richherr.github.io/UNT_workshops/](https://richherr.github.io/UNT_workshops/){style="font-size: 1.25em"}
 
 ## Conda for High-Performance Computing (HPC)
-- Conda: An open-source package management and environment management system.
-- Purpose: Facilitates the installation, management, and deployment of software packages and libraries.
-- Cross-Platform: Available for Windows, macOS, and Linux.
+
+-   Conda: An open-source package management and environment management
+    system.
+-   Purpose: Facilitates the installation, management, and deployment of
+    software packages and libraries.
+-   Cross-Platform: Available for Windows, macOS, and Linux.
 
 ## Conda in the Context of HPC
-- Environment Management: Conda allows users to create isolated environments to manage dependencies and versions of software, ensuring consistency and reproducibility across different stages of the project and among different team members.
-- Package Management: It simplifies the process of installing, updating, and managing software packages from various repositories, which can be crucial for managing complex HPC applications.
+
+-   Environment Management: Conda allows users to create isolated
+    environments to manage dependencies and versions of software,
+    ensuring consistency and reproducibility across different stages of
+    the project and among different team members.
+-   Package Management: It simplifies the process of installing,
+    updating, and managing software packages from various repositories,
+    which can be crucial for managing complex HPC applications.
 
 # Key Features Beneficial for HPC
 
 ## Reproducibility
-- Ensures that computational experiments and applications are reproducible by managing specific versions of packages and dependencies.
-- Facilitates sharing of environments using environment.yml files, ensuring that other researchers can recreate the same computational environment.
+
+-   Ensures that computational experiments and applications are
+    reproducible by managing specific versions of packages and
+    dependencies.
+-   Facilitates sharing of environments using environment.yml files,
+    ensuring that other researchers can recreate the same computational
+    environment.
 
 ## Dependency Management
-- Automatically resolves and manages dependencies, ensuring that all software libraries are compatible.
-- Reduces the dependency problems by handling library versions and resolving conflicts, which is crucial in HPC where multiple libraries might be used for parallel computing, numerical analysis, data processing, etc.
+
+-   Automatically resolves and manages dependencies, ensuring that all
+    software libraries are compatible.
+-   Reduces the dependency problems by handling library versions and
+    resolving conflicts, which is crucial in HPC where multiple
+    libraries might be used for parallel computing, numerical analysis,
+    data processing, etc.
 
 ## Cross-Language Support
-- Supports various programming languages like Python, R, Julia, Scala, C/C++, SQL, etc., which are commonly used in data analysis, machine learning, scientific computing, and more in the HPC context.
-- Allows for the integration of packages from different languages into a single computational environment, facilitating cross-language development and execution.
+
+-   Supports various programming languages like Python, R, Julia, Scala,
+    C/C++, SQL, etc., which are commonly used in data analysis, machine
+    learning, scientific computing, and more in the HPC context.
+-   Allows for the integration of packages from different languages into
+    a single computational environment, facilitating cross-language
+    development and execution.
 
 ## Binary Package Management:
-- Provides pre-compiled binary packages, which reduces the need to compile code and manage compilers, thereby simplifying software deployment on HPC systems.
-- Provides binaries that are compatible with various CPU and GPU architectures, ensuring wide applicability in diverse HPC setups.
-- Conda supports binary packages for Windows, macOS, and Linux, ensuring that software can be consistently deployed across various platforms.
+
+-   Provides pre-compiled binary packages, which reduces the need to
+    compile code and manage compilers, thereby simplifying software
+    deployment on HPC systems.
+-   Provides binaries that are compatible with various CPU and GPU
+    architectures, ensuring wide applicability in diverse HPC setups.
+-   Conda supports binary packages for Windows, macOS, and Linux,
+    ensuring that software can be consistently deployed across various
+    platforms.
 
 ## Channel and Repository Management:
-- Allows users to access packages from different repositories and channels, providing a wide array of scientific and computational libraries and tools optimized for various use cases.
-- Enables organizations to host their own repositories to manage and distribute software efficiently.
 
-## Local Software Management 
+-   Allows users to access packages from different repositories and
+    channels, providing a wide array of scientific and computational
+    libraries and tools optimized for various use cases.
+-   Enables organizations to host their own repositories to manage and
+    distribute software efficiently.
 
-- Conda allows users to create isolated environments, enabling the installation of software packages and dependencies without interfering with system-wide installations or requiring administrator privileges.
-- Users can install software packages locally within a Conda environment, bypassing the need for system administrator permissions usually required for global installations.
-- Conda provides access to pre-compiled binary packages, eliminating the need to compile software from source which might require system-level dependencies and administrator privileges.
+## Local Software Management
 
+-   Conda allows users to create isolated environments, enabling the
+    installation of software packages and dependencies without
+    interfering with system-wide installations or requiring
+    administrator privileges.
+-   Users can install software packages locally within a Conda
+    environment, bypassing the need for system administrator permissions
+    usually required for global installations.
+-   Conda provides access to pre-compiled binary packages, eliminating
+    the need to compile software from source which might require
+    system-level dependencies and administrator privileges.
 
 ## One Last Important Point About Performance
 
 ::: fragment
-::: callout-warning 
-Conda and its generic binary packages may not always provide the level of optimization and performance tuning that specialized HPC compilers and networking solutions can offer. The convenience and ease of use provided by Conda might come at the cost of potentially lower performance in some HPC scenarios. However, Conda still remains a valuable tool for managing and deploying software, especially in environments where ease of use, reproducibility, and rapid deployment are prioritized over squeezing out every last bit of performance.
+::: callout-warning
+Conda and its generic binary packages may not always provide the level
+of optimization and performance tuning that specialized HPC compilers
+and networking solutions can offer. The convenience and ease of use
+provided by Conda might come at the cost of potentially lower
+performance in some HPC scenarios. However, Conda still remains a
+valuable tool for managing and deploying software, especially in
+environments where ease of use, reproducibility, and rapid deployment
+are prioritized over squeezing out every last bit of performance.
 :::
 :::
-
 
 # Installing Conda on LS6
 
 ## Download and Installation {.smaller style="font-size: 0.63em"}
- 
-1. Change into your work directory; then download the miniforge mamba/conda installer from the 
-github site. [https://github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge)
 
-::: {.fragment}
-```bash
+1.  Change into your work directory; then download the miniforge
+    mamba/conda installer from the github site.
+    <https://github.com/conda-forge/miniforge>
+
+::: fragment
+``` bash
 login1.ls6(672)$ pwd
 /home1/07723/richherr
 login2.ls6(549)$ cd /home1/07723/richherr/work
@@ -83,15 +133,16 @@ login1.ls6(658)$ wget "https://github.com/conda-forge/miniforge/releases/latest/
 ```
 :::
 
-2. Change the permissions on the installer to executable (+x).  
-Then run the executable and follow the directions. Make sure to use the path to your **work** 
-directory when installing. You don't want to install into your **home** directory.   
+2.  Change the permissions on the installer to executable (+x).\
+    Then run the executable and follow the directions. Make sure to use
+    the path to your **work** directory when installing. You don't want
+    to install into your **home** directory.
 
-3. Respond **yes** the question: "Do you wish the installer to initialize Miniforge3
-by running conda init? [yes|no]"
+3.  Respond **yes** the question: "Do you wish the installer to
+    initialize Miniforge3 by running conda init? \[yes\|no\]"
 
-::: {.fragment}
-```bash
+::: fragment
+``` bash
 login1.ls6(670)$ pwd
 /home1/07723/richherr/work
 login1.ls6(662)$ ls -la Miniforge3-Linux-x86_64.sh
@@ -107,21 +158,22 @@ In order to continue the installation process, please review the license
 agreement.
 Plea se, press ENTER to continue
 >>>
-
 ```
 :::
 
-## Creating a <span style="color: red;">conda.init</span> File {.smaller style="font-size: 0.68em"}
+## Creating a [conda.init]{style="color: red;"} File {.smaller style="font-size: 0.68em"}
 
-4. We need to remove the conda lines added to your **.bashrc** file and place them in a
-seperate file called **conda.init**.  We'll grab the last 20 lines to make sure we get 
-all of the lines. We may need to delete some of the lines that are not part of the conda 
-init lines. Use **nano** to edit the file.  Scroll through the file and **Ctl-k** (delete) 
-any lines that are before the conda init lines then **Ctl-o** to save the file. Your **conda.init** 
-file should contain something similar to the lines displayed using the **more** command.
+4.  We need to remove the conda lines added to your **.bashrc** file and
+    place them in a seperate file called **conda.init**. We'll grab the
+    last 20 lines to make sure we get all of the lines. We may need to
+    delete some of the lines that are not part of the conda init lines.
+    Use **nano** to edit the file. Scroll through the file and **Ctl-k**
+    (delete) any lines that are before the conda init lines then
+    **Ctl-o** to save the file. Your **conda.init** file should contain
+    something similar to the lines displayed using the **more** command.
 
-::: {.fragment}
-```bash
+::: fragment
+``` bash
 login2.ls6(564)$ cd ~
 login2.ls6(564)$ tail -20 .bashrc > conda.init
 login2.ls6(564)$ nano conda.init [delete any lines not contained within the conda init lines]
@@ -145,16 +197,19 @@ login2.ls6(564)$ more conda.init
 ```
 :::
 
-## Editing <span style="color: red;">.bashrc</span> and Activating Conda {style="font-size: 0.80em"}
+## Editing [.bashrc]{style="color: red;"} and Activating Conda {style="font-size: 0.80em"}
 
-5. Now we need to remove the conda init lines from our **.bashrc** file.  Use **nano** editor again 
-to edit the **.bashrc** file.  Scroll to the bottom of the file and use **Ctl-k** to delete all of
-the conda init lines (see lines above).  When finished use **Ctl-o** to save to your **.bashrc** file.  Now 
-you can use the **source** command to source the **conda.init** file rather than having conda active
-everytime you login to LS6. This gives you the ability to use **conda activate** in a bash shell. 
+5.  Now we need to remove the conda init lines from our **.bashrc**
+    file. Use **nano** editor again to edit the **.bashrc** file. Scroll
+    to the bottom of the file and use **Ctl-k** to delete all of the
+    conda init lines (see lines above). When finished use **Ctl-o** to
+    save to your **.bashrc** file. Now you can use the **source**
+    command to source the **conda.init** file rather than having conda
+    active everytime you login to LS6. This gives you the ability to use
+    **conda activate** in a bash shell.
 
-::: {.fragment}
-```bash
+::: fragment
+``` bash
 login2.ls6(564)$ cd ~
 login2.ls6(564)$ nano .bashrc [delete all of the conda init lines - see above]
 login2.ls6(564)$ source conda.init
@@ -167,16 +222,115 @@ base                  *  /work/07723/richherr/miniconda3
 ```
 :::
 
+## Creating a New Conda Environment {style="font-size: 0.80em"}
+
+6.  Let's create a new conda environment. But first, let's make sure our
+    python path is the one determined by our conda base environment by
+    using the **which** command. Then we will use the **create**
+    argument to conda to create a new environment. Will create an
+    environment for the AI software H2o
+    
+    [https://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html](https://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html) 
+
+::: fragment
+``` bash
+(base) login1.ls6(783)$ which python
+/work/07723/richherr/miniconda3/bin/python
+```
+:::
+
+::: fragment
+``` bash
+(base) login1.ls6(786)$ conda create -n h2oai
+
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+## Package Plan ##
+  environment location: /work/07723/richherr/miniconda3/envs/h2oai
+
+(base) login1.ls6(786)$ conda activate h2oai
+(base) login1.ls6(786)$ conda install h2oai
+```
+:::
+
+## Conda Installation of H2o
+
+7.  The **conda install** will take a few minutes to install you will
+    see
+
+::: fragment
+``` bash
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    alsa-lib-1.2.10            |       hd590300_0         542 KB  conda-forge
+    cairo-1.16.0               |    h0c91306_1017         1.1 MB  conda-forge
+    freetype-2.12.1            |       h267a509_2         620 KB  conda-forge
+...
+...
+...
+  xorg-xextproto     conda-forge/linux-64::xorg-xextproto-7.3.0-h0b41bf4_1003
+  xorg-xproto        conda-forge/linux-64::xorg-xproto-7.0.31-h7f98852_1007
+  xz                 conda-forge/linux-64::xz-5.2.6-h166bdaf_0
+  zlib               conda-forge/linux-64::zlib-1.2.13-hd590300_5
+  zstd               conda-forge/linux-64::zstd-1.5.5-hfc55251_0
 
 
+Proceed ([y]/n)? y
 
 
+Downloading and Extracting Packages
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(h2oai) login1.ls6(799)$
+```
+:::
+
+## Mamba: A Fast, Reliable Alternative to Conda 
+
+8. Mamba is an open-source package manager that is fully compatible with Conda. Like Conda, it is designed to manage and deploy software packages and their dependencies. Mamba is notably recognized for its speed in resolving dependencies and installing packages.
+
+::: fragment
+::: callout-note
+Mamba was installed along with Conda during our earlier Miniforge installation
+:::
+:::
+
+## Why Use Mamba Rather Than Conda?  
+- Speed and Efficiency: Mamba uses a C++ library (libsolv) for dependency resolution, which is significantly faster than Conda's Python-based resolver. 
+- Quick Installations: Mamba often installs packages more quickly than Conda, enhancing user efficiency, especially when dealing with environments that have numerous or complex dependencies.
+- Compatibility with Conda: Mamba is compatible with Conda environments and repositories, allowing users to benefit from the extensive Conda package ecosystem without major modifications.
+
+## Why Use Mamba Rather Than Conda?  
+- Environment Management: Mamba can manage Conda environments, ensuring that users can switch between Mamba and Conda easily. 
+- Lower Memory Usage: Mamba typically uses less memory than Conda, making it a lightweight alternative, especially beneficial for systems with limited resources.
+- Optimized Computations: Mamba is designed to optimize computational resources, ensuring efficient use of CPU and memory during package management tasks.
+
+## Using Mamba to install Within an Existing Conda Environment {style="font-size: 0.68em"}
+
+8.  Let's use Mamba to install the Python module **dask** in our existing h2o conda environment. Dask is a parallel computing library in Python that enables performance optimizations through dynamic task scheduling and parallel execution, particularly suited for processing larger-than-memory datasets. 
+    
+    [https://docs.dask.org/en/stable/](https://docs.dask.org/en/stable/) 
+
+::: fragment
+``` bash
+(h2oai) login1.ls6(799)$ mamba install dask
+Downloading and Extracting Packages
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+```
+:::
+
+::: fragment
+``` bash
 
 
-
-
-
-
-
+```
+:::
 
 

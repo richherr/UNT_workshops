@@ -1314,7 +1314,7 @@ Rich Herrington
 <section id="download-and-installation" class="slide level2 smaller" style="font-size: 0.63em">
 <h2>Download and Installation</h2>
 <ol type="1">
-<li class="fragment">Change into your work directory; then download the miniforge mamba/conda installer from the github site. <a href="https://github.com/conda-forge/miniforge">https://github.com/conda-forge/miniforge</a></li>
+<li class="fragment">Change into your work directory; then download the miniforge mamba/conda installer from the github site. <a href="https://github.com/conda-forge/miniforge" class="uri">https://github.com/conda-forge/miniforge</a></li>
 </ol>
 <div class="fragment">
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">672</span><span class="kw">)</span><span class="ex">$</span> pwd</span>
@@ -1388,6 +1388,117 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <span id="cb4-7"><a href="#cb4-7"></a><span class="co">#</span></span>
 <span id="cb4-8"><a href="#cb4-8"></a><span class="ex">base</span>                  <span class="pp">*</span>  /work/07723/richherr/miniconda3</span>
 <span id="cb4-9"><a href="#cb4-9"></a><span class="op">&gt;&gt;&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-a-new-conda-environment" class="slide level2" style="font-size: 0.80em">
+<h2>Creating a New Conda Environment</h2>
+<ol start="6" type="1">
+<li class="fragment"><p>Let’s create a new conda environment. But first, let’s make sure our python path is the one determined by our conda base environment by using the <strong>which</strong> command. Then we will use the <strong>create</strong> argument to conda to create a new environment. Will create an environment for the AI software H2o</p>
+<p><a href="https://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html">https://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html</a></p></li>
+</ol>
+<div class="fragment">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">783</span><span class="kw">)</span><span class="ex">$</span> which python</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">/work/07723/richherr/miniconda3/bin/python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">786</span><span class="kw">)</span><span class="ex">$</span> conda create <span class="at">-n</span> h2oai</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">Collecting</span> package metadata <span class="er">(</span><span class="ex">current_repodata.json</span><span class="kw">)</span><span class="bu">:</span> done</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="ex">Solving</span> environment: done</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">## Package Plan ##</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="ex">environment</span> location: /work/07723/richherr/miniconda3/envs/h2oai</span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">786</span><span class="kw">)</span><span class="ex">$</span> conda activate h2oai</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">786</span><span class="kw">)</span><span class="ex">$</span> conda install h2oai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="conda-installation-of-h2o" class="slide level2">
+<h2>Conda Installation of H2o</h2>
+<ol start="7" type="1">
+<li class="fragment">The <strong>conda install</strong> will take a few minutes to install you will see</li>
+</ol>
+<div class="fragment">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">The</span> following packages will be downloaded:</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="ex">package</span>                    <span class="kw">|</span>            <span class="ex">build</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="ex">---------------------------</span><span class="kw">|</span><span class="ex">-----------------</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="ex">alsa-lib-1.2.10</span>            <span class="kw">|</span>       <span class="ex">hd590300_0</span>         542 KB  conda-forge</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="ex">cairo-1.16.0</span>               <span class="kw">|</span>    <span class="ex">h0c91306_1017</span>         1.1 MB  conda-forge</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="ex">freetype-2.12.1</span>            <span class="kw">|</span>       <span class="ex">h267a509_2</span>         620 KB  conda-forge</span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="ex">...</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="ex">...</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="ex">...</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  <span class="ex">xorg-xextproto</span>     conda-forge/linux-64::xorg-xextproto-7.3.0-h0b41bf4_1003</span>
+<span id="cb7-12"><a href="#cb7-12"></a>  <span class="ex">xorg-xproto</span>        conda-forge/linux-64::xorg-xproto-7.0.31-h7f98852_1007</span>
+<span id="cb7-13"><a href="#cb7-13"></a>  <span class="fu">xz</span>                 conda-forge/linux-64::xz-5.2.6-h166bdaf_0</span>
+<span id="cb7-14"><a href="#cb7-14"></a>  <span class="ex">zlib</span>               conda-forge/linux-64::zlib-1.2.13-hd590300_5</span>
+<span id="cb7-15"><a href="#cb7-15"></a>  <span class="ex">zstd</span>               conda-forge/linux-64::zstd-1.5.5-hfc55251_0</span>
+<span id="cb7-16"><a href="#cb7-16"></a></span>
+<span id="cb7-17"><a href="#cb7-17"></a></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="ex">Proceed</span> <span class="er">(</span><span class="ex">[y]/n</span><span class="kw">)</span><span class="ex">?</span> y</span>
+<span id="cb7-19"><a href="#cb7-19"></a></span>
+<span id="cb7-20"><a href="#cb7-20"></a></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="ex">Downloading</span> and Extracting Packages</span>
+<span id="cb7-22"><a href="#cb7-22"></a></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="ex">Preparing</span> transaction: done</span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="ex">Verifying</span> transaction: done</span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="ex">Executing</span> transaction: done</span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">799</span><span class="kw">)</span><span class="ex">$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="mamba-a-fast-reliable-alternative-to-conda" class="slide level2">
+<h2>Mamba: A Fast, Reliable Alternative to Conda</h2>
+<ol start="8" type="1">
+<li class="fragment">Mamba is an open-source package manager that is fully compatible with Conda. Like Conda, it is designed to manage and deploy software packages and their dependencies. Mamba is notably recognized for its speed in resolving dependencies and installing packages.</li>
+</ol>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Mamba was installed along with Conda during our earlier Miniforge installation</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="why-use-mamba-rather-than-conda" class="slide level2">
+<h2>Why Use Mamba Rather Than Conda?</h2>
+<ul>
+<li class="fragment">Speed and Efficiency: Mamba uses a C++ library (libsolv) for dependency resolution, which is significantly faster than Conda’s Python-based resolver.</li>
+<li class="fragment">Quick Installations: Mamba often installs packages more quickly than Conda, enhancing user efficiency, especially when dealing with environments that have numerous or complex dependencies.</li>
+<li class="fragment">Compatibility with Conda: Mamba is compatible with Conda environments and repositories, allowing users to benefit from the extensive Conda package ecosystem without major modifications.</li>
+</ul>
+</section>
+<section id="why-use-mamba-rather-than-conda-1" class="slide level2">
+<h2>Why Use Mamba Rather Than Conda?</h2>
+<ul>
+<li class="fragment">Environment Management: Mamba can manage Conda environments, ensuring that users can switch between Mamba and Conda easily.</li>
+<li class="fragment">Lower Memory Usage: Mamba typically uses less memory than Conda, making it a lightweight alternative, especially beneficial for systems with limited resources.</li>
+<li class="fragment">Optimized Computations: Mamba is designed to optimize computational resources, ensuring efficient use of CPU and memory during package management tasks.</li>
+</ul>
+</section>
+<section id="using-mamba-to-install-within-an-existing-conda-environment" class="slide level2" style="font-size: 0.68em">
+<h2>Using Mamba to install Within an Existing Conda Environment</h2>
+<ol start="8" type="1">
+<li class="fragment"><p>Let’s use Mamba to install the Python module <strong>dask</strong> in our existing h2o conda environment. Dask is a parallel computing library in Python that enables performance optimizations through dynamic task scheduling and parallel execution, particularly suited for processing larger-than-memory datasets.</p>
+<p><a href="https://docs.dask.org/en/stable/">https://docs.dask.org/en/stable/</a></p></li>
+</ol>
+<div class="fragment">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">799</span><span class="kw">)</span><span class="ex">$</span> mamba install dask</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="ex">Downloading</span> and Extracting Packages</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="ex">Preparing</span> transaction: done</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="ex">Verifying</span> transaction: done</span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="ex">Executing</span> transaction: done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="footer footer-default">
 
