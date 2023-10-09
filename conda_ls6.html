@@ -1393,7 +1393,7 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <section id="creating-a-new-conda-environment" class="slide level2" style="font-size: 0.80em">
 <h2>Creating a New Conda Environment</h2>
 <ol start="6" type="1">
-<li class="fragment"><p>Let’s create a new conda environment. But first, let’s make sure our python path is the one determined by our conda base environment by using the <strong>which</strong> command. Then we will use the <strong>create</strong> argument to conda to create a new environment. Will create an environment for the AI software H2o</p>
+<li class="fragment"><p>Let’s create a new conda environment. But first, let’s make sure our python path is the one determined by our conda base environment by using the <strong>which</strong> command. Then we will use the <strong>create</strong> argument to conda to create a new environment. Will create an environment for the AI software H2o. We will use Python version 3.8 with H2o.</p>
 <p><a href="https://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html">https://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html</a></p></li>
 </ol>
 <div class="fragment">
@@ -1401,7 +1401,7 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <span id="cb5-2"><a href="#cb5-2"></a><span class="ex">/work/07723/richherr/miniconda3/bin/python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">786</span><span class="kw">)</span><span class="ex">$</span> conda create <span class="at">-n</span> h2oai</span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">786</span><span class="kw">)</span><span class="ex">$</span> conda create <span class="at">-n</span> h2oai python=3.8</span>
 <span id="cb6-2"><a href="#cb6-2"></a></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="ex">Collecting</span> package metadata <span class="er">(</span><span class="ex">current_repodata.json</span><span class="kw">)</span><span class="bu">:</span> done</span>
 <span id="cb6-4"><a href="#cb6-4"></a><span class="ex">Solving</span> environment: done</span>
@@ -1497,8 +1497,28 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <span id="cb8-5"><a href="#cb8-5"></a><span class="ex">Verifying</span> transaction: done</span>
 <span id="cb8-6"><a href="#cb8-6"></a><span class="ex">Executing</span> transaction: done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="using-mamba-to-install-within-an-existing-conda-environment-1" class="slide level2" style="font-size: 0.68em">
+<h2>Using Mamba to install Within an Existing Conda Environment</h2>
 <div class="fragment">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can use <strong>conda list</strong> to list all the packages in the <strong>h2oai</strong> environment.</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">c307-012.ls6</span><span class="er">(</span><span class="ex">541</span><span class="kw">)</span><span class="ex">$</span> conda list</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co"># packages in environment at /work/07723/richherr/miniconda3/envs/h2oai:</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Name                    Version                   Build  Channel</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="ex">_libgcc_mutex</span>             0.1                 conda_forge    conda-forge</span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="ex">_openmp_mutex</span>             4.5                       2_gnu    conda-forge</span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="ex">alsa-lib</span>                  1.2.10               hd590300_0    conda-forge</span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="ex">aws-c-auth</span>                0.7.4                hc8144f4_1    conda-forge</span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="ex">...</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="ex">...</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="ex">...</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="ex">zict</span>                      3.0.0              pyhd8ed1ab_0    conda-forge</span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="ex">zipp</span>                      3.17.0             pyhd8ed1ab_0    conda-forge</span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="ex">zlib</span>                      1.2.13               hd590300_5    conda-forge</span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="ex">zstd</span>                      1.5.5                hfc55251_0    conda-forge</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="footer footer-default">
 

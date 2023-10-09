@@ -228,7 +228,8 @@ base                  *  /work/07723/richherr/miniconda3
     python path is the one determined by our conda base environment by
     using the **which** command. Then we will use the **create**
     argument to conda to create a new environment. Will create an
-    environment for the AI software H2o
+    environment for the AI software H2o.  We will use Python version 3.8 
+    with H2o.
     
     [https://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html](https://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html) 
 
@@ -241,7 +242,7 @@ base                  *  /work/07723/richherr/miniconda3
 
 ::: fragment
 ``` bash
-(base) login1.ls6(786)$ conda create -n h2oai
+(base) login1.ls6(786)$ conda create -n h2oai python=3.8
 
 Collecting package metadata (current_repodata.json): done
 Solving environment: done
@@ -326,10 +327,29 @@ Executing transaction: done
 ```
 :::
 
+## Using Mamba to install Within an Existing Conda Environment {style="font-size: 0.68em"}
+
+::: fragment
+We can use **conda list** to list all the packages in the **h2oai** environment. 
+:::
+
 ::: fragment
 ``` bash
-
-
+(h2oai) c307-012.ls6(541)$ conda list
+# packages in environment at /work/07723/richherr/miniconda3/envs/h2oai:
+#
+# Name                    Version                   Build  Channel
+_libgcc_mutex             0.1                 conda_forge    conda-forge
+_openmp_mutex             4.5                       2_gnu    conda-forge
+alsa-lib                  1.2.10               hd590300_0    conda-forge
+aws-c-auth                0.7.4                hc8144f4_1    conda-forge
+...
+...
+...
+zict                      3.0.0              pyhd8ed1ab_0    conda-forge
+zipp                      3.17.0             pyhd8ed1ab_0    conda-forge
+zlib                      1.2.13               hd590300_5    conda-forge
+zstd                      1.5.5                hfc55251_0    conda-forge
 ```
 :::
 
