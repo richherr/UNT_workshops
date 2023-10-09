@@ -249,7 +249,7 @@ Solving environment: done
   environment location: /work/07723/richherr/miniconda3/envs/h2oai
 
 (base) login1.ls6(786)$ conda activate h2oai
-(base) login1.ls6(786)$ conda install h2oai
+(base) login1.ls6(786)$ conda install -c h2oai h2o
 ```
 :::
 
