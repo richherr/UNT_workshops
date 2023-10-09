@@ -126,10 +126,10 @@ are prioritized over squeezing out every last bit of performance.
 
 ::: fragment
 ``` bash
-login1.ls6(672)$ pwd
+login1.ls6$ pwd
 /home1/07723/richherr
-login2.ls6(549)$ cd /home1/07723/richherr/work
-login1.ls6(658)$ wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+login2.ls6$ cd /home1/07723/richherr/work
+login1.ls6$ wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 ```
 :::
 
@@ -143,20 +143,20 @@ login1.ls6(658)$ wget "https://github.com/conda-forge/miniforge/releases/latest/
 
 ::: fragment
 ``` bash
-login1.ls6(670)$ pwd
+login1.ls6$ pwd
 /home1/07723/richherr/work
-login1.ls6(662)$ ls -la Miniforge3-Linux-x86_64.sh
+login1.ls6$ ls -la Miniforge3-Linux-x86_64.sh
 -rw------- 1 richherr G-824114 87007851 Sep  3 18:22 Miniforge3-Linux-x86_64.sh
-login1.ls6(663)$ chmod +x Miniforge3-Linux-x86_64.sh
-login1.ls6(664)$ ls -la Miniforge3-Linux-x86_64.sh
+login1.ls6$ chmod +x Miniforge3-Linux-x86_64.sh
+login1.ls6$ ls -la Miniforge3-Linux-x86_64.sh
 -rwx------ 1 richherr G-824114 87007851 Sep  3 18:22 Miniforge3-Linux-x86_64.sh
-login1.ls6(665)$ ./Miniforge3-Linux-x86_64.sh
+login1.ls6$ ./Miniforge3-Linux-x86_64.sh
 
 Welcome to Miniforge3 23.3.1-1
 
 In order to continue the installation process, please review the license
 agreement.
-Plea se, press ENTER to continue
+Please, press ENTER to continue
 >>>
 ```
 :::
@@ -174,10 +174,10 @@ Plea se, press ENTER to continue
 
 ::: fragment
 ``` bash
-login2.ls6(564)$ cd ~
-login2.ls6(564)$ tail -20 .bashrc > conda.init
-login2.ls6(564)$ nano conda.init [delete any lines not contained within the conda init lines]
-login2.ls6(564)$ more conda.init
+login2.ls6$ cd ~
+login2.ls6$ tail -20 .bashrc > conda.init
+login2.ls6$ nano conda.init [delete any lines not contained within the conda init lines]
+login2.ls6$ more conda.init
 
 ## >>> conda initialize >>>
 ## !! Contents within this block are managed by 'conda init' !!
@@ -210,11 +210,11 @@ login2.ls6(564)$ more conda.init
 
 ::: fragment
 ``` bash
-login2.ls6(564)$ cd ~
-login2.ls6(564)$ nano .bashrc [delete all of the conda init lines - see above]
-login2.ls6(564)$ source conda.init
-login2.ls6(564)$ conda activate
-(base) login1.ls6(622)$ conda env list
+login2.ls6$ cd ~
+login2.ls6$ nano .bashrc [delete all of the conda init lines - see above]
+login2.ls6$ source conda.init
+login2.ls6$ conda activate
+(base) login1.ls6$ conda env list
 # conda environments:
 #
 base                  *  /work/07723/richherr/miniconda3
@@ -235,22 +235,22 @@ base                  *  /work/07723/richherr/miniconda3
 
 ::: fragment
 ``` bash
-(base) login1.ls6(783)$ which python
+(base) login1.ls6$ which python
 /work/07723/richherr/miniconda3/bin/python
 ```
 :::
 
 ::: fragment
 ``` bash
-(base) login1.ls6(786)$ conda create -n h2oai python=3.8
+(base) login1.ls6$ conda create -n h2oai python=3.8
 
 Collecting package metadata (current_repodata.json): done
 Solving environment: done
 ## Package Plan ##
   environment location: /work/07723/richherr/miniconda3/envs/h2oai
 
-(base) login1.ls6(786)$ conda activate h2oai
-(base) login1.ls6(786)$ conda install -c h2oai h2o
+(base) login1.ls6$ conda activate h2oai
+(base) login1.ls6$ conda install -c h2oai h2o
 ```
 :::
 
@@ -286,7 +286,7 @@ Downloading and Extracting Packages
 Preparing transaction: done
 Verifying transaction: done
 Executing transaction: done
-(h2oai) login1.ls6(799)$
+(h2oai) login1.ls6$
 ```
 :::
 
@@ -318,7 +318,7 @@ Mamba was installed along with Conda during our earlier Miniforge installation
 
 ::: fragment
 ``` bash
-(h2oai) login1.ls6(799)$ mamba install dask
+(h2oai) login1.ls6$ mamba install dask
 Downloading and Extracting Packages
 
 Preparing transaction: done
@@ -335,7 +335,7 @@ We can use **conda list** to list all the packages in the **h2oai** environment.
 
 ::: fragment
 ``` bash
-(h2oai) c307-012.ls6(541)$ conda list
+(h2oai) c307-012.ls6$ conda list
 # packages in environment at /work/07723/richherr/miniconda3/envs/h2oai:
 #
 # Name                    Version                   Build  Channel
@@ -414,9 +414,9 @@ srun python h2o_randomForest.py
 
 ::: fragment
 ``` bash
-login1.ls6(616)$ pwd
+login1.ls6$ pwd
 /home1/07723/richherr/work/h2o
-login1.ls6(617)$ sbatch h2o_randomForest.sh
+login1.ls6$ sbatch h2o_randomForest.sh
 
 -----------------------------------------------------------------
            Welcome to the Lonestar6 Supercomputer
@@ -436,7 +436,7 @@ Submitted batch job 1218654
 
 ::: fragment
 ``` bash
-login1.ls6(617)$ squeue -u richherr      
+login1.ls6$ squeue -u richherr      
 
 login1.ls6.tacc.utexas.edu: 
 Mon Oct  9 
@@ -453,8 +453,8 @@ Mon Oct  9
 
 ::: fragment
 ``` bash
-  login1.ls6(617)$ ssh c302-017
-c302-017.ls6(608)$ htop
+  login1.ls6$ ssh c302-017
+c302-017.ls6$ htop
 ```
 :::
 
@@ -598,8 +598,87 @@ H2O session _sid_bc8c closed.
 
 # Further Package Management Details to Consider
 
-### 
+## Conda Channels
 
+14. Conda channels are repositories that host packages and make them available for Conda users. 
+- When you install a package using Conda, the package is retrieved from one of these channels. 
+- Channels serve as the distribution layer in the Conda ecosystem, providing a scalable and manageable way to share packages. 
 
+## Example Using a Conda Channel with [-c]{style="color: red;"} Argument {style="font-size: 0.64em"}
+- Suppose you want to install a package named **biopython** from the **bioconda** channel. bioconda is a channel that provides bioinformatics software for Conda. To install biopython from bioconda, you would use the following (you can use either conda or mamba - I use mamba since it is much faster)
 
+::: fragment
+``` bash
+login1.ls6$ mamba install -c bioconda biopython
 
+```
+:::
+- You can also specify multiple channels by using the -c flag multiple times. Conda will search the channels in the order they are listed. For example, if you want Conda to search the bioconda channel first and then the conda-forge channel, you would use
+
+::: fragment
+``` bash
+login1.ls6$ conda install -c bioconda -c conda-forge package_name
+```
+:::
+- When you run the command **conda config --add channels channel_name**, Conda will add that channel to the top of your channel list, meaning it will be the highest-priority channel. For example, when adding **conda-forge**, conda will search in the conda-forge channel first, and if the package is not found there, it will search in the next channel in the list, and so on.
+
+::: fragment
+``` bash
+login1.ls6$ conda config --add channels conda-forge
+```
+:::
+
+## Creating and Sharing an Environment{style="font-size: 0.64em"}
+
+15. Channels can host environment files, which are typically YAML files that specify a list of packages to be installed together. These environment files can be shared and used by others to recreate the same environment, ensuring consistency and reproducibility across different systems and use cases.
+- Imagine a research team that uses several packages like NumPy, Pandas, and Matplotlib together. A team member can create an environment file, say **data_science_env.yml**, that specifies these packages:
+
+::: fragment
+``` bash
+name: data_science_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - numpy
+  - pandas
+  - matplotlib
+```
+:::
+
+- This file can be local or retreived from a remote location
+
+::: fragment
+``` bash
+login1.ls6$ conda env create -f data_science_env.yml
+login1.ls6$ conda env create -f https://raw.githubusercontent.com/user/repo/branch/data_science_env.yml
+```
+:::
+
+## Creating and Using [.yml]{style="color: red;"} Files {style="font-size: 0.64em"}
+
+16. Creating a **.yml** file (often referred to as an environment file) from an existing Conda environment is a common practice to ensure reproducibility and consistency across different systems and use cases. This file can then be used to recreate the same environment on a different system or by a different user.
+- Here’s how you can create an .yml file from an existing Conda environment and use it to create a new environment:
+
+::: fragment
+``` bash
+(h2oai) login2.ls6$ conda activate h2oai
+(h2oai) login2.ls6$ conda env export --name h2oai > h2oai.yml
+(h2oai) login2.ls6$ more h2oai.yml
+
+name: h2oai
+channels:
+  - h2oai
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=2_gnu
+...
+...
+  - zipp=3.17.0=pyhd8ed1ab_0
+  - zstd=1.5.5=hfc55251_0
+prefix: /work/07723/richherr/miniconda3/envs/h2oai
+```
+:::

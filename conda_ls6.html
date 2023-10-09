@@ -1317,10 +1317,10 @@ Rich Herrington <br> DRI, Research Computing Services
 <li class="fragment">Change into your work directory; then download the miniforge mamba/conda installer from the github site. <a href="https://github.com/conda-forge/miniforge" class="uri">https://github.com/conda-forge/miniforge</a></li>
 </ol>
 <div class="fragment">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">672</span><span class="kw">)</span><span class="ex">$</span> pwd</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">login1.ls6$</span> pwd</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="ex">/home1/07723/richherr</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="ex">login2.ls6</span><span class="er">(</span><span class="ex">549</span><span class="kw">)</span><span class="ex">$</span> cd /home1/07723/richherr/work</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">658</span><span class="kw">)</span><span class="ex">$</span> wget <span class="st">&quot;https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-</span><span class="va">$(</span><span class="fu">uname</span><span class="va">)</span><span class="st">-</span><span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span><span class="st">.sh&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="ex">login2.ls6$</span> cd /home1/07723/richherr/work</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="ex">login1.ls6$</span> wget <span class="st">&quot;https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-</span><span class="va">$(</span><span class="fu">uname</span><span class="va">)</span><span class="st">-</span><span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span><span class="st">.sh&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li class="fragment"><p>Change the permissions on the installer to executable (+x).<br>
@@ -1328,20 +1328,20 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <li class="fragment"><p>Respond <strong>yes</strong> the question: “Do you wish the installer to initialize Miniforge3 by running conda init? [yes|no]”</p></li>
 </ol>
 <div class="fragment">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">670</span><span class="kw">)</span><span class="ex">$</span> pwd</span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">login1.ls6$</span> pwd</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="ex">/home1/07723/richherr/work</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">662</span><span class="kw">)</span><span class="ex">$</span> ls <span class="at">-la</span> Miniforge3-Linux-x86_64.sh</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="ex">login1.ls6$</span> ls <span class="at">-la</span> Miniforge3-Linux-x86_64.sh</span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="ex">-rw-------</span> 1 richherr G-824114 87007851 Sep  3 18:22 Miniforge3-Linux-x86_64.sh</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">663</span><span class="kw">)</span><span class="ex">$</span> chmod +x Miniforge3-Linux-x86_64.sh</span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">664</span><span class="kw">)</span><span class="ex">$</span> ls <span class="at">-la</span> Miniforge3-Linux-x86_64.sh</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="ex">login1.ls6$</span> chmod +x Miniforge3-Linux-x86_64.sh</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="ex">login1.ls6$</span> ls <span class="at">-la</span> Miniforge3-Linux-x86_64.sh</span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="ex">-rwx------</span> 1 richherr G-824114 87007851 Sep  3 18:22 Miniforge3-Linux-x86_64.sh</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">665</span><span class="kw">)</span><span class="ex">$</span> ./Miniforge3-Linux-x86_64.sh</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="ex">login1.ls6$</span> ./Miniforge3-Linux-x86_64.sh</span>
 <span id="cb2-9"><a href="#cb2-9"></a></span>
 <span id="cb2-10"><a href="#cb2-10"></a><span class="ex">Welcome</span> to Miniforge3 23.3.1-1</span>
 <span id="cb2-11"><a href="#cb2-11"></a></span>
 <span id="cb2-12"><a href="#cb2-12"></a><span class="ex">In</span> order to continue the installation process, please review the license</span>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="ex">agreement.</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="ex">Plea</span> se, press ENTER to continue</span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="ex">Please,</span> press ENTER to continue</span>
 <span id="cb2-15"><a href="#cb2-15"></a><span class="op">&gt;&gt;&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1351,10 +1351,10 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <li class="fragment">We need to remove the conda lines added to your <strong>.bashrc</strong> file and place them in a seperate file called <strong>conda.init</strong>. We’ll grab the last 20 lines to make sure we get all of the lines. We may need to delete some of the lines that are not part of the conda init lines. Use <strong>nano</strong> to edit the file. Scroll through the file and <strong>Ctl-k</strong> (delete) any lines that are before the conda init lines then <strong>Ctl-o</strong> to save the file. Your <strong>conda.init</strong> file should contain something similar to the lines displayed using the <strong>more</strong> command.</li>
 </ol>
 <div class="fragment">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">login2.ls6</span><span class="er">(</span><span class="ex">564</span><span class="kw">)</span><span class="ex">$</span> cd ~</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">login2.ls6</span><span class="er">(</span><span class="ex">564</span><span class="kw">)</span><span class="ex">$</span> tail <span class="at">-20</span> .bashrc <span class="op">&gt;</span> conda.init</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="ex">login2.ls6</span><span class="er">(</span><span class="ex">564</span><span class="kw">)</span><span class="ex">$</span> nano conda.init [delete any lines not contained within the conda init lines]</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="ex">login2.ls6</span><span class="er">(</span><span class="ex">564</span><span class="kw">)</span><span class="ex">$</span> more conda.init</span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">login2.ls6$</span> cd ~</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">login2.ls6$</span> tail <span class="at">-20</span> .bashrc <span class="op">&gt;</span> conda.init</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="ex">login2.ls6$</span> nano conda.init [delete any lines not contained within the conda init lines]</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="ex">login2.ls6$</span> more conda.init</span>
 <span id="cb3-5"><a href="#cb3-5"></a></span>
 <span id="cb3-6"><a href="#cb3-6"></a><span class="co">## &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a><span class="co">## !! Contents within this block are managed by &#39;conda init&#39; !!</span></span>
@@ -1379,11 +1379,11 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <li class="fragment">Now we need to remove the conda init lines from our <strong>.bashrc</strong> file. Use <strong>nano</strong> editor again to edit the <strong>.bashrc</strong> file. Scroll to the bottom of the file and use <strong>Ctl-k</strong> to delete all of the conda init lines (see lines above). When finished use <strong>Ctl-o</strong> to save to your <strong>.bashrc</strong> file. Now you can use the <strong>source</strong> command to source the <strong>conda.init</strong> file rather than having conda active everytime you login to LS6. This gives you the ability to use <strong>conda activate</strong> in a bash shell.</li>
 </ol>
 <div class="fragment">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">login2.ls6</span><span class="er">(</span><span class="ex">564</span><span class="kw">)</span><span class="ex">$</span> cd ~</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">login2.ls6</span><span class="er">(</span><span class="ex">564</span><span class="kw">)</span><span class="ex">$</span> nano .bashrc [delete all of the conda init lines <span class="at">-</span> see above]</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="ex">login2.ls6</span><span class="er">(</span><span class="ex">564</span><span class="kw">)</span><span class="ex">$</span> source conda.init</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="ex">login2.ls6</span><span class="er">(</span><span class="ex">564</span><span class="kw">)</span><span class="ex">$</span> conda activate</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">622</span><span class="kw">)</span><span class="ex">$</span> conda env list</span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">login2.ls6$</span> cd ~</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">login2.ls6$</span> nano .bashrc [delete all of the conda init lines <span class="at">-</span> see above]</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="ex">login2.ls6$</span> source conda.init</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="ex">login2.ls6$</span> conda activate</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6$</span> conda env list</span>
 <span id="cb4-6"><a href="#cb4-6"></a><span class="co"># conda environments:</span></span>
 <span id="cb4-7"><a href="#cb4-7"></a><span class="co">#</span></span>
 <span id="cb4-8"><a href="#cb4-8"></a><span class="ex">base</span>                  <span class="pp">*</span>  /work/07723/richherr/miniconda3</span>
@@ -1397,19 +1397,19 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <p><a href="https://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html">https://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html</a></p></li>
 </ol>
 <div class="fragment">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">783</span><span class="kw">)</span><span class="ex">$</span> which python</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6$</span> which python</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="ex">/work/07723/richherr/miniconda3/bin/python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">786</span><span class="kw">)</span><span class="ex">$</span> conda create <span class="at">-n</span> h2oai python=3.8</span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6$</span> conda create <span class="at">-n</span> h2oai python=3.8</span>
 <span id="cb6-2"><a href="#cb6-2"></a></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="ex">Collecting</span> package metadata <span class="er">(</span><span class="ex">current_repodata.json</span><span class="kw">)</span><span class="bu">:</span> done</span>
 <span id="cb6-4"><a href="#cb6-4"></a><span class="ex">Solving</span> environment: done</span>
 <span id="cb6-5"><a href="#cb6-5"></a><span class="co">## Package Plan ##</span></span>
 <span id="cb6-6"><a href="#cb6-6"></a>  <span class="ex">environment</span> location: /work/07723/richherr/miniconda3/envs/h2oai</span>
 <span id="cb6-7"><a href="#cb6-7"></a></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">786</span><span class="kw">)</span><span class="ex">$</span> conda activate h2oai</span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">786</span><span class="kw">)</span><span class="ex">$</span> conda install <span class="at">-c</span> h2oai h2o</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6$</span> conda activate h2oai</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">login1.ls6$</span> conda install <span class="at">-c</span> h2oai h2o</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="conda-installation-of-h2o" class="slide level2">
@@ -1443,7 +1443,7 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <span id="cb7-23"><a href="#cb7-23"></a><span class="ex">Preparing</span> transaction: done</span>
 <span id="cb7-24"><a href="#cb7-24"></a><span class="ex">Verifying</span> transaction: done</span>
 <span id="cb7-25"><a href="#cb7-25"></a><span class="ex">Executing</span> transaction: done</span>
-<span id="cb7-26"><a href="#cb7-26"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">799</span><span class="kw">)</span><span class="ex">$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">login1.ls6$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="mamba-a-fast-reliable-alternative-to-conda" class="slide level2">
@@ -1490,7 +1490,7 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <p><a href="https://docs.dask.org/en/stable/">https://docs.dask.org/en/stable/</a></p></li>
 </ol>
 <div class="fragment">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">799</span><span class="kw">)</span><span class="ex">$</span> mamba install dask</span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">login1.ls6$</span> mamba install dask</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="ex">Downloading</span> and Extracting Packages</span>
 <span id="cb8-3"><a href="#cb8-3"></a></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="ex">Preparing</span> transaction: done</span>
@@ -1504,7 +1504,7 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <p>We can use <strong>conda list</strong> to list all the packages in the <strong>h2oai</strong> environment.</p>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">c307-012.ls6</span><span class="er">(</span><span class="ex">541</span><span class="kw">)</span><span class="ex">$</span> conda list</span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">c307-012.ls6$</span> conda list</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="co"># packages in environment at /work/07723/richherr/miniconda3/envs/h2oai:</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="co">#</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Name                    Version                   Build  Channel</span></span>
@@ -1580,9 +1580,9 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <li class="fragment">Make sure the python script and the slurm script are in the same directory before submitting the batch script</li>
 </ol>
 <div class="fragment">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">616</span><span class="kw">)</span><span class="ex">$</span> pwd</span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">login1.ls6$</span> pwd</span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="ex">/home1/07723/richherr/work/h2o</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">617</span><span class="kw">)</span><span class="ex">$</span> sbatch h2o_randomForest.sh</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="ex">login1.ls6$</span> sbatch h2o_randomForest.sh</span>
 <span id="cb12-4"><a href="#cb12-4"></a></span>
 <span id="cb12-5"><a href="#cb12-5"></a><span class="ex">-----------------------------------------------------------------</span></span>
 <span id="cb12-6"><a href="#cb12-6"></a>           <span class="ex">Welcome</span> to the Lonestar6 Supercomputer</span>
@@ -1599,7 +1599,7 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <span id="cb12-17"><a href="#cb12-17"></a><span class="ex">Submitted</span> batch job 1218654</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">617</span><span class="kw">)</span><span class="ex">$</span> squeue <span class="at">-u</span> richherr      </span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">login1.ls6$</span> squeue <span class="at">-u</span> richherr      </span>
 <span id="cb13-2"><a href="#cb13-2"></a></span>
 <span id="cb13-3"><a href="#cb13-3"></a><span class="ex">login1.ls6.tacc.utexas.edu:</span> </span>
 <span id="cb13-4"><a href="#cb13-4"></a><span class="ex">Mon</span> Oct  9 </span>
@@ -1615,8 +1615,8 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <li class="fragment">We want to make sure that our H2o randomForest model is maximally using the resources on the compute node. To do this we <strong>ssh</strong> login to the node and use <strong>htop</strong> to view the processor activity. Here we see that all of the processors are being utilized.</li>
 </ol>
 <div class="fragment">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a>  <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">617</span><span class="kw">)</span><span class="ex">$</span> ssh c302-017</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">c302-017.ls6</span><span class="er">(</span><span class="ex">608</span><span class="kw">)</span><span class="ex">$</span> htop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a>  <span class="ex">login1.ls6$</span> ssh c302-017</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">c302-017.ls6$</span> htop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <div class="quarto-figure quarto-figure-center">
@@ -1765,10 +1765,95 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <h1>Further Package Management Details to Consider</h1>
 
 </section>
-<h3 id="section"></h3>
+<section id="conda-channels" class="slide level2">
+<h2>Conda Channels</h2>
+<ol start="14" type="1">
+<li class="fragment">Conda channels are repositories that host packages and make them available for Conda users.</li>
+</ol>
+<ul>
+<li class="fragment">When you install a package using Conda, the package is retrieved from one of these channels.</li>
+<li class="fragment">Channels serve as the distribution layer in the Conda ecosystem, providing a scalable and manageable way to share packages.</li>
+</ul>
+</section>
+<section id="example-using-a-conda-channel-with--c-argument" class="slide level2" style="font-size: 0.64em">
+<h2>Example Using a Conda Channel with <span style="color: red;">-c</span> Argument</h2>
+<ul>
+<li class="fragment">Suppose you want to install a package named <strong>biopython</strong> from the <strong>bioconda</strong> channel. bioconda is a channel that provides bioinformatics software for Conda. To install biopython from bioconda, you would use the following (you can use either conda or mamba - I use mamba since it is much faster)</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">login1.ls6$</span> mamba install <span class="at">-c</span> bioconda biopython</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li class="fragment">You can also specify multiple channels by using the -c flag multiple times. Conda will search the channels in the order they are listed. For example, if you want Conda to search the bioconda channel first and then the conda-forge channel, you would use</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="ex">login1.ls6$</span> conda install <span class="at">-c</span> bioconda <span class="at">-c</span> conda-forge package_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li class="fragment">When you run the command <strong>conda config –add channels channel_name</strong>, Conda will add that channel to the top of your channel list, meaning it will be the highest-priority channel. For example, when adding <strong>conda-forge</strong>, conda will search in the conda-forge channel first, and if the package is not found there, it will search in the next channel in the list, and so on.</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">login1.ls6$</span> conda config <span class="at">--add</span> channels conda-forge</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-and-sharing-an-environment" class="slide level2" style="font-size: 0.64em">
+<h2>Creating and Sharing an Environment</h2>
+<ol start="15" type="1">
+<li class="fragment">Channels can host environment files, which are typically YAML files that specify a list of packages to be installed together. These environment files can be shared and used by others to recreate the same environment, ensuring consistency and reproducibility across different systems and use cases.</li>
+</ol>
+<ul>
+<li class="fragment">Imagine a research team that uses several packages like NumPy, Pandas, and Matplotlib together. A team member can create an environment file, say <strong>data_science_env.yml</strong>, that specifies these packages:</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="ex">name:</span> data_science_env</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="ex">channels:</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="ex">-</span> conda-forge</span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="ex">-</span> defaults</span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="ex">dependencies:</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="ex">-</span> numpy</span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="ex">-</span> pandas</span>
+<span id="cb19-8"><a href="#cb19-8"></a>  <span class="ex">-</span> matplotlib</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li class="fragment">This file can be local or retreived from a remote location</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="ex">login1.ls6$</span> conda env create <span class="at">-f</span> data_science_env.yml</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="ex">login1.ls6$</span> conda env create <span class="at">-f</span> https://raw.githubusercontent.com/user/repo/branch/data_science_env.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-and-using-.yml-files" class="slide level2" style="font-size: 0.64em">
+<h2>Creating and Using <span style="color: red;">.yml</span> Files</h2>
+<ol start="16" type="1">
+<li class="fragment">Creating a <strong>.yml</strong> file (often referred to as an environment file) from an existing Conda environment is a common practice to ensure reproducibility and consistency across different systems and use cases. This file can then be used to recreate the same environment on a different system or by a different user.</li>
+</ol>
+<ul>
+<li class="fragment">Here’s how you can create an .yml file from an existing Conda environment and use it to create a new environment:</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">login2.ls6$</span> conda activate h2oai</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">login2.ls6$</span> conda env export <span class="at">--name</span> h2oai <span class="op">&gt;</span> h2oai.yml</span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="kw">(</span><span class="ex">h2oai</span><span class="kw">)</span> <span class="ex">login2.ls6$</span> more h2oai.yml</span>
+<span id="cb21-4"><a href="#cb21-4"></a></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="ex">name:</span> h2oai</span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="ex">channels:</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="ex">-</span> h2oai</span>
+<span id="cb21-8"><a href="#cb21-8"></a>  <span class="ex">-</span> conda-forge</span>
+<span id="cb21-9"><a href="#cb21-9"></a>  <span class="ex">-</span> bioconda</span>
+<span id="cb21-10"><a href="#cb21-10"></a>  <span class="ex">-</span> defaults</span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="ex">dependencies:</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a>  <span class="ex">-</span> _libgcc_mutex=0.1=conda_forge</span>
+<span id="cb21-13"><a href="#cb21-13"></a>  <span class="ex">-</span> _openmp_mutex=4.5=2_gnu</span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="ex">...</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a><span class="ex">...</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a>  <span class="ex">-</span> zipp=3.17.0=pyhd8ed1ab_0</span>
+<span id="cb21-17"><a href="#cb21-17"></a>  <span class="ex">-</span> zstd=1.5.5=hfc55251_0</span>
+<span id="cb21-18"><a href="#cb21-18"></a><span class="ex">prefix:</span> /work/07723/richherr/miniconda3/envs/h2oai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="footer footer-default">
 
-</div></section>
+</div>
+</section></section>
     </div>
   </div>
 
