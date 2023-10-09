@@ -118,7 +118,7 @@ are prioritized over squeezing out every last bit of performance.
 
 # Installing Conda on LS6
 
-## Download and Installation {.smaller style="font-size: 0.63em"}
+## Download and Installation {.smaller style="font-size: 0.62em"}
 
 1.  Change into your work directory; then download the miniforge
     mamba/conda installer from the github site.
@@ -126,6 +126,7 @@ are prioritized over squeezing out every last bit of performance.
 
 ::: fragment
 ``` bash
+ssh richherr@ls6.tacc.utexas.udu
 login1.ls6$ pwd
 /home1/07723/richherr
 login2.ls6$ cd /home1/07723/richherr/work
@@ -692,7 +693,7 @@ prefix: /work/07723/richherr/miniconda3/envs/h2oai
 ```
 :::
 
-## A Few Parting Considerations {style="font-size: 0.58em"}
+## A Few Parting Considerations {style="font-size: 0.80em"}
 
 17. We've covered quite a bit about Conda, installation, basic usage, channels, environment management, the alternative usage of Mamba, and activating Conda environments within SLURM jobs. However, Conda has a wide array of functionalities, and here are a few additional aspects you might find interesting or useful
 - Regularly updating Conda ensures you have the latest features, bug fixes, and more secure version. Use Conda to update Conda itself (mamba works better IMHO).
@@ -704,7 +705,17 @@ login2.ls6$ mamba update -n base -c defaults conda
 :::
 
 - Conda allows you to manage different versions of Python itself in different environments, ensuring compatibility with different projects.
+
+
+## A Few Parting Considerations {style="font-size: 0.85em"}
 - While Conda and Pip are distinct package managers, they can be used together. However, it's recommended to use Conda when possible, and if a package is only available via Pip, to install it in a Conda environment using **pip install <package>**
+
+::: fragment
+``` bash
+conda activate h2oai
+pip3 install scipy
+```
+:::
 
 ::: {.fragment}
 ::: {.callout-tip}
@@ -712,6 +723,10 @@ Other useful Conda commands: <br>
 ``` bash
 conda uninstall package_name [uninstalling a package]
 conda env remove --name myenv [removing an environment]
+conda install package_name=version_number [install a specific version number]
+conda search package_name [search for a specific package]
+conda deactivate [deactivate current environment]
+conda clean --tarballs [clean downloaded files]
 ```
 :::
 :::
