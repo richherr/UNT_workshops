@@ -1,7 +1,7 @@
 ---
 title: "An Introduction to Conda and Mamba on TACC LoneStar6"
 subtitle: "Streamlining Scientific Computing with Effective Package Management"
-author: "Rich Herrington"
+author: "Rich Herrington <br> DRI, Research Computing Services"
 format: 
   revealjs: 
     theme: white
