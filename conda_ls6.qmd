@@ -353,4 +353,7 @@ zstd                      1.5.5                hfc55251_0    conda-forge
 ```
 :::
 
+## Using Our H2o Conda Environment with a SLURM Batch Job {style="font-size: 0.68em"}
+
+9. 
 
