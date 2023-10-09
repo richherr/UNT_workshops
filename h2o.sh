@@ -1,12 +1,14 @@
 #!/bin/bash
-#SBATCH -J h2o_job
-#SBATCH -o h2o_output.out
-#SBATCH -e h2o_job.err
-#SBATCH -p normal
+#SBATCH --job-name=h2o_arrayJob
+#SBATCH --output=h2o_arrayJob_%A_%a.out
+#SBATCH --error=h2o_arrayJob_%A_%a.err
 #SBATCH -N 1
-#SBATCH --ntasks=128
-#SBATCJ --ntasks-per-node=128
-#SBATCH -t 48:00:00
+#SBATCH -p development
+#SBATCH -n 1
+#SBATCH -t 02:00:00
+#SBATCH --mail-user=richherr@unt.edu
+#SBATCH --mail-type=begin
+#SBATCH --mail-type=end
 
 # Load module or activate conda environment
 source ~/conda.init
