@@ -1,0 +1,20 @@
+---
+title: "Using Containers on TACC LoneStar6"
+subtitle: "Reproducibility and Portability of Workflows"
+author: "Rich Herrington <br> DRI, Research Computing Services"
+format: 
+  revealjs: 
+    theme: white
+    transition: slide
+    self-contained: true
+code-tools: true
+incremental: true
+title-slide-attributes: 
+  data-background-image: unt.png
+  data-background-size: 23%
+  data-background-position: 2% 2%
+editor: 
+  markdown: 
+    wrap: 72
+---
+
