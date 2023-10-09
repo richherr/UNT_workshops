@@ -1,5 +1,5 @@
 ---
-title: "UNT Workshops"
+title: "UNT Research Computing Services Workshops"
 description: |
   Workshops Presented at UNT by Research Computing Services
 author:
