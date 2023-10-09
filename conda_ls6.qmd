@@ -355,7 +355,7 @@ zstd                      1.5.5                hfc55251_0    conda-forge
 
 ## Using Our H2o Conda Environment with a SLURM Batch Job {style="font-size: 0.64em"}
 
-9. Next we will use our H2o conda environment with the SLURM batch system on LS6.  We will build a build a randomForest classifier with H2o using the **Data Expo 2009 - Airline on-time performance** data. [https://community.amstat.org/jointscsg-section/dataexpo/dataexpo2009](https://community.amstat.org/jointscsg-section/dataexpo/dataexpo2009). Our target variable is whether or not a flight has been delayed.  We use a smaller subset of this data - 2GB compressed.  The full data is 12GB compressed. The smaller data has 43978 rows with 31 variables - we will use 8 variables as predictors.   We use a subset of these variables. Our Python script **h2o_randomForesty.py** is listed below.
+9. Next we will use our H2o conda environment with the SLURM batch system on LS6.  We will build a build a randomForest classifier with H2o using the **Data Expo 2009 - Airline on-time performance** data. [https://community.amstat.org/jointscsg-section/dataexpo/dataexpo2009](https://community.amstat.org/jointscsg-section/dataexpo/dataexpo2009). Our target variable is whether or not a flight has been delayed.  We use a smaller subset of this data - 2GB compressed.  The full data is 12GB compressed. The smaller data has 43978 rows with 31 variables - we will use 8 of these variables as predictors.   Our Python script **h2o_randomForesty.py** is listed below.
 
 ::: fragment
 ``` bash
@@ -449,7 +449,7 @@ Mon Oct  9
 
 ## Logging Into the Compute Node and Checking the Resource Utilization {style="font-size: 0.64em"}
 
-12. We want to make sure that our H2o randomForest model is maximally using the resources on the compute node.   To do this we ssh login to the node and use **htop** to view the processor activity.  Here we see that all of the processors are being utilized. 
+12. We want to make sure that our H2o randomForest model is maximally using the resources on the compute node.   To do this we **ssh** login to the node and use **htop** to view the processor activity.  Here we see that all of the processors are being utilized. 
 
 ::: fragment
 ``` bash

@@ -1524,7 +1524,7 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <section id="using-our-h2o-conda-environment-with-a-slurm-batch-job" class="slide level2" style="font-size: 0.64em">
 <h2>Using Our H2o Conda Environment with a SLURM Batch Job</h2>
 <ol start="9" type="1">
-<li class="fragment">Next we will use our H2o conda environment with the SLURM batch system on LS6. We will build a build a randomForest classifier with H2o using the <strong>Data Expo 2009 - Airline on-time performance</strong> data. <a href="https://community.amstat.org/jointscsg-section/dataexpo/dataexpo2009">https://community.amstat.org/jointscsg-section/dataexpo/dataexpo2009</a>. Our target variable is whether or not a flight has been delayed. We use a smaller subset of this data - 2GB compressed. The full data is 12GB compressed. The smaller data has 43978 rows with 31 variables - we will use 8 variables as predictors. We use a subset of these variables. Our Python script <strong>h2o_randomForesty.py</strong> is listed below.</li>
+<li class="fragment">Next we will use our H2o conda environment with the SLURM batch system on LS6. We will build a build a randomForest classifier with H2o using the <strong>Data Expo 2009 - Airline on-time performance</strong> data. <a href="https://community.amstat.org/jointscsg-section/dataexpo/dataexpo2009">https://community.amstat.org/jointscsg-section/dataexpo/dataexpo2009</a>. Our target variable is whether or not a flight has been delayed. We use a smaller subset of this data - 2GB compressed. The full data is 12GB compressed. The smaller data has 43978 rows with 31 variables - we will use 8 of these variables as predictors. Our Python script <strong>h2o_randomForesty.py</strong> is listed below.</li>
 </ol>
 <div class="fragment">
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">import</span> h2o</span>
@@ -1612,7 +1612,7 @@ Then run the executable and follow the directions. Make sure to use the path to 
 <section id="logging-into-the-compute-node-and-checking-the-resource-utilization" class="slide level2" style="font-size: 0.64em">
 <h2>Logging Into the Compute Node and Checking the Resource Utilization</h2>
 <ol start="12" type="1">
-<li class="fragment">We want to make sure that our H2o randomForest model is maximally using the resources on the compute node. To do this we ssh login to the node and use <strong>htop</strong> to view the processor activity. Here we see that all of the processors are being utilized.</li>
+<li class="fragment">We want to make sure that our H2o randomForest model is maximally using the resources on the compute node. To do this we <strong>ssh</strong> login to the node and use <strong>htop</strong> to view the processor activity. Here we see that all of the processors are being utilized.</li>
 </ol>
 <div class="fragment">
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a>  <span class="ex">login1.ls6</span><span class="er">(</span><span class="ex">617</span><span class="kw">)</span><span class="ex">$</span> ssh c302-017</span>
