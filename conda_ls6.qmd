@@ -327,6 +327,15 @@ Executing transaction: done
 ```
 :::
 
+::: fragment
+::: callout-tip
+In most cases, you can simply replace conda with mamba in your commands, and things will work as expected. Mamba uses the same environment and package management system as Conda, and it was designed to be a drop-in replacement for Conda. Therefore, the commands and flags are almost identical between the two.
+:::
+:::
+
+
+
+
 ## Using Mamba to install Within an Existing Conda Environment {style="font-size: 0.68em"}
 
 ::: fragment
@@ -681,4 +690,38 @@ dependencies:
   - zstd=1.5.5=hfc55251_0
 prefix: /work/07723/richherr/miniconda3/envs/h2oai
 ```
+:::
+
+## A Few Parting Considerations {style="font-size: 0.58em"}
+
+17. We've covered quite a bit about Conda, installation, basic usage, channels, environment management, the alternative usage of Mamba, and activating Conda environments within SLURM jobs. However, Conda has a wide array of functionalities, and here are a few additional aspects you might find interesting or useful
+- Regularly updating Conda ensures you have the latest features, bug fixes, and more secure version. Use Conda to update Conda itself (mamba works better IMHO).
+
+::: fragment
+``` bash
+login2.ls6$ mamba update -n base -c defaults conda
+```
+:::
+
+- Conda allows you to manage different versions of Python itself in different environments, ensuring compatibility with different projects.
+- While Conda and Pip are distinct package managers, they can be used together. However, it's recommended to use Conda when possible, and if a package is only available via Pip, to install it in a Conda environment using **pip install <package>**
+
+::: {.fragment}
+::: {.callout-tip}
+Other useful Conda commands: <br>
+``` bash
+conda uninstall package_name [uninstalling a package]
+conda env remove --name myenv [removing an environment]
+```
+:::
+:::
+
+# Thank you!
+
+::: { style="font-size: 0.70em" }
+Questions? Comments?
+
+Rich Herrington
+
+- [richard.herrington\@unt.edu](mailto:richard.herrington@unt.edu){.email}
 :::
