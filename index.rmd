@@ -12,7 +12,7 @@ output:
       css: themes.css
 ---
 
-### An Introduction to Conda and Mamba on LS6 - Streamlining Scientific Computing with Effective Package Management
+### An Introduction to Conda and Mamba on TACC LoneStar6 - Streamlining Scientific Computing with Effective Package Management
 
 - **Materials**: [An Introduction to Conda and Mamba on LS6](https://richherr.github.io/UNT_workshops/conda_ls6.html#/title-slide)
 
