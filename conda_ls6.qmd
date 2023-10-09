@@ -11,7 +11,7 @@ code-tools: true
 incremental: true
 title-slide-attributes: 
   data-background-image: unt.png
-  data-background-size: 15%
+  data-background-size: 20%
   data-background-position: 2% 2%
 editor: 
   markdown: 
@@ -598,7 +598,7 @@ H2O session _sid_bc8c closed.
 
 # Further Package Management Details to Consider
 
-###
+### 
 
 
 
