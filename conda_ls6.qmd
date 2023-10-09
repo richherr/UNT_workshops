@@ -15,6 +15,10 @@ title-slide-attributes:
   data-background-position: 2% 2%
 ---
 
+# Slide URL 
+
+[https://richherr.github.io/UNT_workshops/](https://richherr.github.io/UNT_workshops/){style="font-size: 1.25em"}
+
 ## Conda for High-Performance Computing (HPC)
 - Conda: An open-source package management and environment management system.
 - Purpose: Facilitates the installation, management, and deployment of software packages and libraries.
