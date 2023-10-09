@@ -16,6 +16,7 @@ output:
 
 - **Materials**: [An Introduction to Conda and Mamba on LS6](https://richherr.github.io/UNT_workshops/conda_ls6.html#/title-slide)
 
+- **Materials**: [An Introduction to Containers on LS6](https://richherr.github.io/UNT_workshops/containers_ls6.html#/title-slide)
 
 
 
