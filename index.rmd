@@ -16,6 +16,8 @@ output:
 
 - **Materials**: [An Introduction to Conda and Mamba on LS6](https://richherr.github.io/UNT_workshops/conda_ls6.html#/title-slide)
 
+### An Introduction to Containers on TACC LoneStar6 - Reproducibility and Portability of Workflows (Rich Herrington)
+
 - **Materials**: [An Introduction to Containers on LS6](https://richherr.github.io/UNT_workshops/containers_ls6.html#/title-slide)
 
 
