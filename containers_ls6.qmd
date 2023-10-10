@@ -107,10 +107,13 @@ VERSION_ID="8.6"
 ## Many Many Containers to Choose From {.smaller style="font-size: 0.68em"}
 
 3. Let's pick a container that has more interesting tools to use. 
-- 
+- From: [https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html](https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html)
+- Select: [https://hub.docker.com/r/jupyter/datascience-notebook](https://hub.docker.com/r/jupyter/datascience-notebook)
+- Containers can be small (less than 1 GB) or large (several GB) and the conversion to an apptainer image (.sif) format can be relatively quick or take substantially longer. 
 
 ::: fragment
 ``` bash
+apptainer pull jupyter_datascience.sif docker://jupyter/datascience-notebook
 
 ```
 :::

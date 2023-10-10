@@ -1311,11 +1311,16 @@ Rich Herrington <br> DRI, Research Computing Services
 </section>
 <section id="many-many-containers-to-choose-from" class="slide level2 smaller" style="font-size: 0.68em">
 <h2>Many Many Containers to Choose From</h2>
-</section>
-<section id="lets-pick-a-container-that-has-more-interesting-tools-to-use." class="slide level2">
-<h2>3. Let’s pick a container that has more interesting tools to use.</h2>
+<ol start="3" type="1">
+<li class="fragment">Let’s pick a container that has more interesting tools to use.</li>
+</ol>
+<ul>
+<li class="fragment">From: <a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html">https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html</a></li>
+<li class="fragment">Select: <a href="https://hub.docker.com/r/jupyter/datascience-notebook">https://hub.docker.com/r/jupyter/datascience-notebook</a></li>
+<li class="fragment">Containers can be small (less than 1 GB) or large (several GB) and the conversion to an apptainer image (.sif) format can be relatively quick or take substantially longer.</li>
+</ul>
 <div class="fragment">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">apptainer</span> pull jupyter_datascience.sif docker://jupyter/datascience-notebook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="footer footer-default">
 
