@@ -22,6 +22,8 @@ editor:
 
 [https://richherr.github.io/UNT_workshops/](https://richherr.github.io/UNT_workshops/){style="font-size: 1.25em"}
 
+# Basics Operations for Containers
+
 ## Setup 
 1. We need to do some intial setup to work with containers on LS6.
 - Create temp locations for downloads and builds.
@@ -244,9 +246,86 @@ hello world
 ```
 :::
 
+# Initiating an RStudio Web Service from a Container on a Compute Node
 
+## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.60em"}
 
+6. Containers have streamlined the way web services are developed, deployed, and scaled by encapsulating the service and its dependencies into isolated, lightweight, and portable modules.  Our goal here is to use our **rocker_rstudio.sif** container to launch the server based RStudio IDE onto a compute node.  
+- In this particular example we will be using a method that is referred to as **port forwarding**.  We will forward the port 10000 from the compute node back to our local machine and then will launch the service on a compute node.  This will give us access to the RStudio IDE on our local machine.
+- Note that this method assumes that you have an X server on your local machine (will handle windowing forwarded from LS6).  Windows users can install VcXrv: [https://sourceforge.net/projects/vcxsrv/](https://sourceforge.net/projects/vcxsrv/).  MacOSX users can install XQuartz: [https://www.xquartz.org/](https://www.xquartz.org/).
 
+## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.60em"}
 
+- Login to LS6 using the particular ssh command below.  Then log into your interactive compute node session using the same form of the ssh command. 
+- Make sure you are the directory containing your container. 
+
+::: fragment
+``` bash
+local.machine$ ssh -L 10000:localhost:10000 richherr@ls6.tacc.utexas.edu
+login2.ls6$ ssh -L 10000:localhost:10000 c303-012
+Last login: Tue Oct 10 13:58:31 2023 from 129.114.40.81
+c303-012.ls6$ cd /work/07723/richherr/containers
+
+c303-012.ls6(781)$ ls -la
+total 654484
+drwx------  4 richherr G-824114      4096 Oct 10 16:50 .
+drwx------ 46 richherr G-824114      4096 Oct 10 14:32 ..
+-rw-------  1 richherr G-824114        50 Oct 10 13:48 database.conf
+-rwx------  1 richherr G-824114  47751168 Oct  9 20:39 my_debian.sif
+-rwx------  1 richherr G-824114 622399488 Oct 10 13:01 rstudio_latest.sif
+-rwx------  1 richherr G-824114        77 Oct 10 17:02 submit_py
+-rwx------  1 richherr G-824114        44 Oct 10 17:04 test.py
+-rw-------  1 richherr G-824114        10 Oct 10 16:35 test.R
+
+```
+:::
+
+## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.60em"}
+
+- We need to load the apptainer module.
+- We use **mkdir** to create directories that will be used for storing runtime data (run) and data related to the RStudio Server (var-lib-rstudio-server). The second command creates a configuration file (database.conf) that specifies how RStudio server will interact with its backend database. We only need to run these commands once.  We can reuse these directories later. 
+
+::: fragment
+``` bash
+login2.ls6$ module load tacc-apptainer
+login2.ls6$ mkdir -p run var-lib-rstudio-server
+login2.ls6$ printf 'provider=sqlite\ndirectory=/var/lib/rstudio-server\n' > database.conf
+```
+:::
+
+- Next we export variables into our environment that set our username and password.  We unload **module xalt** since it causes the RStudio instance to terminate improperly. Finally we use **fuser** to terminate any possible server instances on port 10000.  
+
+::: fragment
+``` bash
+login2.ls6$ export APPTAINERENV_USER="richherr"
+login2.ls6$ export APPTAINERENV_PASSWORD="123"
+login2.ls6$ module unload xalt
+login2.ls6$ fuser -k 10000/tcp
+```
+:::
+
+## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.60em"}
+
+- Our last command is to run the **apptainer exec** with appropriate calling arguments.  The **bind** arguments map the host file system back to the container filesystem (HOST:CONTAINER). Other arguments set the port number, sign-in time, and auth-timeout.   
+
+::: fragment
+``` bash
+login2.ls6$ apptainer exec --bind /home1/07723/richherr:$HOME --bind run:/run,var-lib-rstudio-server:/var/lib/rstudio-server,database.conf:/etc/rstudio/database.conf rstudio_latest.sif rserver --www-port=10000 --auth-none=0 --auth-pam-helper-path=pam-helper --auth-stay-signed-in-days=2 --auth-timeout-minutes=0 --server-user="richherr" & 
+```
+:::
+
+- More apptainer details can be found from the user documentation [https://apptainer.org/docs/user/main/quick_start.html](https://apptainer.org/docs/user/main/quick_start.html). 
+- Setting these arguments can be tricky - all I can say is that **trial-and-error** and **Google Search** are your friend. 
+- You should be able to take these commands: loading the apptainer module, unloading the xalt module, exporting the username and password, running the fuser command, and running the apptainer command itself into an executable script - say **submit_rstudio**.  Don't forget to **chmod +x submit_rstudio**  
+
+::: fragment
+``` bash
+local.machine$ ssh -L 10000:localhost:10000 richherr@ls6.tacc.utexas.edu
+login2.ls6$ ssh -L 10000:localhost:10000 c303-012
+Last login: Tue Oct 10 13:58:31 2023 from 129.114.40.81
+c303-012.ls6$ cd /work/07723/richherr/containers
+c303-012.ls6$ ./submit_rstudio
+```
+:::
 
 

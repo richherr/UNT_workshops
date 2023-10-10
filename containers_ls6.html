@@ -1219,10 +1219,15 @@ Rich Herrington <br> DRI, Research Computing Services
 </div>
 
 </section>
-<section>
 <section id="slide-url" class="title-slide slide level1 center">
 <h1>Slide URL</h1>
 <p><a href="https://richherr.github.io/UNT_workshops/" style="font-size: 1.25em">https://richherr.github.io/UNT_workshops/</a></p>
+</section>
+
+<section>
+<section id="basics-operations-for-containers" class="title-slide slide level1 center">
+<h1>Basics Operations for Containers</h1>
+
 </section>
 <section id="setup" class="slide level2">
 <h2>Setup</h2>
@@ -1452,6 +1457,88 @@ Rich Herrington <br> DRI, Research Computing Services
 <span id="cb10-13"><a href="#cb10-13"></a></span>
 <span id="cb10-14"><a href="#cb10-14"></a><span class="ex">c303-012.ls6$</span> apptainer exec rstudio_latest.sif /work/07723/richherr/containers/submit_py</span>
 <span id="cb10-15"><a href="#cb10-15"></a><span class="ex">hello</span> world</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="initiating-an-rstudio-web-service-from-a-container-on-a-compute-node" class="title-slide slide level1 center">
+<h1>Initiating an RStudio Web Service from a Container on a Compute Node</h1>
+
+</section>
+<section id="setup-prior-to-initiating-the-rstudio-web-service" class="slide level2 smaller" style="font-size: 0.60em">
+<h2>Setup Prior to Initiating the RStudio Web Service</h2>
+<ol start="6" type="1">
+<li class="fragment">Containers have streamlined the way web services are developed, deployed, and scaled by encapsulating the service and its dependencies into isolated, lightweight, and portable modules. Our goal here is to use our <strong>rocker_rstudio.sif</strong> container to launch the server based RStudio IDE onto a compute node.<br>
+</li>
+</ol>
+<ul>
+<li class="fragment">In this particular example we will be using a method that is referred to as <strong>port forwarding</strong>. We will forward the port 10000 from the compute node back to our local machine and then will launch the service on a compute node. This will give us access to the RStudio IDE on our local machine.</li>
+<li class="fragment">Note that this method assumes that you have an X server on your local machine (will handle windowing forwarded from LS6). Windows users can install VcXrv: <a href="https://sourceforge.net/projects/vcxsrv/">https://sourceforge.net/projects/vcxsrv/</a>. MacOSX users can install XQuartz: <a href="https://www.xquartz.org/">https://www.xquartz.org/</a>.</li>
+</ul>
+</section>
+<section id="setup-prior-to-initiating-the-rstudio-web-service-1" class="slide level2 smaller" style="font-size: 0.60em">
+<h2>Setup Prior to Initiating the RStudio Web Service</h2>
+<ul>
+<li class="fragment">Login to LS6 using the particular ssh command below. Then log into your interactive compute node session using the same form of the ssh command.</li>
+<li class="fragment">Make sure you are the directory containing your container.</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">local.machine$</span> ssh <span class="at">-L</span> 10000:localhost:10000 richherr@ls6.tacc.utexas.edu</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="ex">login2.ls6$</span> ssh <span class="at">-L</span> 10000:localhost:10000 c303-012</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="ex">Last</span> login: Tue Oct 10 13:58:31 2023 from 129.114.40.81</span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="ex">c303-012.ls6$</span> cd /work/07723/richherr/containers</span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="ex">c303-012.ls6</span><span class="er">(</span><span class="ex">781</span><span class="kw">)</span><span class="ex">$</span> ls <span class="at">-la</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="ex">total</span> 654484</span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="ex">drwx------</span>  4 richherr G-824114      4096 Oct 10 16:50 .</span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="ex">drwx------</span> 46 richherr G-824114      4096 Oct 10 14:32 ..</span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="ex">-rw-------</span>  1 richherr G-824114        50 Oct 10 13:48 database.conf</span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="ex">-rwx------</span>  1 richherr G-824114  47751168 Oct  9 20:39 my_debian.sif</span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="ex">-rwx------</span>  1 richherr G-824114 622399488 Oct 10 13:01 rstudio_latest.sif</span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="ex">-rwx------</span>  1 richherr G-824114        77 Oct 10 17:02 submit_py</span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="ex">-rwx------</span>  1 richherr G-824114        44 Oct 10 17:04 test.py</span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="ex">-rw-------</span>  1 richherr G-824114        10 Oct 10 16:35 test.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="setup-prior-to-initiating-the-rstudio-web-service-2" class="slide level2 smaller" style="font-size: 0.60em">
+<h2>Setup Prior to Initiating the RStudio Web Service</h2>
+<ul>
+<li class="fragment">We need to load the apptainer module.</li>
+<li class="fragment">We use <strong>mkdir</strong> to create directories that will be used for storing runtime data (run) and data related to the RStudio Server (var-lib-rstudio-server). The second command creates a configuration file (database.conf) that specifies how RStudio server will interact with its backend database. We only need to run these commands once. We can reuse these directories later.</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">login2.ls6$</span> module load tacc-apptainer</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="ex">login2.ls6$</span> mkdir <span class="at">-p</span> run var-lib-rstudio-server</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="ex">login2.ls6$</span> printf <span class="st">&#39;provider=sqlite\ndirectory=/var/lib/rstudio-server\n&#39;</span> <span class="op">&gt;</span> database.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li class="fragment">Next we export variables into our environment that set our username and password. We unload <strong>module xalt</strong> since it causes the RStudio instance to terminate improperly. Finally we use <strong>fuser</strong> to terminate any possible server instances on port 10000.</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">login2.ls6$</span> export APPTAINERENV_USER=<span class="st">&quot;richherr&quot;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="ex">login2.ls6$</span> export APPTAINERENV_PASSWORD=<span class="st">&quot;123&quot;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="ex">login2.ls6$</span> module unload xalt</span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="ex">login2.ls6$</span> fuser <span class="at">-k</span> 10000/tcp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="setup-prior-to-initiating-the-rstudio-web-service-3" class="slide level2 smaller" style="font-size: 0.60em">
+<h2>Setup Prior to Initiating the RStudio Web Service</h2>
+<ul>
+<li class="fragment">Our last command is to run the <strong>apptainer exec</strong> with appropriate calling arguments. The <strong>bind</strong> arguments map the host file system back to the container filesystem (HOST:CONTAINER). Other arguments set the port number, sign-in time, and auth-timeout.</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">login2.ls6$</span> apptainer exec <span class="at">--bind</span> /home1/07723/richherr:<span class="va">$HOME</span> <span class="at">--bind</span> run:/run,var-lib-rstudio-server:/var/lib/rstudio-server,database.conf:/etc/rstudio/database.conf rstudio_latest.sif rserver <span class="at">--www-port</span><span class="op">=</span>10000 <span class="at">--auth-none</span><span class="op">=</span>0 <span class="at">--auth-pam-helper-path</span><span class="op">=</span>pam-helper <span class="at">--auth-stay-signed-in-days</span><span class="op">=</span>2 <span class="at">--auth-timeout-minutes</span><span class="op">=</span>0 <span class="at">--server-user</span><span class="op">=</span><span class="st">&quot;richherr&quot;</span> <span class="kw">&amp;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li class="fragment">More apptainer details can be found from the user documentation <a href="https://apptainer.org/docs/user/main/quick_start.html">https://apptainer.org/docs/user/main/quick_start.html</a>.</li>
+<li class="fragment">Setting these arguments can be tricky - all I can say is that <strong>trial-and-error</strong> and <strong>Google Search</strong> are your friend.</li>
+<li class="fragment">You should be able to take these commands: loading the apptainer module, unloading the xalt module, exporting the username and password, running the fuser command, and running the apptainer command itself into an executable script - say <strong>submit_rstudio</strong>. Don’t forget to <strong>chmod +x submit_rstudio</strong></li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">local.machine$</span> ssh <span class="at">-L</span> 10000:localhost:10000 richherr@ls6.tacc.utexas.edu</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ex">login2.ls6$</span> ssh <span class="at">-L</span> 10000:localhost:10000 c303-012</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="ex">Last</span> login: Tue Oct 10 13:58:31 2023 from 129.114.40.81</span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="ex">c303-012.ls6$</span> cd /work/07723/richherr/containers</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="ex">c303-012.ls6$</span> ./submit_rstudio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="footer footer-default">
 
