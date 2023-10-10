@@ -43,7 +43,7 @@ login1.ls6$ source ~/.bashrc
 ```
 :::
 
-## Requesting an Interactive Batch Session on a Compute Node {.smaller style="font-size: 0.80em"}
+## Requesting an Interactive Bash Session on a Compute Node {.smaller style="font-size: 0.80em"}
 
 2. We need to request an interactive session on a compute node.  We'll use the development partition.  TACC doesn't allow the use of Apptainer on login nodes. 
 
