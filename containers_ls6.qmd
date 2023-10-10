@@ -57,9 +57,9 @@ c303-012.ls6$ pwd
 
 ## Our First Simple Container Action {.smaller style="font-size: 0.62em"}
 
-3. We will load the apptainer module and pull a container from Docker Hub
-- Load Module
-- Do apptainer pull
+3. We will load the apptainer module and pull a container from docker hub
+- Load module to access apptainer
+- Do apptainer pull from docker hub
 - Move the container from our temp directory to our container directory
 
 ::: fragment
@@ -78,10 +78,42 @@ drwx------ 46 richherr G-824114     4096 Oct  9 20:24 ..
 ```
 :::
  
+## Interacting with the Container Using **shell** {.smaller style="font-size: 0.68em"}
 
+2. We can interact with the container by using the shell command. With shell, you are inside the container's environment.
+- **apptainer shell** is like "entering" the container
+- We can see that the environment is different from an ordinary bash shell on the login node
 
+::: fragment
+``` bash
+c303-012.ls6$ apptainer shell my_debian.sif
+Apptainer> cat /etc/os-release
 
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
 
+login1.ls6$ cat /etc/os-release
+
+NAME="Rocky Linux"
+VERSION="8.6 (Green Obsidian)"
+ID="rocky"
+ID_LIKE="rhel centos fedora"
+VERSION_ID="8.6"
+```
+:::
+
+## Many Many Containers to Choose From {.smaller style="font-size: 0.68em"}
+
+3. Let's pick a container that has more interesting tools to use. 
+- 
+
+::: fragment
+``` bash
+
+```
+:::
 
 
 
