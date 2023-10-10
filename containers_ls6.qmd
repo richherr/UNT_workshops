@@ -43,9 +43,10 @@ login1.ls6$ source ~/.bashrc
 ```
 :::
 
-## Requesting an Interactive Bash Session on a Compute Node {.smaller style="font-size: 0.80em"}
+## Requesting an Interactive Bash Session on a Compute Node {.smaller style="font-size: 0.70em"}
 
 2. We need to request an interactive session on a compute node.  We'll use the development partition.  TACC doesn't allow the use of Apptainer on login nodes. 
+- While we start with an interactive sessions, containers can be used with SLURM batch as well. 
 
 ::: fragment
 ``` bash
@@ -54,6 +55,18 @@ c303-012.ls6$ pwd
 /home1/07723/richherr
 ```
 :::
+
+::: {.fragment}
+::: {.callout-tip}
+You can also use the command **idev** to get an interactive session
+``` bash
+login1.ls6$ module load idev
+login1.ls6$ idev -m 120 -A TRA21001
+```
+:::
+:::
+
+
 
 ## Our First Simple Container Action {.smaller style="font-size: 0.62em"}
 
@@ -64,7 +77,7 @@ c303-012.ls6$ pwd
 
 ::: fragment
 ``` bash
-c303-012.ls6$ module load apptainer
+c303-012.ls6$ module load tacc-apptainer
 c303-012.ls6$ apptainer pull my_debian.sif docker://debian:latest
 c303-012.ls6$ mv /scratch/07723/richherr/tmp/.apptainer/my_debian.sif /work/07723/richherr/containers/
 c303-012.ls6$ cd /work/07723/richherr/containers/
@@ -78,7 +91,7 @@ drwx------ 46 richherr G-824114     4096 Oct  9 20:24 ..
 ```
 :::
  
-## Interacting with the Container Using **shell** {.smaller style="font-size: 0.68em"}
+## Interacting with the Container Using [shell]{style="color: red;"} {.smaller style="font-size: 0.68em"}
 
 2. We can interact with the container by using the shell command. With shell, you are inside the container's environment.
 - **apptainer shell** is like "entering" the container
@@ -104,19 +117,136 @@ VERSION_ID="8.6"
 ```
 :::
 
-## Many Many Containers to Choose From {.smaller style="font-size: 0.68em"}
+## Many Containers to Choose From {.smaller style="font-size: 0.68em"}
 
-3. Let's pick a container that has more interesting tools to use. 
-- From: [https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html](https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html)
-- Select: [https://hub.docker.com/r/jupyter/datascience-notebook](https://hub.docker.com/r/jupyter/datascience-notebook)
-- Containers can be small (less than 1 GB) or large (several GB) and the conversion to an apptainer image (.sif) format can be relatively quick or take substantially longer. 
+3. Let's pick a container that has more interesting tools to use.  Go to the Docker Hub website and search for the docker image "rocker/rstudio".
+[https://hub.docker.com/](https://hub.docker.com/)
+- Information on the container: 
+[https://rocker-project.org/images/versioned/rstudio.html](https://rocker-project.org/images/versioned/rstudio.html)
+- The .sif image file is 594M and took about 5 minutes to download and create. 
 
 ::: fragment
 ``` bash
-apptainer pull jupyter_datascience.sif docker://jupyter/datascience-notebook
-
+c303-012.ls6$ module load tacc-apptainer
+c303-012.ls6$ apptainer pull docker://rocker/rstudio
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+...
+...
+INFO:    Creating SIF file...
+c303-012.ls6$ mv /scratch/07723/richherr/tmp/.apptainer/rstudio_latest.sif /work/07723/richherr/containers/
+c303-012.ls6(742)$ cd /work/07723/richherr/containers/
+c303-012.ls6(742)$ ls -lha
+total 640M
+drwx------  2 richherr G-824114 4.0K Oct 10 13:03 .
+drwx------ 46 richherr G-824114 4.0K Oct  9 23:19 ..
+-rwx------  1 richherr G-824114  46M Oct  9 20:39 my_debian.sif
+-rwx------  1 richherr G-824114 594M Oct 10 13:01 rstudio_latest.sif
 ```
 :::
+
+## Interacting with our Container Using [shell (R)]{style="color: red;"} {.smaller style="font-size: 0.68em"}
+
+4. We can interact with our container using **apptainer shell**
+
+- We really only need to load the module for apptainer once so I'll stop loading it before each code segment. 
+- Here we run an interactive session with R version 4.3.1
+
+::: fragment
+``` bash
+c303-012.ls6$ c303-012.ls6(823)$ pwd
+/home1/07723/richherr/work/containers
+c303-012.ls6$ apptainer shell rstudio_latest.sif
+
+Apptainer> R
+
+R version 4.3.1 (2023-06-16) -- "Beagle Scouts"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+Type 'q()' to quit R.
+
+>
+```
+:::
+
+## Interacting with our Container Using [shell (Python)]{style="color: red;"} {.smaller style="font-size: 0.68em"}
+
+- We can also use our Conda environments from within the container!
+- Here we load the base environment and start python from that environment. 
+- Note that python is not installed in the container but we are accessing python by loading our conda environment.
+- We can even install software into our conda environment from within the container.
+
+::: fragment
+``` bash
+c303-012.ls6$ apptainer shell rstudio_latest.sif
+Apptainer> source ~/conda.init
+Apptainer> conda activate
+(base) Apptainer> which python
+/work/07723/richherr/miniconda3/bin/python
+(base) Apptainer> python
+Python 3.8.17 | packaged by conda-forge | (default, Jun 16 2023, 07:06:00)
+[GCC 11.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+
+(base) Apptainer> mamba install htop
+```
+:::
+
+## Interacting with our Container Using [exec (R)]{style="color: red;"}  {.smaller style="font-size: 0.68em"}
+
+5. We can interact with our container using **apptainer exec** (R)
+
+- Here we send a executable script to the R language in the container using **exec** 
+- We first need to create a **test.R** text file (use nano) with a simple single R command in it - let's use **rnorm(10)** - this generates 10 random draws from the normal distribution. 
+- Remember to make the test.R an executable file by using **chmod +x**
+
+::: fragment
+``` bash
+c303-012.ls6$ nano test.R
+c303-012.ls6$ chmod +x test.R
+c303-012.ls6$ more test.R
+rnorm(10)
+
+apptainer exec rstudio_latest.sif Rscript test.R
+ [1] -0.83928324  0.38760952 -0.10603479 -0.39473706 -1.37026012  0.65444678
+ [7] -1.41737121  0.41543348  0.04030247 -0.93155394
+c303-012.ls6$
+```
+:::
+
+## Interacting with our Container Using [exec (Python)]{style="color: red;"} {.smaller style="font-size: 0.60em"}
+
+- Here we send a executable script to the Python language in the container using **exec**, but only after we have initialized our conda environment.
+- We first need to create a **test.py** text file (use nano) with a simple single python command in it - let's use a simple 'hello world' - remember to make the test.py an executable file by using **chmod +x**
+- The setup for this is a bit more complicated since Python is not installed in the container. We'll need to create **submit_py** script and a **test.py** separatly.  The **submit_py** will initialize our conda environment and then submit the **test.py** python script.  
+- Lastly, make sure to give the full path to the **submit_py** script
+
+::: fragment
+``` bash
+c303-012.ls6$ nano test.py
+c303-012.ls6$ chmod +x test.py
+c303-012.ls6$ more test.py
+#!/usr/bin/env python3
+print('hello world')
+
+c303-012.ls6$ nano submit_py
+c303-012.ls6$ chmod +x submit_py
+c303-012.ls6$ more submit_py
+#!/bin/bash
+source /home1/07723/richherr/conda.init
+conda activate
+
+c303-012.ls6$ apptainer exec rstudio_latest.sif /work/07723/richherr/containers/submit_py
+hello world
+```
+:::
+
+
+
+
 
 
 

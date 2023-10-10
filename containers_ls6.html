@@ -1247,15 +1247,35 @@ Rich Herrington <br> DRI, Research Computing Services
 <span id="cb1-12"><a href="#cb1-12"></a><span class="ex">login1.ls6$</span> source ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="requesting-an-interactive-bash-session-on-a-compute-node" class="slide level2 smaller" style="font-size: 0.80em">
+<section id="requesting-an-interactive-bash-session-on-a-compute-node" class="slide level2 smaller" style="font-size: 0.70em">
 <h2>Requesting an Interactive Bash Session on a Compute Node</h2>
 <ol start="2" type="1">
 <li class="fragment">We need to request an interactive session on a compute node. We’ll use the development partition. TACC doesn’t allow the use of Apptainer on login nodes.</li>
 </ol>
+<ul>
+<li class="fragment">While we start with an interactive sessions, containers can be used with SLURM batch as well.</li>
+</ul>
 <div class="fragment">
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">login1.ls6$</span> srun <span class="at">-p</span> development <span class="at">-t</span> 02:00:00 <span class="at">-A</span> TRA21001 <span class="at">-N</span> 1 <span class="at">-n</span> 128 <span class="at">--pty</span> bash</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="ex">c303-012.ls6$</span> pwd</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="ex">/home1/07723/richherr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>You can also use the command <strong>idev</strong> to get an interactive session</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">login1.ls6$</span> module load idev</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">login1.ls6$</span> idev <span class="at">-m</span> 120 <span class="at">-A</span> TRA21001</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="our-first-simple-container-action" class="slide level2 smaller" style="font-size: 0.62em">
@@ -1269,21 +1289,21 @@ Rich Herrington <br> DRI, Research Computing Services
 <li class="fragment">Move the container from our temp directory to our container directory</li>
 </ul>
 <div class="fragment">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">c303-012.ls6$</span> module load apptainer</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">c303-012.ls6$</span> apptainer pull my_debian.sif docker://debian:latest</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="ex">c303-012.ls6$</span> mv /scratch/07723/richherr/tmp/.apptainer/my_debian.sif /work/07723/richherr/containers/</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="ex">c303-012.ls6$</span> cd /work/07723/richherr/containers/</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="ex">c303-012.ls6$</span> pwd</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="ex">/home1/07723/richherr/work/containers</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="ex">c303-012.ls6$</span> ls <span class="at">-la</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="ex">total</span> 46644</span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="ex">drwx------</span>  2 richherr G-824114     4096 Oct  9 20:44 .</span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="ex">drwx------</span> 46 richherr G-824114     4096 Oct  9 20:24 ..</span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="ex">-rwx------</span>  1 richherr G-824114 47751168 Oct  9 20:39 my_debian.sif</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">c303-012.ls6$</span> module load tacc-apptainer</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">c303-012.ls6$</span> apptainer pull my_debian.sif docker://debian:latest</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="ex">c303-012.ls6$</span> mv /scratch/07723/richherr/tmp/.apptainer/my_debian.sif /work/07723/richherr/containers/</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="ex">c303-012.ls6$</span> cd /work/07723/richherr/containers/</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="ex">c303-012.ls6$</span> pwd</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="ex">/home1/07723/richherr/work/containers</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="ex">c303-012.ls6$</span> ls <span class="at">-la</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="ex">total</span> 46644</span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="ex">drwx------</span>  2 richherr G-824114     4096 Oct  9 20:44 .</span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="ex">drwx------</span> 46 richherr G-824114     4096 Oct  9 20:24 ..</span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="ex">-rwx------</span>  1 richherr G-824114 47751168 Oct  9 20:39 my_debian.sif</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="interacting-with-the-container-using-shell" class="slide level2 smaller" style="font-size: 0.68em">
-<h2>Interacting with the Container Using <strong>shell</strong></h2>
+<h2>Interacting with the Container Using <span style="color: red;">shell</span></h2>
 <ol start="2" type="1">
 <li class="fragment">We can interact with the container by using the shell command. With shell, you are inside the container’s environment.</li>
 </ol>
@@ -1292,35 +1312,146 @@ Rich Herrington <br> DRI, Research Computing Services
 <li class="fragment">We can see that the environment is different from an ordinary bash shell on the login node</li>
 </ul>
 <div class="fragment">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">c303-012.ls6$</span> apptainer shell my_debian.sif</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">Apptainer</span><span class="op">&gt;</span> cat /etc/os-release</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="va">PRETTY_NAME</span><span class="op">=</span><span class="st">&quot;Debian GNU/Linux 12 (bookworm)&quot;</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="va">NAME</span><span class="op">=</span><span class="st">&quot;Debian GNU/Linux&quot;</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="va">VERSION_ID</span><span class="op">=</span><span class="st">&quot;12&quot;</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="va">VERSION</span><span class="op">=</span><span class="st">&quot;12 (bookworm)&quot;</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="ex">login1.ls6$</span> cat /etc/os-release</span>
-<span id="cb4-10"><a href="#cb4-10"></a></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="va">NAME</span><span class="op">=</span><span class="st">&quot;Rocky Linux&quot;</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="va">VERSION</span><span class="op">=</span><span class="st">&quot;8.6 (Green Obsidian)&quot;</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="va">ID</span><span class="op">=</span><span class="st">&quot;rocky&quot;</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="va">ID_LIKE</span><span class="op">=</span><span class="st">&quot;rhel centos fedora&quot;</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="va">VERSION_ID</span><span class="op">=</span><span class="st">&quot;8.6&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">c303-012.ls6$</span> apptainer shell my_debian.sif</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">Apptainer</span><span class="op">&gt;</span> cat /etc/os-release</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="va">PRETTY_NAME</span><span class="op">=</span><span class="st">&quot;Debian GNU/Linux 12 (bookworm)&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="va">NAME</span><span class="op">=</span><span class="st">&quot;Debian GNU/Linux&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="va">VERSION_ID</span><span class="op">=</span><span class="st">&quot;12&quot;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="va">VERSION</span><span class="op">=</span><span class="st">&quot;12 (bookworm)&quot;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="ex">login1.ls6$</span> cat /etc/os-release</span>
+<span id="cb5-10"><a href="#cb5-10"></a></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="va">NAME</span><span class="op">=</span><span class="st">&quot;Rocky Linux&quot;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="va">VERSION</span><span class="op">=</span><span class="st">&quot;8.6 (Green Obsidian)&quot;</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="va">ID</span><span class="op">=</span><span class="st">&quot;rocky&quot;</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="va">ID_LIKE</span><span class="op">=</span><span class="st">&quot;rhel centos fedora&quot;</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="va">VERSION_ID</span><span class="op">=</span><span class="st">&quot;8.6&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="many-many-containers-to-choose-from" class="slide level2 smaller" style="font-size: 0.68em">
-<h2>Many Many Containers to Choose From</h2>
+<section id="many-containers-to-choose-from" class="slide level2 smaller" style="font-size: 0.68em">
+<h2>Many Containers to Choose From</h2>
 <ol start="3" type="1">
-<li class="fragment">Let’s pick a container that has more interesting tools to use.</li>
+<li class="fragment">Let’s pick a container that has more interesting tools to use. Go to the Docker Hub website and search for the docker image “rocker/rstudio”. <a href="https://hub.docker.com/">https://hub.docker.com/</a></li>
 </ol>
 <ul>
-<li class="fragment">From: <a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html">https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html</a></li>
-<li class="fragment">Select: <a href="https://hub.docker.com/r/jupyter/datascience-notebook">https://hub.docker.com/r/jupyter/datascience-notebook</a></li>
-<li class="fragment">Containers can be small (less than 1 GB) or large (several GB) and the conversion to an apptainer image (.sif) format can be relatively quick or take substantially longer.</li>
+<li class="fragment">Information on the container: <a href="https://rocker-project.org/images/versioned/rstudio.html">https://rocker-project.org/images/versioned/rstudio.html</a></li>
+<li class="fragment">The .sif image file is 594M and took about 5 minutes to download and create.</li>
 </ul>
 <div class="fragment">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">apptainer</span> pull jupyter_datascience.sif docker://jupyter/datascience-notebook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">c303-012.ls6$</span> module load tacc-apptainer</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">c303-012.ls6$</span> apptainer pull docker://rocker/rstudio</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">INFO:</span>    Converting OCI blobs to SIF format</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="ex">INFO:</span>    Starting build...</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="ex">Getting</span> image source signatures</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="ex">...</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="ex">...</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="ex">INFO:</span>    Creating SIF file...</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="ex">c303-012.ls6$</span> mv /scratch/07723/richherr/tmp/.apptainer/rstudio_latest.sif /work/07723/richherr/containers/</span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="ex">c303-012.ls6</span><span class="er">(</span><span class="ex">742</span><span class="kw">)</span><span class="ex">$</span> cd /work/07723/richherr/containers/</span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="ex">c303-012.ls6</span><span class="er">(</span><span class="ex">742</span><span class="kw">)</span><span class="ex">$</span> ls <span class="at">-lha</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="ex">total</span> 640M</span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="ex">drwx------</span>  2 richherr G-824114 4.0K Oct 10 13:03 .</span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="ex">drwx------</span> 46 richherr G-824114 4.0K Oct  9 23:19 ..</span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="ex">-rwx------</span>  1 richherr G-824114  46M Oct  9 20:39 my_debian.sif</span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="ex">-rwx------</span>  1 richherr G-824114 594M Oct 10 13:01 rstudio_latest.sif</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="interacting-with-our-container-using-shell-r" class="slide level2 smaller" style="font-size: 0.68em">
+<h2>Interacting with our Container Using <span style="color: red;">shell (R)</span></h2>
+<ol start="4" type="1">
+<li class="fragment">We can interact with our container using <strong>apptainer shell</strong></li>
+</ol>
+<ul>
+<li class="fragment">We really only need to load the module for apptainer once so I’ll stop loading it before each code segment.</li>
+<li class="fragment">Here we run an interactive session with R version 4.3.1</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">c303-012.ls6$</span> c303-012.ls6<span class="er">(</span><span class="ex">823</span><span class="kw">)</span><span class="ex">$</span> pwd</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ex">/home1/07723/richherr/work/containers</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="ex">c303-012.ls6$</span> apptainer shell rstudio_latest.sif</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="ex">Apptainer</span><span class="op">&gt;</span> R</span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="ex">R</span> version 4.3.1 <span class="er">(</span><span class="ex">2023-06-16</span><span class="kw">)</span> <span class="ex">--</span> <span class="st">&quot;Beagle Scouts&quot;</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="ex">Copyright</span> <span class="er">(</span><span class="ex">C</span><span class="kw">)</span> <span class="ex">2023</span> The R Foundation for Statistical Computing</span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="ex">Platform:</span> x86_64-pc-linux-gnu <span class="er">(</span><span class="ex">64-bit</span><span class="kw">)</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="ex">Type</span> <span class="st">&#39;q()&#39;</span> to quit R.</span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="interacting-with-our-container-using-shell-python" class="slide level2 smaller" style="font-size: 0.68em">
+<h2>Interacting with our Container Using <span style="color: red;">shell (Python)</span></h2>
+<ul>
+<li class="fragment">We can also use our Conda environments from within the container!</li>
+<li class="fragment">Here we load the base environment and start python from that environment.</li>
+<li class="fragment">Note that python is not installed in the container but we are accessing python by loading our conda environment.</li>
+<li class="fragment">We can even install software into our conda environment from within the container.</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">c303-012.ls6$</span> apptainer shell rstudio_latest.sif</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="ex">Apptainer</span><span class="op">&gt;</span> source ~/conda.init</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="ex">Apptainer</span><span class="op">&gt;</span> conda activate</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">Apptainer</span><span class="op">&gt;</span> which python</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="ex">/work/07723/richherr/miniconda3/bin/python</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">Apptainer</span><span class="op">&gt;</span> python</span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="ex">Python</span> 3.8.17 <span class="kw">|</span> <span class="ex">packaged</span> by conda-forge <span class="kw">|</span> <span class="kw">(</span><span class="ex">default,</span> Jun 16 2023, 07:06:00<span class="kw">)</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="ex">[GCC</span> 11.4.0] on linux</span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="ex">Type</span> <span class="st">&quot;help&quot;</span>, <span class="st">&quot;copyright&quot;</span>, <span class="st">&quot;credits&quot;</span> or <span class="st">&quot;license&quot;</span> for more information.</span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">Apptainer</span><span class="op">&gt;</span> mamba install htop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="interacting-with-our-container-using-exec-r" class="slide level2 smaller" style="font-size: 0.68em">
+<h2>Interacting with our Container Using <span style="color: red;">exec (R)</span></h2>
+<ol start="5" type="1">
+<li class="fragment">We can interact with our container using <strong>apptainer exec</strong> (R)</li>
+</ol>
+<ul>
+<li class="fragment">Here we send a executable script to the R language in the container using <strong>exec</strong></li>
+<li class="fragment">We first need to create a <strong>test.R</strong> text file (use nano) with a simple single R command in it - let’s use <strong>rnorm(10)</strong> - this generates 10 random draws from the normal distribution.</li>
+<li class="fragment">Remember to make the test.R an executable file by using <strong>chmod +x</strong></li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">c303-012.ls6$</span> nano test.R</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="ex">c303-012.ls6$</span> chmod +x test.R</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="ex">c303-012.ls6$</span> more test.R</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="ex">rnorm</span><span class="er">(</span><span class="ex">10</span><span class="kw">)</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="ex">apptainer</span> exec rstudio_latest.sif Rscript test.R</span>
+<span id="cb9-7"><a href="#cb9-7"></a> <span class="ex">[1]</span> <span class="at">-0.83928324</span>  0.38760952 <span class="at">-0.10603479</span> <span class="at">-0.39473706</span> <span class="at">-1.37026012</span>  0.65444678</span>
+<span id="cb9-8"><a href="#cb9-8"></a> <span class="ex">[7]</span> <span class="at">-1.41737121</span>  0.41543348  0.04030247 <span class="at">-0.93155394</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="ex">c303-012.ls6$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="interacting-with-our-container-using-exec-python" class="slide level2 smaller" style="font-size: 0.60em">
+<h2>Interacting with our Container Using <span style="color: red;">exec (Python)</span></h2>
+<ul>
+<li class="fragment">Here we send a executable script to the Python language in the container using <strong>exec</strong>, but only after we have initialized our conda environment.</li>
+<li class="fragment">We first need to create a <strong>test.py</strong> text file (use nano) with a simple single python command in it - let’s use a simple ‘hello world’ - remember to make the test.py an executable file by using <strong>chmod +x</strong></li>
+<li class="fragment">The setup for this is a bit more complicated since Python is not installed in the container. We’ll need to create <strong>submit_py</strong> script and a <strong>test.py</strong> separatly. The <strong>submit_py</strong> will initialize our conda environment and then submit the <strong>test.py</strong> python script.<br>
+</li>
+<li class="fragment">Lastly, make sure to give the full path to the <strong>submit_py</strong> script</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">c303-012.ls6$</span> nano test.py</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="ex">c303-012.ls6$</span> chmod +x test.py</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="ex">c303-012.ls6$</span> more test.py</span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#!/usr/bin/env python3</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="ex">print</span><span class="er">(</span><span class="st">&#39;hello world&#39;</span><span class="kw">)</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="ex">c303-012.ls6$</span> nano submit_py</span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="ex">c303-012.ls6$</span> chmod +x submit_py</span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="ex">c303-012.ls6$</span> more submit_py</span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="bu">source</span> /home1/07723/richherr/conda.init</span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="ex">conda</span> activate</span>
+<span id="cb10-13"><a href="#cb10-13"></a></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="ex">c303-012.ls6$</span> apptainer exec rstudio_latest.sif /work/07723/richherr/containers/submit_py</span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="ex">hello</span> world</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="footer footer-default">
 
