@@ -18,3 +18,70 @@ editor:
     wrap: 72
 ---
 
+# Slide URL
+
+[https://richherr.github.io/UNT_workshops/](https://richherr.github.io/UNT_workshops/){style="font-size: 1.25em"}
+
+## Setup 
+1. We need to do some intial setup to work with containers on LS6.
+- Create temp locations for downloads and builds.
+
+::: fragment
+``` bash
+login1.ls6$ ssh richherr@ls6.tacc.utexas.edu
+login2.ls6$ pwd
+/home1/07723/richherr
+login1.ls6$ cd /scratch/07723/richherr
+login1.ls6$ mkdir -p tmp/.apptainer
+login1.ls6$ mkdir /home1/07723/richherr/work/containers
+login1.ls6$ cd /home1/07723/richherr/work/containers
+login1.ls6$ echo export "APPTAINER_CACHEDIR=/scratch/07723/richherr/tmp/.apptainer" >> ~/.bashrc
+login1.ls6$ echo export "APPTAINER_LOCALCACHEDIR=/scratch/07723/richherr/tmp/.apptainer" >> ~/.bashrc
+login1.ls6$ echo export "APPTAINER_TMPDIR=/scratch/07723/richherr/tmp/.apptainer" >> ~/.bashrc
+login1.ls6$ echo export "APPTAINER_PULLFOLDER=/scratch/07723/richherr/tmp/.apptainer" >> ~/.bashrc
+login1.ls6$ source ~/.bashrc
+```
+:::
+
+## Requesting an Interactive Batch Session on a Compute Node {.smaller style="font-size: 0.80em"}
+
+2. We need to request an interactive session on a compute node.  We'll use the development partition.  TACC doesn't allow the use of Apptainer on login nodes. 
+
+::: fragment
+``` bash
+login1.ls6$ srun -p development -t 02:00:00 -A TRA21001 -N 1 -n 128 --pty bash
+c303-012.ls6$ pwd
+/home1/07723/richherr
+```
+:::
+
+## Our First Simple Container Action {.smaller style="font-size: 0.62em"}
+
+3. We will load the apptainer module and pull a container from Docker Hub
+- Load Module
+- Do apptainer pull
+- Move the container from our temp directory to our container directory
+
+::: fragment
+``` bash
+c303-012.ls6$ module load apptainer
+c303-012.ls6$ apptainer pull my_debian.sif docker://debian:latest
+c303-012.ls6$ mv /scratch/07723/richherr/tmp/.apptainer/my_debian.sif /work/07723/richherr/containers/
+c303-012.ls6$ cd /work/07723/richherr/containers/
+c303-012.ls6$ pwd
+/home1/07723/richherr/work/containers
+c303-012.ls6$ ls -la
+total 46644
+drwx------  2 richherr G-824114     4096 Oct  9 20:44 .
+drwx------ 46 richherr G-824114     4096 Oct  9 20:24 ..
+-rwx------  1 richherr G-824114 47751168 Oct  9 20:39 my_debian.sif
+```
+:::
+ 
+
+
+
+
+
+
+
