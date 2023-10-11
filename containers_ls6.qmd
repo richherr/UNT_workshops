@@ -250,7 +250,7 @@ hello world
 
 ## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.60em"}
 
-6. Containers have streamlined the way web services are developed, deployed, and scaled by encapsulating the service and its dependencies into isolated, lightweight, and portable modules.  Our goal here is to use our **rocker_rstudio.sif** container to launch the server based RStudio IDE onto a compute node.  
+6. Containers have streamlined the way web services are developed, deployed, and scaled by encapsulating these services and their dependencies into isolated, lightweight, and portable modules.  Our goal here is to use our **rocker_rstudio.sif** container to launch the server based RStudio IDE onto a compute node.  
 - In this particular example we will be using a method that is referred to as **port forwarding**.  We will forward the port 10000 from the compute node back to our local machine and then will launch the service on a compute node.  This will give us access to the RStudio IDE on our local machine.
 - Note that this method assumes that you have an X server on your local machine (will handle windowing forwarded from LS6).  Windows users can install VcXrv: [https://sourceforge.net/projects/vcxsrv/](https://sourceforge.net/projects/vcxsrv/).  MacOSX users can install XQuartz: [https://www.xquartz.org/](https://www.xquartz.org/).
 
@@ -316,6 +316,9 @@ login2.ls6$ apptainer exec --bind /home1/07723/richherr:$HOME --bind run:/run,va
 
 - More apptainer details can be found from the user documentation [https://apptainer.org/docs/user/main/quick_start.html](https://apptainer.org/docs/user/main/quick_start.html). 
 - Setting these arguments can be tricky - all I can say is that **trial-and-error** and **Google Search** are your friend. 
+
+## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.58em"}
+
 - You should be able to take these commands: loading the apptainer module, unloading the xalt module, exporting the username and password, running the fuser command, and running the apptainer command itself into an executable script - say **submit_rstudio**.  Don't forget to **chmod +x submit_rstudio**  
 
 ::: fragment
@@ -328,4 +331,27 @@ c303-012.ls6$ ./submit_rstudio
 ```
 :::
 
+- Contents of **submit_rstudio**
+
+::: fragment
+``` bash
+c303-012.ls6(1001)$ more submit_rstudio
+#!/bin/bash
+cd /work/07723/richherr/containers
+module load tacc-apptainer
+module unload xalt
+fuser -k 10000/tcp
+
+# Only need to run once
+# mkdir -p run var-lib-rstudio-server
+# printf 'provider=sqlite\ndirectory=/var/lib/rstudio-server\n' > database.conf
+
+export APPTAINERENV_USER="richherr"
+export APPTAINERENV_PASSWORD="123"
+
+apptainer exec --bind /home1/07723/richherr:$HOME --bind run:/run,var-lib-rstudio-server:/var/lib/rstudio-server,dat
+abase.conf:/etc/rstudio/database.conf rstudio_latest.sif rserver --www-port=10000 --auth-none=0 --auth-pam-helper-pa
+th=pam-helper --auth-stay-signed-in-days=2 --auth-timeout-minutes=0 --server-user="richherr" &
+```
+:::
 

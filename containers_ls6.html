@@ -1467,7 +1467,7 @@ Rich Herrington <br> DRI, Research Computing Services
 <section id="setup-prior-to-initiating-the-rstudio-web-service" class="slide level2 smaller" style="font-size: 0.60em">
 <h2>Setup Prior to Initiating the RStudio Web Service</h2>
 <ol start="6" type="1">
-<li class="fragment">Containers have streamlined the way web services are developed, deployed, and scaled by encapsulating the service and its dependencies into isolated, lightweight, and portable modules. Our goal here is to use our <strong>rocker_rstudio.sif</strong> container to launch the server based RStudio IDE onto a compute node.<br>
+<li class="fragment">Containers have streamlined the way web services are developed, deployed, and scaled by encapsulating these services and their dependencies into isolated, lightweight, and portable modules. Our goal here is to use our <strong>rocker_rstudio.sif</strong> container to launch the server based RStudio IDE onto a compute node.<br>
 </li>
 </ol>
 <ul>
@@ -1531,6 +1531,11 @@ Rich Herrington <br> DRI, Research Computing Services
 <ul>
 <li class="fragment">More apptainer details can be found from the user documentation <a href="https://apptainer.org/docs/user/main/quick_start.html">https://apptainer.org/docs/user/main/quick_start.html</a>.</li>
 <li class="fragment">Setting these arguments can be tricky - all I can say is that <strong>trial-and-error</strong> and <strong>Google Search</strong> are your friend.</li>
+</ul>
+</section>
+<section id="setup-prior-to-initiating-the-rstudio-web-service-4" class="slide level2 smaller" style="font-size: 0.58em">
+<h2>Setup Prior to Initiating the RStudio Web Service</h2>
+<ul>
 <li class="fragment">You should be able to take these commands: loading the apptainer module, unloading the xalt module, exporting the username and password, running the fuser command, and running the apptainer command itself into an executable script - say <strong>submit_rstudio</strong>. Don’t forget to <strong>chmod +x submit_rstudio</strong></li>
 </ul>
 <div class="fragment">
@@ -1539,6 +1544,28 @@ Rich Herrington <br> DRI, Research Computing Services
 <span id="cb15-3"><a href="#cb15-3"></a><span class="ex">Last</span> login: Tue Oct 10 13:58:31 2023 from 129.114.40.81</span>
 <span id="cb15-4"><a href="#cb15-4"></a><span class="ex">c303-012.ls6$</span> cd /work/07723/richherr/containers</span>
 <span id="cb15-5"><a href="#cb15-5"></a><span class="ex">c303-012.ls6$</span> ./submit_rstudio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li class="fragment">Contents of <strong>submit_rstudio</strong></li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">c303-012.ls6</span><span class="er">(</span><span class="ex">1001</span><span class="kw">)</span><span class="ex">$</span> more submit_rstudio</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="bu">cd</span> /work/07723/richherr/containers</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="ex">module</span> load tacc-apptainer</span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="ex">module</span> unload xalt</span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="fu">fuser</span> <span class="at">-k</span> 10000/tcp</span>
+<span id="cb16-7"><a href="#cb16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="co"># Only need to run once</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co"># mkdir -p run var-lib-rstudio-server</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="co"># printf &#39;provider=sqlite\ndirectory=/var/lib/rstudio-server\n&#39; &gt; database.conf</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="bu">export</span> <span class="va">APPTAINERENV_USER</span><span class="op">=</span><span class="st">&quot;richherr&quot;</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="bu">export</span> <span class="va">APPTAINERENV_PASSWORD</span><span class="op">=</span><span class="st">&quot;123&quot;</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a></span>
+<span id="cb16-15"><a href="#cb16-15"></a><span class="ex">apptainer</span> exec <span class="at">--bind</span> /home1/07723/richherr:<span class="va">$HOME</span> <span class="at">--bind</span> run:/run,var-lib-rstudio-server:/var/lib/rstudio-server,dat</span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="ex">abase.conf:/etc/rstudio/database.conf</span> rstudio_latest.sif rserver <span class="at">--www-port</span><span class="op">=</span>10000 <span class="at">--auth-none</span><span class="op">=</span>0 <span class="at">--auth-pam-helper-pa</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a><span class="va">th</span><span class="op">=</span>pam-helper <span class="ex">--auth-stay-signed-in-days=2</span> <span class="at">--auth-timeout-minutes</span><span class="op">=</span>0 <span class="at">--server-user</span><span class="op">=</span><span class="st">&quot;richherr&quot;</span> <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="footer footer-default">
 
