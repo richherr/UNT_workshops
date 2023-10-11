@@ -1722,19 +1722,49 @@ Rich Herrington <br> DRI, Research Computing Services
 <li class="fragment">Use <strong>scp</strong> to copy the <strong>rstudio_latest.sif</strong> from LS6 to a machine that you have <strong>sudo</strong> rights on (with apptainer installed) and use <strong>shell writeable</strong> and <strong>build</strong> to make your intended changes. Finally, copy the <strong>.sif</strong> file back to LS6.</li>
 </ul>
 </section>
-<section id="some-best-practices-with-containers-and-last-considerations" class="slide level2 smaller" style="font-size: 0.60em">
+<section id="some-best-practices-with-containers-and-last-considerations" class="slide level2 smaller" style="font-size: 0.68em">
 <h2>Some Best Practices with Containers and Last Considerations</h2>
+<ul>
+<li class="fragment">Maintain a compact and minimalistic design and incorporate only essential components for your applications.</li>
+<li class="fragment">Keep containers as small as possible - bulky containers demand more memory and experience delayed startups.</li>
+<li class="fragment">Choose base images carefully and prefer minimalistic, official, or widely-recognized images.</li>
+<li class="fragment">Treat containers as immutable, meaning once a container is deployed, no updates, patches, or configurations are applied to it. If a change is required, a new container image should be built and deployed to replace the existing one.</li>
+</ul>
+</section>
+<section id="future-topics-to-explore" class="slide level2 smaller" style="font-size: 0.68em">
+<h2>Future Topics to Explore</h2>
 <ol start="9" type="1">
-<li class="fragment">Maintain a compact and minimalistic design and incorporate only essential components for your applications. Bulky containers demand more memory and experience delayed startups.</li>
+<li class="fragment">We plan to have a follow-up workshop that covers some important topics that we didn’t have time to cover here</li>
 </ol>
 <ul>
-<li class="fragment">We plan to have a follow-up workshop that covers some important topics that we didn’t have time to covere here</li>
 <li class="fragment">Using containers with SLURM and MPI</li>
 <li class="fragment">Using containers with Nvidia and LS6 GPUs</li>
 <li class="fragment">Building containers with Apptainer def files</li>
 <li class="fragment">Explore using Docker with containers</li>
 <li class="fragment">Saving containers to Docker Hub or Github Packages</li>
 </ul>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>I have made the rocker/rstudio .sif file avaliable at</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="ex">c303-012.ls6</span><span class="er">(</span><span class="ex">1044</span><span class="kw">)</span><span class="ex">$</span> pwd</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="ex">/scratch/projects/UNT/containers</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="ex">c303-012.ls6</span><span class="er">(</span><span class="ex">1045</span><span class="kw">)</span><span class="ex">$</span> ls <span class="at">-la</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="ex">total</span> 607813</span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="ex">drwxr-xr-x</span> 2 richherr G-824114         1 Oct 11 00:38 .</span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="ex">drwxrwxr-x</span> 9 jeq0010  G-824114         7 Oct 11 00:36 ..</span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="ex">-rwx------</span> 1 richherr G-824114 622399488 Oct 11 00:39 rstudio_latest.sif</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 </section></section>
 <section id="thank-you" class="title-slide slide level1 center">
 <h1>Thank you!</h1>

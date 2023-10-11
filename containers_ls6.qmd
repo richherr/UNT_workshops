@@ -465,15 +465,41 @@ local.machine$ sudo apptainer build --sandbox new_directory/ rstudio_latest.sif
 - The updates might include updating the versions of software, libraries, or dependencies within the container; installing new software, tools, or libraries; uninstalling unnecessary or deprecated software or libraries.
 - Use **scp** to copy the **rstudio_latest.sif** from LS6 to a machine that you have **sudo** rights on (with apptainer installed) and use **shell writeable** and **build** to make your intended changes. Finally, copy the **.sif** file back to LS6.
 
-## Some Best Practices with Containers and Last Considerations {.smaller style="font-size: 0.60em"}
+## Some Best Practices with Containers and Last Considerations {.smaller style="font-size: 0.68em"}
 
-9. Maintain a compact and minimalistic design and incorporate only essential components for your applications. Bulky containers demand more memory and experience delayed startups. 
-- We plan to have a follow-up workshop that covers some important topics that we didn't have time to covere here 
+- Maintain a compact and minimalistic design and incorporate only essential components for your applications. 
+- Keep containers as small as possible - bulky containers demand more memory and experience delayed startups. 
+- Choose base images carefully and prefer minimalistic, official, or widely-recognized images.
+- Treat containers as immutable, meaning once a container is deployed, no updates, patches, or configurations are applied to it. If a change is required, a new container image should be built and deployed to replace the existing one.
+
+## Future Topics to Explore {.smaller style="font-size: 0.68em"}
+
+9. We plan to have a follow-up workshop that covers some important topics that we didn't have time to cover here 
+
 - Using containers with SLURM and MPI
 - Using containers with Nvidia and LS6 GPUs
 - Building containers with Apptainer def files
 - Explore using Docker with containers
 - Saving containers to Docker Hub or Github Packages
+
+::: fragment
+::: callout-note
+
+I have made the rocker/rstudio .sif file avaliable at
+
+``` bash
+c303-012.ls6(1044)$ pwd
+/scratch/projects/UNT/containers
+c303-012.ls6(1045)$ ls -la
+total 607813
+drwxr-xr-x 2 richherr G-824114         1 Oct 11 00:38 .
+drwxrwxr-x 9 jeq0010  G-824114         7 Oct 11 00:36 ..
+-rwx------ 1 richherr G-824114 622399488 Oct 11 00:39 rstudio_latest.sif
+```
+:::
+:::
+
+
 
 # Thank you!
 
