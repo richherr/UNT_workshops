@@ -478,6 +478,7 @@ local.machine$ sudo apptainer build --sandbox new_directory/ rstudio_latest.sif
 
 - Using containers with SLURM and MPI
 - Using containers with Nvidia and LS6 GPUs
+- Modifying Existing Containers
 - Building containers with Apptainer def files
 - Explore using Docker with containers
 - Saving containers to Docker Hub or Github Packages
