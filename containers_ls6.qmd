@@ -444,8 +444,8 @@ http://localhost:10000/
 
 ## Updating an Existing Container {.smaller style="font-size: 0.60em"}
 
-8. Updating a container using Apptainer involves a few steps that are somewhat different from other containerization tools (e.g. Docker) due to its unique architecture and usage in HPC environments. When you have sudo rights on a machine, you can manage containers with elevated privileges, ensuring you can manipulate any files and settings as needed. 
-- To modify an existing image you need to make changes directly to an existing image (and have sudo rights), you can use the --writable flag or build a sandbox (directory) container and make your changes.
+8. Updating a container using Apptainer involves a few steps that are somewhat different from other containerization tools (e.g. Docker) due to its unique architecture and usage in HPC environments. When you have **sudo** rights on a machine, you can manage containers with elevated privileges, ensuring you can manipulate any files and settings as needed. 
+- To modify an existing image you need to make changes directly to an existing image (and have sudo rights), you can use the **--writable** argument or build a **sandbox** (directory) container and make your changes.
 
 ::: fragment
 ``` bash

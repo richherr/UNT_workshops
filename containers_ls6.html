@@ -1702,10 +1702,10 @@ Rich Herrington <br> DRI, Research Computing Services
 <section id="updating-an-existing-container" class="slide level2 smaller" style="font-size: 0.60em">
 <h2>Updating an Existing Container</h2>
 <ol start="8" type="1">
-<li class="fragment">Updating a container using Apptainer involves a few steps that are somewhat different from other containerization tools (e.g. Docker) due to its unique architecture and usage in HPC environments. When you have sudo rights on a machine, you can manage containers with elevated privileges, ensuring you can manipulate any files and settings as needed.</li>
+<li class="fragment">Updating a container using Apptainer involves a few steps that are somewhat different from other containerization tools (e.g. Docker) due to its unique architecture and usage in HPC environments. When you have <strong>sudo</strong> rights on a machine, you can manage containers with elevated privileges, ensuring you can manipulate any files and settings as needed.</li>
 </ol>
 <ul>
-<li class="fragment">To modify an existing image you need to make changes directly to an existing image (and have sudo rights), you can use the –writable flag or build a sandbox (directory) container and make your changes.</li>
+<li class="fragment">To modify an existing image you need to make changes directly to an existing image (and have sudo rights), you can use the <strong>–writable</strong> argument or build a <strong>sandbox</strong> (directory) container and make your changes.</li>
 </ul>
 <div class="fragment">
 <div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">local.machine$</span> sudo apptainer shell <span class="at">--writable</span> rstudio_latest.sif</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
