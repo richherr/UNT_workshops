@@ -328,6 +328,9 @@ login2.ls6$ ssh -L 10000:localhost:10000 c303-012
 Last login: Tue Oct 10 13:58:31 2023 from 129.114.40.81
 c303-012.ls6$ cd /work/07723/richherr/containers
 c303-012.ls6$ ./submit_rstudio
+c303-012.ls6(1008)$ ./submit_rstudio
+10000/tcp:           2562371
+TTY detected. Printing informational message about logging configuration. Logging configuration loaded from '/etc/rstudio/logging.conf'. Logging to 'syslog'.
 ```
 :::
 
@@ -354,4 +357,21 @@ abase.conf:/etc/rstudio/database.conf rstudio_latest.sif rserver --www-port=1000
 th=pam-helper --auth-stay-signed-in-days=2 --auth-timeout-minutes=0 --server-user="richherr" &
 ```
 :::
+
+## Accessing the RStudio IDE on your Local Machine {.smaller style="font-size: 0.60em"}
+
+7. Now we should be able to access the RStudio IDE through localhost. Open a browser on your local machine and type the following
+
+::: fragment
+``` bash
+http://localhost:10000/
+```
+:::
+
+- You should see the login page
+
+::: fragment
+![RStudio view](/work/richherr/UNT_workshops/RStudio.png){.fragment width="860" height="425"}
+:::
+
 
