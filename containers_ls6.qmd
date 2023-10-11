@@ -368,10 +368,15 @@ http://localhost:10000/
 ```
 :::
 
-- You should see the login page
+- You should see the login page - use the username and password that you exported to your environment
 
 ::: fragment
-![RStudio view](/work/richherr/UNT_workshops/RStudio.png){.fragment width="860" height="425"}
+![](/work/richherr/UNT_workshops/RStudio.png){.fragment width="860" height="425"}
 :::
 
+## Accessing the RStudio IDE on your Local Machine {.smaller style="font-size: 0.60em"}
+- Once you login you should see
 
+::: fragment
+![](/work/richherr/UNT_workshops/RStudio_IDE.png){.fragment width="860" height="425"}
+:::

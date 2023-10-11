@@ -469,7 +469,7 @@ c302-017.ls6$ htop
 :::
 
 ::: fragment
-![htop view](/work/richherr/UNT_workshops/h2o_htop_view.png){.fragment width="860" height="425"}
+![](/work/richherr/UNT_workshops/h2o_htop_view.png){.fragment width="860" height="425"}
 :::
 
 ## Our H2o Output {style="font-size: 0.64em"}
