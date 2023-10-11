@@ -1533,10 +1533,10 @@ Rich Herrington <br> DRI, Research Computing Services
 <li class="fragment">Setting these arguments can be tricky - all I can say is that <strong>trial-and-error</strong> and <strong>Google Search</strong> are your friend.</li>
 </ul>
 </section>
-<section id="setup-prior-to-initiating-the-rstudio-web-service-4" class="slide level2 smaller" style="font-size: 0.58em">
+<section id="setup-prior-to-initiating-the-rstudio-web-service-4" class="slide level2 smaller" style="font-size: 0.56em">
 <h2>Setup Prior to Initiating the RStudio Web Service</h2>
 <ul>
-<li class="fragment">You should be able to take these commands: loading the apptainer module, unloading the xalt module, exporting the username and password, running the fuser command, and running the apptainer command itself into an executable script - say <strong>submit_rstudio</strong>. Don’t forget to <strong>chmod +x submit_rstudio</strong></li>
+<li class="fragment">These setup commands: loading the apptainer module; unloading the xalt module; exporting the username and password; running the fuser command; and running the apptainer exec, can all be placed into an executable script, for example <strong>submit_rstudio</strong>. Then use <strong>chmod +x submit_rstudio</strong> to make it an executable file. Then, starting the RStudio server instance only becomes a matter of running <strong>submit_rstudio</strong>.</li>
 </ul>
 <div class="fragment">
 <div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">local.machine$</span> ssh <span class="at">-L</span> 10000:localhost:10000 richherr@ls6.tacc.utexas.edu</span>

@@ -317,9 +317,9 @@ login2.ls6$ apptainer exec --bind /home1/07723/richherr:$HOME --bind run:/run,va
 - More apptainer details can be found from the user documentation [https://apptainer.org/docs/user/main/quick_start.html](https://apptainer.org/docs/user/main/quick_start.html). 
 - Setting these arguments can be tricky - all I can say is that **trial-and-error** and **Google Search** are your friend. 
 
-## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.58em"}
+## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.56em"}
 
-- You should be able to take these commands: loading the apptainer module, unloading the xalt module, exporting the username and password, running the fuser command, and running the apptainer command itself into an executable script - say **submit_rstudio**.  Don't forget to **chmod +x submit_rstudio**  
+- These setup commands: loading the apptainer module; unloading the xalt module; exporting the username and password; running the fuser command; and running the apptainer exec, can all be placed into an executable script, for example **submit_rstudio**.  Then use **chmod +x submit_rstudio** to make it an executable file. Then, starting the RStudio server instance only becomes a matter of running **submit_rstudio**.    
 
 ::: fragment
 ``` bash
