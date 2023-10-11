@@ -1225,6 +1225,73 @@ Rich Herrington <br> DRI, Research Computing Services
 </section>
 
 <section>
+<section id="introduction-to-containers" class="title-slide slide level1 center">
+<h1>Introduction to Containers</h1>
+
+</section>
+<section id="defining-containers" class="slide level2">
+<h2>Defining Containers</h2>
+<ul>
+<li class="fragment">Containers have revolutionized the way developers create, deploy, and manage applications.</li>
+<li class="fragment">At its core, a container is a standalone, executable package that includes everything needed to run a piece of software, including the code, runtime, libraries, and system tools.</li>
+<li class="fragment">Containers encapsulate an application and its dependencies into a singular unit, ensuring that it runs consistently across various computing environments.</li>
+</ul>
+</section>
+<section id="the-importance-of-containers" class="slide level2 smaller" style="font-size: 0.70em">
+<h2>The Importance of Containers</h2>
+<ul>
+<li class="fragment">Containers ensure that applications run the same way regardless of where they are deployed, be it a developer’s local machine, a test environment, or a public or private cloud.</li>
+<li class="fragment">Containers facilitate a microservices architecture, allowing each service to be developed, deployed, and scaled independently, enhancing the agility and resilience of the overall application.</li>
+<li class="fragment">Containers utilize system resources more efficiently than traditional virtual machines as they share the OS kernel and isolate the application processes from each other.</li>
+</ul>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Microservices Architecture refers to a software development style that structures an application as a collection of loosely coupled, independently deployable services. Each service, or “microservice,” is a self-contained unit that performs a specific business capability and communicates with other services through well-defined APIs (Application Programming Interfaces).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-importance-of-containers-1" class="slide level2">
+<h2>The Importance of Containers</h2>
+<ul>
+<li class="fragment">Containers can be started in milliseconds, enabling rapid deployment and scaling of applications.</li>
+<li class="fragment">This is crucial for implementing continuous integration and continuous delivery (CI/CD) pipelines and for applications that need to scale on-demand.</li>
+<li class="fragment">Containers provide an isolated environment for applications, ensuring that they have their own filesystem, CPU, memory, and network space, thereby enhancing security and reducing conflicts between applications.</li>
+</ul>
+</section>
+<section id="containers-vs.-virtual-machines-vms" class="slide level2">
+<h2>Containers vs. Virtual Machines (VMs)</h2>
+<ul>
+<li class="fragment">Containers share the host system’s OS kernel and isolate the application processes from each other.</li>
+<li class="fragment">VMs include a full OS instance for each VM along with the application and its dependencies, which are hosted by a hypervisor.</li>
+<li class="fragment">Containers are lightweight and require less system resources since they share the OS kernel and avoid the overhead of running full OS instances.</li>
+<li class="fragment">VMs tend to consume more system resources as each VM runs its own full-fledged OS instance.</li>
+</ul>
+</section>
+<section id="containers-enhance-portability" class="slide level2">
+<h2>Containers Enhance Portability</h2>
+<ul>
+<li class="fragment">Containers are highly portable as they encapsulate all of the application’s dependencies, ensuring consistency across multiple deployment environments.</li>
+<li class="fragment">VMs can also be portable but tend to be bulkier and more resource-intensive, making them less ideal for rapid, scalable deployments.</li>
+</ul>
+</section>
+<section id="use-case-for-containers-and-vms" class="slide level2">
+<h2>Use Case for Containers and VMs</h2>
+<ul>
+<li class="fragment">Containers are ideal for microservices, cloud-native applications, and scenarios where rapid scaling and deployment are crucial.</li>
+<li class="fragment">VMs are suitable for scenarios where complete isolation of operating systems is necessary, such as running applications that require different OS types.</li>
+</ul>
+</section></section>
+<section>
 <section id="basics-operations-for-containers" class="title-slide slide level1 center">
 <h1>Basics Operations for Containers</h1>
 
@@ -1665,6 +1732,7 @@ Rich Herrington <br> DRI, Research Computing Services
 <li class="fragment">Using containers with SLURM and MPI</li>
 <li class="fragment">Using containers with Nvidia and LS6 GPUs</li>
 <li class="fragment">Building containers with Apptainer def files</li>
+<li class="fragment">Explore using Docker with containers</li>
 <li class="fragment">Saving containers to Docker Hub or Github Packages</li>
 </ul>
 </section></section>

@@ -22,6 +22,44 @@ editor:
 
 [https://richherr.github.io/UNT_workshops/](https://richherr.github.io/UNT_workshops/){style="font-size: 1.25em"}
 
+# Introduction to Containers
+
+## Defining Containers
+- Containers have revolutionized the way developers create, deploy, and manage applications. 
+- At its core, a container is a standalone, executable package that includes everything needed to run a piece of software, including the code, runtime, libraries, and system tools. 
+- Containers encapsulate an application and its dependencies into a singular unit, ensuring that it runs consistently across various computing environments.
+
+## The Importance of Containers {.smaller style="font-size: 0.70em"}
+- Containers ensure that applications run the same way regardless of where they are deployed, be it a developer's local machine, a test environment, or a public or private cloud.
+- Containers facilitate a microservices architecture, allowing each service to be developed, deployed, and scaled independently, enhancing the agility and resilience of the overall application.
+- Containers utilize system resources more efficiently than traditional virtual machines as they share the OS kernel and isolate the application processes from each other.
+
+::: fragment
+::: callout-note
+Microservices Architecture refers to a software development style that structures an application as a collection of loosely coupled, independently deployable services. Each service, or "microservice," is a self-contained unit that performs a specific business capability and communicates with other services through well-defined APIs (Application Programming Interfaces).
+:::
+:::
+
+## The Importance of Containers
+- Containers can be started in milliseconds, enabling rapid deployment and scaling of applications. 
+- This is crucial for implementing continuous integration and continuous delivery (CI/CD) pipelines and for applications that need to scale on-demand.
+- Containers provide an isolated environment for applications, ensuring that they have their own filesystem, CPU, memory, and network space, thereby enhancing security and reducing conflicts between applications.
+
+## Containers vs. Virtual Machines (VMs)
+- Containers share the host system’s OS kernel and isolate the application processes from each other.
+- VMs include a full OS instance for each VM along with the application and its dependencies, which are hosted by a hypervisor.
+- Containers are lightweight and require less system resources since they share the OS kernel and avoid the overhead of running full OS instances.
+- VMs tend to consume more system resources as each VM runs its own full-fledged OS instance.
+
+## Containers Enhance Portability
+- Containers are highly portable as they encapsulate all of the application’s dependencies, ensuring consistency across multiple deployment environments.
+- VMs can also be portable but tend to be bulkier and more resource-intensive, making them less ideal for rapid, scalable deployments.
+
+## Use Case for Containers and VMs
+
+- Containers are ideal for microservices, cloud-native applications, and scenarios where rapid scaling and deployment are crucial.
+- VMs are suitable for scenarios where complete isolation of operating systems is necessary, such as running applications that require different OS types.
+
 # Basics Operations for Containers
 
 ## Setup 
@@ -434,6 +472,7 @@ local.machine$ sudo apptainer build --sandbox new_directory/ rstudio_latest.sif
 - Using containers with SLURM and MPI
 - Using containers with Nvidia and LS6 GPUs
 - Building containers with Apptainer def files
+- Explore using Docker with containers
 - Saving containers to Docker Hub or Github Packages
 
 # Thank you!
