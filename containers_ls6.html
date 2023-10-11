@@ -1631,10 +1631,56 @@ Rich Herrington <br> DRI, Research Computing Services
 
 </tbody></table>
 </div>
+</section>
+<section id="updating-an-existing-container" class="slide level2 smaller" style="font-size: 0.60em">
+<h2>Updating an Existing Container</h2>
+<ol start="8" type="1">
+<li class="fragment">Updating a container using Apptainer involves a few steps that are somewhat different from other containerization tools (e.g. Docker) due to its unique architecture and usage in HPC environments. When you have sudo rights on a machine, you can manage containers with elevated privileges, ensuring you can manipulate any files and settings as needed.</li>
+</ol>
+<ul>
+<li class="fragment">To modify an existing image you need to make changes directly to an existing image (and have sudo rights), you can use the –writable flag or build a sandbox (directory) container and make your changes.</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">local.machine$</span> sudo apptainer shell <span class="at">--writable</span> rstudio_latest.sif</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li class="fragment">Or you can convert the image to a sandbox for more extensive changes</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="ex">local.machine$</span> sudo apptainer build <span class="at">--sandbox</span> new_directory/ rstudio_latest.sif</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li class="fragment">You make your changes in the sandbox, and then convert it back into an image file.</li>
+<li class="fragment">The updates might include updating the versions of software, libraries, or dependencies within the container; installing new software, tools, or libraries; uninstalling unnecessary or deprecated software or libraries.</li>
+<li class="fragment">Use <strong>scp</strong> to copy the <strong>rstudio_latest.sif</strong> from LS6 to a machine that you have <strong>sudo</strong> rights on (with apptainer installed) and use <strong>shell writeable</strong> and <strong>build</strong> to make your intended changes. Finally, copy the <strong>.sif</strong> file back to LS6.</li>
+</ul>
+</section>
+<section id="some-best-practices-with-containers-and-last-considerations" class="slide level2 smaller" style="font-size: 0.60em">
+<h2>Some Best Practices with Containers and Last Considerations</h2>
+<ol start="9" type="1">
+<li class="fragment">Maintain a compact and minimalistic design and incorporate only essential components for your applications. Bulky containers demand more memory and experience delayed startups.</li>
+</ol>
+<ul>
+<li class="fragment">We plan to have a follow-up workshop that covers some important topics that we didn’t have time to covere here</li>
+<li class="fragment">Using containers with SLURM and MPI</li>
+<li class="fragment">Using containers with Nvidia and LS6 GPUs</li>
+<li class="fragment">Building containers with Apptainer def files</li>
+<li class="fragment">Saving containers to Docker Hub or Github Packages</li>
+</ul>
+</section></section>
+<section id="thank-you" class="title-slide slide level1 center">
+<h1>Thank you!</h1>
+<div style="font-size: 0.70em">
+<p>Questions? Comments?</p>
+<p>Rich Herrington</p>
+<ul>
+<li class="fragment"><a href="mailto:richard.herrington@unt.edu" class="email">richard.herrington@unt.edu</a></li>
+</ul>
+</div>
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 

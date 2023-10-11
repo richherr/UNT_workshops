@@ -404,6 +404,48 @@ http://localhost:10000/
 </table>
 :::
 
+## Updating an Existing Container {.smaller style="font-size: 0.60em"}
+
+8. Updating a container using Apptainer involves a few steps that are somewhat different from other containerization tools (e.g. Docker) due to its unique architecture and usage in HPC environments. When you have sudo rights on a machine, you can manage containers with elevated privileges, ensuring you can manipulate any files and settings as needed. 
+- To modify an existing image you need to make changes directly to an existing image (and have sudo rights), you can use the --writable flag or build a sandbox (directory) container and make your changes.
+
+::: fragment
+``` bash
+local.machine$ sudo apptainer shell --writable rstudio_latest.sif
+```
+:::
+
+- Or you can convert the image to a sandbox for more extensive changes
+
+::: fragment
+``` bash
+local.machine$ sudo apptainer build --sandbox new_directory/ rstudio_latest.sif
+```
+:::
+
+- You make your changes in the sandbox, and then convert it back into an image file.
+- The updates might include updating the versions of software, libraries, or dependencies within the container; installing new software, tools, or libraries; uninstalling unnecessary or deprecated software or libraries.
+- Use **scp** to copy the **rstudio_latest.sif** from LS6 to a machine that you have **sudo** rights on (with apptainer installed) and use **shell writeable** and **build** to make your intended changes. Finally, copy the **.sif** file back to LS6.
+
+## Some Best Practices with Containers and Last Considerations {.smaller style="font-size: 0.60em"}
+
+9. Maintain a compact and minimalistic design and incorporate only essential components for your applications. Bulky containers demand more memory and experience delayed startups. 
+- We plan to have a follow-up workshop that covers some important topics that we didn't have time to covere here 
+- Using containers with SLURM and MPI
+- Using containers with Nvidia and LS6 GPUs
+- Building containers with Apptainer def files
+- Saving containers to Docker Hub or Github Packages
+
+# Thank you!
+
+::: { style="font-size: 0.70em" }
+Questions? Comments?
+
+Rich Herrington
+
+- [richard.herrington\@unt.edu](mailto:richard.herrington@unt.edu){.email}
+:::
+
 
 
 
