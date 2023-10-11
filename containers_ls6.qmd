@@ -494,8 +494,8 @@ c303-012.ls6(1044)$ pwd
 c303-012.ls6(1045)$ ls -la
 total 607813
 drwxr-xr-x 2 richherr G-824114         1 Oct 11 00:38 .
-drwxrwxr-x 9 jeq0010  G-824114         7 Oct 11 00:36 ..
--rwx------ 1 richherr G-824114 622399488 Oct 11 00:39 rstudio_latest.sif
+-rwxr-xr-x 1 richherr G-824114 622399488 Oct 11 00:39 rstudio_latest.sif
+
 ```
 :::
 :::
