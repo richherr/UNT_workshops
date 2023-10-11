@@ -394,7 +394,7 @@ http://localhost:10000/
 :::
 
 ## Accessing the RStudio IDE on your Local Machine {.smaller style="font-size: 0.60em"}
-- Why do we care to use the rocker/rstudio container rather than TACC's RStudio through the TAP portal? The current R availabe with Rstats module is 4.0.3 and the RStudio through TAP is from a couple of years ago.  The rocker/rstudio container is the latest version of RStudio IDE, and the R version is 4.1.3.  
+- Why do we care to use the rocker/rstudio container rather than TACC's RStudio through the TAP portal? The current R availabe with Rstats module is 4.0.3 and the RStudio through TAP is from a couple of years ago.  The rocker/rstudio container is the latest version of RStudio IDE, and the R version is 4.3.1.  
 
 ::: fragment
 <table>
