@@ -1,6 +1,10 @@
 ---
 title: "test"
-format: revealjs
+format: 
+  revealjs: 
+    theme: white
+    transition: slide
+    self-contained: true
 editor: visual
 ---
 
