@@ -1,6 +1,6 @@
 ---
-title: "Using Containers on TACC LoneStar6"
-subtitle: "Reproducibility and Portability of Workflows"
+title: "Using Containers on TACC LoneStar6 (Part II)"
+subtitle: "Using Bioinformatics Containers"
 author: "Rich Herrington <br> DRI, Research Computing Services"
 format: 
   revealjs: 
@@ -22,12 +22,10 @@ editor:
 
 [https://richherr.github.io/UNT_workshops/](https://richherr.github.io/UNT_workshops/){style="font-size: 1.25em"}
 
-# Introduction to Containers
+# Bioinformatics Containers
 
-## Defining Containers
-- Containers have revolutionized the way developers create, deploy, and manage applications. 
-- At its core, a container is a standalone, executable package that includes everything needed to run a piece of software, including the code, runtime, libraries, and system tools. 
-- Containers encapsulate an application and its dependencies into a singular unit, ensuring that it runs consistently across various computing environments.
+## Container Repositories
+-  
 
 ## The Importance of Containers {.smaller style="font-size: 0.70em"}
 - Containers ensure that applications run the same way regardless of where they are deployed, be it a developer's local machine, a test environment, or a public or private cloud.
