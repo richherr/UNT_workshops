@@ -37,29 +37,9 @@ Callout
 :::
 :::
 
-## Heading
-- Insert 
-- Insert
-
-## Heading
-- Insert
-- Insert
-
-# Heading
-
-## Steps 
-1. Step 1
-- Insert
-
-::: fragment
-``` bash
-login1.ls6$ 
-```
-:::
-
 ## Heading {.smaller style="font-size: 0.70em"}
 
-2. Step 2 
+1. Step 1 
 - While we start with an interactive sessions, containers can be used with SLURM batch as well. 
 
 ::: fragment
@@ -78,11 +58,10 @@ login1.ls6$
 :::
 
 
-## Heading {.smaller style="font-size: 0.62em"}
+## Heading {.smaller style="font-size: 0.70em"}
 
-3. Step 3
-- Insert
-- Insert
+2. Step 2
+- While we start with an interactive sessions, containers can be used with SLURM batch as well. 
 
 ::: fragment
 ``` bash
@@ -92,7 +71,7 @@ c303-012.ls6$
  
 ## Interacting with the Container Using [shell]{style="color: red;"} {.smaller style="font-size: 0.68em"}
 
-2. We can interact with the container by using the shell command. With shell, you are inside the container's environment.
+3. We can interact with the container by using the shell command. With shell, you are inside the container's environment.
 - **apptainer shell** is like "entering" the container
 - We can see that the environment is different from an ordinary bash shell on the login node
 
@@ -104,7 +83,7 @@ c303-012.ls6$
 
 ## Heading {.smaller style="font-size: 0.68em"}
 
-3. Step 3.
+4 Step 4.
 [https://hub.docker.com/](https://hub.docker.com/)
 - Information on the container: 
 [https://rocker-project.org/images/versioned/rstudio.html](https://rocker-project.org/images/versioned/rstudio.html)
