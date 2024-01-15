@@ -1,0 +1,517 @@
+---
+title: "Using Containers on TACC LoneStar6"
+subtitle: "Reproducibility and Portability of Workflows"
+author: "Rich Herrington <br> DRI, Research Computing Services"
+format: 
+  revealjs: 
+    theme: white
+    transition: slide
+    self-contained: true
+code-tools: true
+incremental: true
+title-slide-attributes: 
+  data-background-image: unt.png
+  data-background-size: 23%
+  data-background-position: 2% 2%
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Slide URL
+
+[https://richherr.github.io/UNT_workshops/](https://richherr.github.io/UNT_workshops/){style="font-size: 1.25em"}
+
+# Introduction to Containers
+
+## Defining Containers
+- Containers have revolutionized the way developers create, deploy, and manage applications. 
+- At its core, a container is a standalone, executable package that includes everything needed to run a piece of software, including the code, runtime, libraries, and system tools. 
+- Containers encapsulate an application and its dependencies into a singular unit, ensuring that it runs consistently across various computing environments.
+
+## The Importance of Containers {.smaller style="font-size: 0.70em"}
+- Containers ensure that applications run the same way regardless of where they are deployed, be it a developer's local machine, a test environment, or a public or private cloud.
+- Containers facilitate a microservices architecture, allowing each service to be developed, deployed, and scaled independently, enhancing the agility and resilience of the overall application.
+- Containers utilize system resources more efficiently than traditional virtual machines as they share the OS kernel and isolate the application processes from each other.
+
+::: fragment
+::: callout-note
+Microservices Architecture refers to a software development style that structures an application as a collection of loosely coupled, independently deployable services. Each service, or "microservice," is a self-contained unit that performs a specific business capability and communicates with other services through well-defined APIs (Application Programming Interfaces).
+:::
+:::
+
+## The Importance of Containers
+- Containers can be started in milliseconds, enabling rapid deployment and scaling of applications. 
+- This is crucial for implementing continuous integration and continuous delivery (CI/CD) pipelines and for applications that need to scale on-demand.
+- Containers provide an isolated environment for applications, ensuring that they have their own filesystem, CPU, memory, and network space, thereby enhancing security and reducing conflicts between applications.
+
+## Containers vs. Virtual Machines (VMs)
+- Containers share the host system’s OS kernel and isolate the application processes from each other.
+- VMs include a full OS instance for each VM along with the application and its dependencies, which are hosted by a hypervisor.
+- Containers are lightweight and require less system resources since they share the OS kernel and avoid the overhead of running full OS instances.
+- VMs tend to consume more system resources as each VM runs its own full-fledged OS instance.
+
+## Containers Enhance Portability
+- Containers are highly portable as they encapsulate all of the application’s dependencies, ensuring consistency across multiple deployment environments.
+- VMs can also be portable but tend to be bulkier and more resource-intensive, making them less ideal for rapid, scalable deployments.
+
+## Use Case for Containers and VMs
+
+- Containers are ideal for microservices, cloud-native applications, and scenarios where rapid scaling and deployment are crucial.
+- VMs are suitable for scenarios where complete isolation of operating systems is necessary, such as running applications that require different OS types.
+
+# Basics Operations for Containers
+
+## Setup 
+1. We need to do some intial setup to work with containers on LS6.
+- Create temp locations for downloads and builds.
+
+::: fragment
+``` bash
+login1.ls6$ ssh richherr@ls6.tacc.utexas.edu
+login2.ls6$ pwd
+/home1/07723/richherr
+login1.ls6$ cd /scratch/07723/richherr
+login1.ls6$ mkdir -p tmp/.apptainer
+login1.ls6$ mkdir /home1/07723/richherr/work/containers
+login1.ls6$ cd /home1/07723/richherr/work/containers
+login1.ls6$ echo export "APPTAINER_CACHEDIR=/scratch/07723/richherr/tmp/.apptainer" >> ~/.bashrc
+login1.ls6$ echo export "APPTAINER_LOCALCACHEDIR=/scratch/07723/richherr/tmp/.apptainer" >> ~/.bashrc
+login1.ls6$ echo export "APPTAINER_TMPDIR=/scratch/07723/richherr/tmp/.apptainer" >> ~/.bashrc
+login1.ls6$ echo export "APPTAINER_PULLFOLDER=/scratch/07723/richherr/tmp/.apptainer" >> ~/.bashrc
+login1.ls6$ source ~/.bashrc
+```
+:::
+
+## Requesting an Interactive Bash Session on a Compute Node {.smaller style="font-size: 0.70em"}
+
+2. We need to request an interactive session on a compute node.  We'll use the development partition.  TACC doesn't allow the use of Apptainer on login nodes. 
+- While we start with an interactive sessions, containers can be used with SLURM batch as well. 
+
+::: fragment
+``` bash
+login1.ls6$ srun -p development -t 02:00:00 -A TRA21001 -N 1 -n 128 --pty bash
+c303-012.ls6$ pwd
+/home1/07723/richherr
+```
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+You can also use the command **idev** to get an interactive session
+``` bash
+login1.ls6$ module load idev
+login1.ls6$ idev -m 120 -A TRA21001
+```
+:::
+:::
+
+
+
+## Our First Simple Container Action {.smaller style="font-size: 0.62em"}
+
+3. We will load the apptainer module and pull a container from docker hub
+- Load module to access apptainer
+- Do apptainer pull from docker hub
+- Move the container from our temp directory to our container directory
+
+::: fragment
+``` bash
+c303-012.ls6$ module load tacc-apptainer
+c303-012.ls6$ apptainer pull my_debian.sif docker://debian:latest
+c303-012.ls6$ mv /scratch/07723/richherr/tmp/.apptainer/my_debian.sif /work/07723/richherr/containers/
+c303-012.ls6$ cd /work/07723/richherr/containers/
+c303-012.ls6$ pwd
+/home1/07723/richherr/work/containers
+c303-012.ls6$ ls -la
+total 46644
+drwx------  2 richherr G-824114     4096 Oct  9 20:44 .
+drwx------ 46 richherr G-824114     4096 Oct  9 20:24 ..
+-rwx------  1 richherr G-824114 47751168 Oct  9 20:39 my_debian.sif
+```
+:::
+ 
+## Interacting with the Container Using [shell]{style="color: red;"} {.smaller style="font-size: 0.68em"}
+
+2. We can interact with the container by using the shell command. With shell, you are inside the container's environment.
+- **apptainer shell** is like "entering" the container
+- We can see that the environment is different from an ordinary bash shell on the login node
+
+::: fragment
+``` bash
+c303-012.ls6$ apptainer shell my_debian.sif
+Apptainer> cat /etc/os-release
+
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+
+login1.ls6$ cat /etc/os-release
+
+NAME="Rocky Linux"
+VERSION="8.6 (Green Obsidian)"
+ID="rocky"
+ID_LIKE="rhel centos fedora"
+VERSION_ID="8.6"
+```
+:::
+
+## Many Containers to Choose From {.smaller style="font-size: 0.68em"}
+
+3. Let's pick a container that has more interesting tools to use.  Go to the Docker Hub website and search for the docker image "rocker/rstudio".
+[https://hub.docker.com/](https://hub.docker.com/)
+- Information on the container: 
+[https://rocker-project.org/images/versioned/rstudio.html](https://rocker-project.org/images/versioned/rstudio.html)
+- The .sif image file is 594M and took about 5 minutes to download and create. 
+
+::: fragment
+``` bash
+c303-012.ls6$ module load tacc-apptainer
+c303-012.ls6$ apptainer pull docker://rocker/rstudio
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+...
+...
+INFO:    Creating SIF file...
+c303-012.ls6$ mv /scratch/07723/richherr/tmp/.apptainer/rstudio_latest.sif /work/07723/richherr/containers/
+c303-012.ls6(742)$ cd /work/07723/richherr/containers/
+c303-012.ls6(742)$ ls -lha
+total 640M
+drwx------  2 richherr G-824114 4.0K Oct 10 13:03 .
+drwx------ 46 richherr G-824114 4.0K Oct  9 23:19 ..
+-rwx------  1 richherr G-824114  46M Oct  9 20:39 my_debian.sif
+-rwx------  1 richherr G-824114 594M Oct 10 13:01 rstudio_latest.sif
+```
+:::
+
+## Interacting with our Container Using [shell (R)]{style="color: red;"} {.smaller style="font-size: 0.68em"}
+
+4. We can interact with our container using **apptainer shell**
+
+- We really only need to load the module for apptainer once so I'll stop loading it before each code segment. 
+- Here we run an interactive session with R version 4.3.1
+
+::: fragment
+``` bash
+c303-012.ls6$ c303-012.ls6(823)$ pwd
+/home1/07723/richherr/work/containers
+c303-012.ls6$ apptainer shell rstudio_latest.sif
+
+Apptainer> R
+
+R version 4.3.1 (2023-06-16) -- "Beagle Scouts"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+Type 'q()' to quit R.
+
+>
+```
+:::
+
+## Interacting with our Container Using [shell (Python)]{style="color: red;"} {.smaller style="font-size: 0.68em"}
+
+- We can also use our Conda environments from within the container!
+- Here we load the base environment and start python from that environment. 
+- Note that python is not installed in the container but we are accessing python by loading our conda environment.
+- We can even install software into our conda environment from within the container.
+
+::: fragment
+``` bash
+c303-012.ls6$ apptainer shell rstudio_latest.sif
+Apptainer> source ~/conda.init
+Apptainer> conda activate
+(base) Apptainer> which python
+/work/07723/richherr/miniconda3/bin/python
+(base) Apptainer> python
+Python 3.8.17 | packaged by conda-forge | (default, Jun 16 2023, 07:06:00)
+[GCC 11.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+
+(base) Apptainer> mamba install htop
+```
+:::
+
+## Interacting with our Container Using [exec (R)]{style="color: red;"}  {.smaller style="font-size: 0.68em"}
+
+5. We can interact with our container using **apptainer exec** (R)
+
+- Here we send a executable script to the R language in the container using **exec** 
+- We first need to create a **test.R** text file (use nano) with a simple single R command in it - let's use **rnorm(10)** - this generates 10 random draws from the normal distribution. 
+- Remember to make the test.R an executable file by using **chmod +x**
+
+::: fragment
+``` bash
+c303-012.ls6$ nano test.R
+c303-012.ls6$ chmod +x test.R
+c303-012.ls6$ more test.R
+rnorm(10)
+
+apptainer exec rstudio_latest.sif Rscript test.R
+ [1] -0.83928324  0.38760952 -0.10603479 -0.39473706 -1.37026012  0.65444678
+ [7] -1.41737121  0.41543348  0.04030247 -0.93155394
+c303-012.ls6$
+```
+:::
+
+## Interacting with our Container Using [exec (Python)]{style="color: red;"} {.smaller style="font-size: 0.60em"}
+
+- Here we send a executable script to the Python language in the container using **exec**, but only after we have initialized our conda environment.
+- We first need to create a **test.py** text file (use nano) with a simple single python command in it - let's use a simple 'hello world' - remember to make the test.py an executable file by using **chmod +x**
+- The setup for this is a bit more complicated since Python is not installed in the container. We'll need to create **submit_py** script and a **test.py** separatly.  The **submit_py** will initialize our conda environment and then submit the **test.py** python script.  
+- Lastly, make sure to give the full path to the **submit_py** script
+
+::: fragment
+``` bash
+c303-012.ls6$ nano test.py
+c303-012.ls6$ chmod +x test.py
+c303-012.ls6$ more test.py
+#!/usr/bin/env python3
+print('hello world')
+
+c303-012.ls6$ nano submit_py
+c303-012.ls6$ chmod +x submit_py
+c303-012.ls6$ more submit_py
+#!/bin/bash
+source /home1/07723/richherr/conda.init
+conda activate
+
+c303-012.ls6$ apptainer exec rstudio_latest.sif /work/07723/richherr/containers/submit_py
+hello world
+```
+:::
+
+# Initiating an RStudio Web Service from a Container on a Compute Node
+
+## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.60em"}
+
+6. Containers have streamlined the way web services are developed, deployed, and scaled by encapsulating these services and their dependencies into isolated, lightweight, and portable modules.  Our goal here is to use our **rocker_rstudio.sif** container to launch the server based RStudio IDE onto a compute node.  
+- In this particular example we will be using a method that is referred to as **port forwarding**.  We will forward the port 10000 from the compute node back to our local machine and then will launch the service on a compute node.  This will give us access to the RStudio IDE on our local machine.
+- Note that this method assumes that you have an X server on your local machine (will handle windowing forwarded from LS6).  Windows users can install VcXrv: [https://sourceforge.net/projects/vcxsrv/](https://sourceforge.net/projects/vcxsrv/).  MacOSX users can install XQuartz: [https://www.xquartz.org/](https://www.xquartz.org/).
+
+## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.60em"}
+
+- Login to LS6 using the particular ssh command below.  Then log into your interactive compute node session using the same form of the ssh command. 
+- Make sure you are the directory containing your container. 
+
+::: fragment
+``` bash
+local.machine$ ssh -L 10000:localhost:10000 richherr@ls6.tacc.utexas.edu
+login2.ls6$ ssh -L 10000:localhost:10000 c303-012
+Last login: Tue Oct 10 13:58:31 2023 from 129.114.40.81
+c303-012.ls6$ cd /work/07723/richherr/containers
+
+c303-012.ls6(781)$ ls -la
+total 654484
+drwx------  4 richherr G-824114      4096 Oct 10 16:50 .
+drwx------ 46 richherr G-824114      4096 Oct 10 14:32 ..
+-rw-------  1 richherr G-824114        50 Oct 10 13:48 database.conf
+-rwx------  1 richherr G-824114  47751168 Oct  9 20:39 my_debian.sif
+-rwx------  1 richherr G-824114 622399488 Oct 10 13:01 rstudio_latest.sif
+-rwx------  1 richherr G-824114        77 Oct 10 17:02 submit_py
+-rwx------  1 richherr G-824114        44 Oct 10 17:04 test.py
+-rw-------  1 richherr G-824114        10 Oct 10 16:35 test.R
+
+```
+:::
+
+## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.60em"}
+
+- We need to load the apptainer module.
+- We use **mkdir** to create directories that will be used for storing runtime data (run) and data related to the RStudio Server (var-lib-rstudio-server). The second command creates a configuration file (database.conf) that specifies how RStudio server will interact with its backend database. We only need to run these commands once.  We can reuse these directories later. 
+
+::: fragment
+``` bash
+login2.ls6$ module load tacc-apptainer
+login2.ls6$ mkdir -p run var-lib-rstudio-server
+login2.ls6$ printf 'provider=sqlite\ndirectory=/var/lib/rstudio-server\n' > database.conf
+```
+:::
+
+- Next we export variables into our environment that set our username and password.  We unload **module xalt** since it causes the RStudio instance to terminate improperly. Finally we use **fuser** to terminate any possible server instances on port 10000.  
+
+::: fragment
+``` bash
+login2.ls6$ export APPTAINERENV_USER="richherr"
+login2.ls6$ export APPTAINERENV_PASSWORD="123"
+login2.ls6$ module unload xalt
+login2.ls6$ fuser -k 10000/tcp
+```
+:::
+
+## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.60em"}
+
+- Our last command is to run the **apptainer exec** with appropriate calling arguments.  The **bind** arguments map the host file system back to the container filesystem (HOST:CONTAINER). Other arguments set the port number, sign-in time, and auth-timeout.   
+
+::: fragment
+``` bash
+login2.ls6$ apptainer exec --bind /home1/07723/richherr:$HOME --bind run:/run,var-lib-rstudio-server:/var/lib/rstudio-server,database.conf:/etc/rstudio/database.conf rstudio_latest.sif rserver --www-port=10000 --auth-none=0 --auth-pam-helper-path=pam-helper --auth-stay-signed-in-days=2 --auth-timeout-minutes=0 --server-user="richherr" & 
+```
+:::
+
+- More apptainer details can be found from the user documentation [https://apptainer.org/docs/user/main/quick_start.html](https://apptainer.org/docs/user/main/quick_start.html). 
+- Setting these arguments can be tricky - all I can say is that **trial-and-error** and **Google Search** are your friend. 
+
+## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.55em"}
+
+- These setup commands: loading the apptainer module; unloading the xalt module; exporting the username and password; running the fuser command; and running the apptainer exec, can all be placed into an executable script, for example **submit_rstudio**.  Then use **chmod +x submit_rstudio** to make it an executable file. Then, starting the RStudio server instance only becomes a matter of running **submit_rstudio**.    
+
+::: fragment
+``` bash
+local.machine$ ssh -L 10000:localhost:10000 richherr@ls6.tacc.utexas.edu
+login2.ls6$ ssh -L 10000:localhost:10000 c303-012
+Last login: Tue Oct 10 13:58:31 2023 from 129.114.40.81
+c303-012.ls6$ cd /work/07723/richherr/containers
+c303-012.ls6$ ./submit_rstudio
+c303-012.ls6(1008)$ ./submit_rstudio
+10000/tcp:           2562371
+TTY detected. Printing informational message about logging configuration. Logging configuration loaded from '/etc/rstudio/logging.conf'. Logging to 'syslog'.
+```
+:::
+
+- Contents of **submit_rstudio**
+
+::: fragment
+``` bash
+c303-012.ls6(1001)$ more submit_rstudio
+#!/bin/bash
+cd /work/07723/richherr/containers
+module load tacc-apptainer
+module unload xalt
+fuser -k 10000/tcp
+
+# Only need to run once
+# mkdir -p run var-lib-rstudio-server
+# printf 'provider=sqlite\ndirectory=/var/lib/rstudio-server\n' > database.conf
+
+export APPTAINERENV_USER="richherr"
+export APPTAINERENV_PASSWORD="123"
+
+apptainer exec --bind /home1/07723/richherr:$HOME --bind run:/run,var-lib-rstudio-server:/var/lib/rstudio-server,dat
+abase.conf:/etc/rstudio/database.conf rstudio_latest.sif rserver --www-port=10000 --auth-none=0 --auth-pam-helper-pa
+th=pam-helper --auth-stay-signed-in-days=2 --auth-timeout-minutes=0 --server-user="richherr" &
+```
+:::
+
+## Accessing the RStudio IDE on your Local Machine {.smaller style="font-size: 0.60em"}
+
+7. Now we should be able to access the RStudio IDE through localhost. Open a browser on your local machine and type the following
+
+::: fragment
+``` bash
+http://localhost:10000/
+```
+:::
+
+- You should see the login page - use the username and password that you exported to your environment
+
+::: fragment
+![](/work/richherr/UNT_workshops/RStudio.png){.fragment width="860" height="425"}
+:::
+
+## Accessing the RStudio IDE on your Local Machine {.smaller style="font-size: 0.60em"}
+- Once you login you should see
+
+::: fragment
+![](/work/richherr/UNT_workshops/RStudio_IDE.png){.fragment width="860" height="425"}
+:::
+
+## Accessing the RStudio IDE on your Local Machine {.smaller style="font-size: 0.60em"}
+- Click the terminal tab (upper right pane). You can **source** your conda environment and then activate your conda base environment. You can see that you have access to python in the conda base.  Type **htop** to see that RStudio IDE has access to 128 cores.   
+
+::: fragment
+<table>
+<tr>
+<td><img src="/work/richherr/UNT_workshops/terminal.png" width="400" /></td>
+<td><img src="/work/richherr/UNT_workshops/rstudio_htop.png" width="400" /></td>
+</tr>
+</table>
+:::
+
+## Accessing the RStudio IDE on your Local Machine {.smaller style="font-size: 0.60em"}
+- Why do we care to use the rocker/rstudio container rather than TACC's RStudio through the TAP portal? The current R available with Rstats module is 4.0.3 and the RStudio through TAP is from a couple of years ago.  The rocker/rstudio container is the latest version of RStudio IDE, and the R version is 4.3.1.  
+
+::: fragment
+<table>
+<tr>
+<td><img src="/work/richherr/UNT_workshops/rstudio_version.png" width="400" /></td>
+</tr>
+</table>
+:::
+
+## Updating an Existing Container {.smaller style="font-size: 0.60em"}
+
+8. Updating a container using Apptainer involves a few steps that are somewhat different from other containerization tools (e.g. Docker) due to its unique architecture and usage in HPC environments. When you have **sudo** rights on a machine, you can manage containers with elevated privileges, ensuring you can manipulate any files and settings as needed. 
+- To modify an existing image you need to make changes directly to an existing image (and have sudo rights), you can use the **--writable** argument or build a **sandbox** (directory) container and make your changes.
+
+::: fragment
+``` bash
+local.machine$ sudo apptainer shell --writable rstudio_latest.sif
+```
+:::
+
+- Or you can convert the image to a sandbox for more extensive changes
+
+::: fragment
+``` bash
+local.machine$ sudo apptainer build --sandbox new_directory/ rstudio_latest.sif
+```
+:::
+
+- You make your changes in the sandbox, and then convert it back into an image file.
+- The updates might include updating the versions of software, libraries, or dependencies within the container; installing new software, tools, or libraries; uninstalling unnecessary or deprecated software or libraries.
+- Use **scp** to copy the **rstudio_latest.sif** from LS6 to a machine that you have **sudo** rights on (with apptainer installed) and use **shell writeable** and **build** to make your intended changes. Finally, copy the **.sif** file back to LS6.
+
+## Some Best Practices with Containers and Last Considerations {.smaller style="font-size: 0.68em"}
+
+- Maintain a compact and minimalistic design and incorporate only essential components for your applications. 
+- Keep containers as small as possible - bulky containers demand more memory and experience delayed startups. 
+- Choose base images carefully and prefer minimalistic, official, or widely-recognized images.
+- Treat containers as immutable, meaning once a container is deployed, no updates, patches, or configurations are applied to it. If a change is required, a new container image should be built and deployed to replace the existing one.
+
+## Future Topics to Explore {.smaller style="font-size: 0.68em"}
+
+9. We plan to have a follow-up workshop that covers some important topics that we didn't have time to cover here 
+
+- Using containers with SLURM and MPI
+- Using containers with Nvidia and LS6 GPUs
+- Modifying Existing Containers
+- Building containers with Apptainer def files
+- Explore using Docker with containers
+- Saving containers to Docker Hub or Github Packages
+
+::: fragment
+::: callout-note
+
+I have made the rocker/rstudio .sif file avaliable at
+
+``` bash
+c303-012.ls6(1044)$ pwd
+/scratch/projects/UNT/containers
+c303-012.ls6(1045)$ ls -la
+total 607813
+drwxr-xr-x 2 richherr G-824114         1 Oct 11 00:38 .
+-rwxr-xr-x 1 richherr G-824114 622399488 Oct 11 00:39 rstudio_latest.sif
+
+```
+:::
+:::
+
+
+
+# Thank you!
+
+::: { style="font-size: 0.70em" }
+Questions? Comments?
+
+Rich Herrington
+
+- [richard.herrington\@unt.edu](mailto:richard.herrington@unt.edu){.email}
+:::
+
+
+
+
