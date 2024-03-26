@@ -295,7 +295,7 @@ hello world
 ## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.60em"}
 
 - Login to LS6 using the particular ssh command below.  Then log into your interactive compute node session using the same form of the ssh command. 
-- Make sure you are the directory containing your container. 
+- Make sure you are in the directory containing your container. 
 
 ::: fragment
 ``` bash
