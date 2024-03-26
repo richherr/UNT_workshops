@@ -320,14 +320,16 @@ drwx------ 46 richherr G-824114      4096 Oct 10 14:32 ..
 
 ## Setup Prior to Initiating the RStudio Web Service {.smaller style="font-size: 0.60em"}
 
+- First, a compute node needs to be requested. We will use the development partition.  We will use 1 node with 128 cores for 2 hours.
+- Login to the compute node and make sure you are in the directory containing your container.
 - We need to load the apptainer module.
 - We use **mkdir** to create directories that will be used for storing runtime data (run) and data related to the RStudio Server (var-lib-rstudio-server). The second command creates a configuration file (database.conf) that specifies how RStudio server will interact with its backend database. We only need to run these commands once.  We can reuse these directories later. 
 
 ::: fragment
 ``` bash
-login2.ls6$ module load tacc-apptainer
-login2.ls6$ mkdir -p run var-lib-rstudio-server
-login2.ls6$ printf 'provider=sqlite\ndirectory=/var/lib/rstudio-server\n' > database.conf
+c303-012.ls6$ module load tacc-apptainer
+c303-012.ls6$ mkdir -p run var-lib-rstudio-server
+c303-012.ls6$ printf 'provider=sqlite\ndirectory=/var/lib/rstudio-server\n' > database.conf
 ```
 :::
 
@@ -335,10 +337,10 @@ login2.ls6$ printf 'provider=sqlite\ndirectory=/var/lib/rstudio-server\n' > data
 
 ::: fragment
 ``` bash
-login2.ls6$ export APPTAINERENV_USER="richherr"
-login2.ls6$ export APPTAINERENV_PASSWORD="123"
-login2.ls6$ module unload xalt
-login2.ls6$ fuser -k 10000/tcp
+c303-012.ls6$ export APPTAINERENV_USER="richherr"
+c303-012.ls6$ export APPTAINERENV_PASSWORD="123"
+c303-012.ls6$ module unload xalt
+c303-012.ls6$ fuser -k 10000/tcp
 ```
 :::
 
@@ -348,7 +350,7 @@ login2.ls6$ fuser -k 10000/tcp
 
 ::: fragment
 ``` bash
-login2.ls6$ apptainer exec --bind /home1/07723/richherr:$HOME --bind run:/run,var-lib-rstudio-server:/var/lib/rstudio-server,database.conf:/etc/rstudio/database.conf rstudio_latest.sif rserver --www-port=10000 --auth-none=0 --auth-pam-helper-path=pam-helper --auth-stay-signed-in-days=2 --auth-timeout-minutes=0 --server-user="richherr" & 
+c303-012.ls6$ apptainer exec --bind /home1/07723/richherr:$HOME --bind run:/run,var-lib-rstudio-server:/var/lib/rstudio-server,database.conf:/etc/rstudio/database.conf rstudio_latest.sif rserver --www-port=10000 --auth-none=0 --auth-pam-helper-path=pam-helper --auth-stay-signed-in-days=2 --auth-timeout-minutes=0 --server-user="richherr" & 
 ```
 :::
 
