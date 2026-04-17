@@ -14,7 +14,7 @@ output:
 
 ### Simple Workflows on TACC LoneStar6 (Rich Herrington)
 
-- **Materials**: [Simple Worflows on LoneStar6 LS6](https://richherr.github.io/UNT_workshops/ls6_first_job_workshop.html#/title-slide)
+- **Materials**: [Simple Workflows on LoneStar6 LS6](https://richherr.github.io/UNT_workshops/ls6_first_job_workshop.html#/title-slide)
 
 ### An Introduction to Conda and Mamba on TACC LoneStar6 - Streamlining Scientific Computing with Effective Package Management (Rich Herrington)
 
