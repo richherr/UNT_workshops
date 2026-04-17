@@ -1,0 +1,341 @@
+---
+title: "Workshop 2: Monitoring and Debugging SLURM Jobs on Lonestar6"
+subtitle: "From submission to diagnosis"
+author: "Richard Herrington"
+format:
+  revealjs:
+    slide-number: true
+    incremental: true
+    transition: slide
+    theme: default
+execute:
+  echo: false
+---
+
+## This is workshop 2 in the course sequence
+
+- Workshop 1: first login, basic Linux, first SLURM job
+- **Workshop 2: monitor, inspect, cancel, debug**
+- Workshop 3: modules, compilers, and your first C program
+- Later workshops: MPI/OpenMP, containers
+
+::: notes
+Tie this workshop directly back to the course arc:
+intro -> Linux fundamentals -> SLURM job scheduling.
+This session deepens the Linux + SLURM material from the course book.
+:::
+
+## Workshop outcomes
+
+By the end of this session, you should be able to:
+
+- check whether a job is pending, running, or finished
+- inspect job history with `sacct`
+- cancel a job with `scancel`
+- read `slurm-*.out`
+- diagnose common beginner failures
+- verify directory, files, modules, and commands before resubmitting
+
+## Mental model: what happens after `sbatch`
+
+**You**  
+↓  
+**job script**  
+↓  
+**scheduler queue**  
+↓  
+**compute node**  
+↓  
+**output file + accounting history**
+
+::: notes
+Emphasize the key beginner idea:
+submitting a job is not the same thing as running it immediately.
+:::
+
+## Quick recap from Workshop 1
+
+- login node vs compute node
+- job scripts request resources
+- `sbatch job.slurm` submits work to SLURM
+- output appears later, after the job runs
+- debugging starts with evidence, not guessing
+
+## Core command set for today
+
+```bash
+squeue -u $USER
+sacct
+sacct -j <jobid>
+scancel <jobid>
+cat slurm-*.out
+tail slurm-*.out
+pwd
+ls -l
+module list
+which <command>
+```
+
+## Job states you will see
+
+- `PD` = pending
+- `R` = running
+- `CG` = completing
+- `CD` = completed
+
+::: notes
+Keep it simple. The goal is confidence, not exhaustive scheduler theory.
+:::
+
+## Monitoring queued and running jobs
+
+Use:
+
+```bash
+squeue -u $USER
+```
+
+Look for:
+
+- job ID
+- partition
+- job name
+- state
+- elapsed time
+- nodes
+
+## Optional live monitoring
+
+You can refresh job status automatically with:
+
+```bash
+watch squeue -u $USER
+```
+
+Use this as a convenience tool, not as the main concept.
+
+## Reading recent job history
+
+Completed jobs do not stay in `squeue`.
+
+Use:
+
+```bash
+sacct
+```
+
+This helps you look backward at what happened.
+
+## Inspect one job more closely
+
+Use a specific job ID:
+
+```bash
+sacct -j 123456
+```
+
+This is useful when you want to focus on one job and its outcome.
+
+::: notes
+In a live demo, replace the fake job ID with a real one.
+:::
+
+## Output files are evidence
+
+When a job runs, you often get output such as:
+
+```bash
+cat slurm-123456.out
+tail slurm-123456.out
+```
+
+The output file is often the first place to look.
+
+## Debug from evidence, not guessing
+
+Ask:
+
+1. Did it submit?
+2. Did it run?
+3. Did it fail?
+4. What does the output say?
+5. Was the environment correct?
+
+## Common failure 1: wrong directory
+
+Check:
+
+```bash
+pwd
+ls
+```
+
+Symptoms:
+
+- missing input file
+- expected output not where you thought
+- job runs, but not on the files you intended
+
+## Common failure 2: missing module or wrong environment
+
+Check:
+
+```bash
+module list
+which gcc
+which python
+```
+
+Symptoms:
+
+- `command not found`
+- wrong program version
+- different behavior than expected
+
+## Common failure 3: bad command in the script
+
+Example:
+
+```bash
+pythn myscript.py
+```
+
+What happens:
+
+- the job submits
+- the job may fail quickly
+- the output file reveals the typo
+
+## Common failure 4: unrealistic request
+
+Possible causes:
+
+- too much wall time
+- wrong partition
+- too many resources for the exercise
+
+::: notes
+Keep this beginner-friendly. The goal is recognition, not policy detail.
+:::
+
+## Cancelling a job
+
+Use:
+
+```bash
+scancel <jobid>
+```
+
+Use cases:
+
+- submitted by mistake
+- wrong script
+- bad resource request
+- runaway test job
+
+## Demo: intentionally broken job
+
+```bash
+#!/bin/bash
+#SBATCH -J broken_test
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH -t 00:02:00
+#SBATCH -p normal
+
+module load gcc
+pythn myscript.py
+```
+
+Question for participants:
+
+**What do you expect to happen?**
+
+## Guided diagnosis walkthrough
+
+Work through the evidence in this order:
+
+```bash
+squeue -u $USER
+sacct
+cat slurm-*.out
+pwd
+ls
+module list
+which python
+```
+
+## Triage checklist
+
+When a job fails:
+
+- check status
+- check accounting
+- read output
+- verify working directory
+- verify files
+- verify modules
+- fix one thing
+- resubmit
+
+## Mini exercise
+
+1. Submit a short job
+2. Inspect it with `squeue`
+3. Inspect it with `sacct`
+4. Read its output
+5. Cancel a test job or diagnose a broken one
+
+::: notes
+If time is tight, make this a guided whole-room exercise instead of individual work.
+:::
+
+## Demos of failures
+
+Short failures to demonstrate:
+
+- add `sleep 60` and monitor live
+- misspell a command
+- omit a needed module
+- run from the wrong directory
+
+## What you accomplished
+
+You can now:
+
+- monitor a running job
+- inspect completed jobs
+- cancel mistakes
+- debug from output and environment
+- resubmit with more confidence
+
+## Bridge to Workshop 3
+
+**Next workshop: Modules, Compilers, and Your First C Program on LS6**
+
+That continues the same course arc:
+
+- Linux environment awareness
+- scheduler literacy
+- software building on HPC systems
+
+## Appendix: quick reference
+
+```bash
+squeue -u $USER
+watch squeue -u $USER
+sacct
+sacct -j <jobid>
+scancel <jobid>
+cat slurm-*.out
+tail slurm-*.out
+pwd
+ls -l
+module list
+which python
+which gcc
+```
+
+::: notes
+A clean live demo matters more than extra slides.
+:::
