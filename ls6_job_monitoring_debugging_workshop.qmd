@@ -6,8 +6,10 @@ format:
   revealjs:
     slide-number: true
     incremental: true
-    transition: slide
+    transition: fade
     theme: default
+    controls: true
+    navigation-mode: linear
 execute:
   echo: false
 ---
