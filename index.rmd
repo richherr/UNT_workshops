@@ -22,6 +22,9 @@ output:
 
 - **Materials**: [Monitoring and Debugging SLURM Jobs on Lonestar6](https://richherr.github.io/UNT_workshops/ls6_job_monitoring_debugging_workshop.html)
 
+### Modules, Compilers, and Your First C Program on Lonestar6 (Rich Herrington)
+- **Materials**: [Modules, Compilers, and Your First C Program on Lonestar6](https://richherr.github.io/UNT_workshops/ls6_modules_compilers_first_c_workshop.html)
+
 ### An Introduction to Conda and Mamba on TACC LoneStar6 - Streamlining Scientific Computing with Effective Package Management (Rich Herrington)
 
 - **Materials**: [An Introduction to Conda and Mamba on LS6](https://richherr.github.io/UNT_workshops/conda_ls6.html#/title-slide)
