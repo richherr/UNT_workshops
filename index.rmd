@@ -12,6 +12,10 @@ output:
       css: themes.css
 ---
 
+### Simple Workflows on TACC LoneStar6 (Rich Herrington)
+
+- **Materials**: [Simple Worflows on LoneStar6 LS6](https://richherr.github.io/UNT_workshops/richherr.github.io/UNT_workshops/s6_first_job_workshop.html#/title-slide)
+
 ### An Introduction to Conda and Mamba on TACC LoneStar6 - Streamlining Scientific Computing with Effective Package Management (Rich Herrington)
 
 - **Materials**: [An Introduction to Conda and Mamba on LS6](https://richherr.github.io/UNT_workshops/conda_ls6.html#/title-slide)

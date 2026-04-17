@@ -1,0 +1,549 @@
+---
+title: "Simple Workflows on Lonestar6"
+subtitle: "A 1-hour beginner workshop"
+author: "Richard Herrington"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    transition: fade
+    code-overflow: wrap
+    incremental: false
+    preview-links: auto
+    controls: true
+    navigation-mode: linear
+---
+
+## Welcome
+
+**Goal:** get from login to a successfully submitted SLURM job.
+
+By the end of this workshop, participants will be able to:
+
+- explain login nodes vs compute nodes
+- navigate to a working directory
+- load a module
+- write a simple SLURM script
+- submit with `sbatch`
+- inspect job output
+
+::: notes
+Open by telling participants this is not a survey of all HPC topics.
+It is one coherent workflow.
+Success for today = "I submitted a real job and understand what happened."
+Suggested time: 3 minutes.
+:::
+
+## Workshop map
+
+| Time | Focus |
+|---|---|
+| 0–10 min | What HPC is and how the cluster works |
+| 10–20 min | Minimal Linux skills for this workshop |
+| 20–28 min | Modules and environments |
+| 28–48 min | Writing and submitting a SLURM job |
+| 48–56 min | Debugging common beginner mistakes |
+| 56–60 min | Wrap-up and next steps |
+
+::: notes
+This slide sets expectations and keeps the session paced.
+If time gets tight, shorten the Linux section and keep the SLURM section intact.
+:::
+
+## What is HPC?
+
+High-performance computing helps when:
+
+- one machine is too slow
+- one machine does not have enough memory
+- work can be split across many cores or nodes
+
+In practice, HPC usually means:
+
+- shared systems
+- queued work
+- command-line workflows
+- resource-aware computing
+
+::: notes
+Keep this concrete. Avoid a long definition.
+The point is to motivate why the scheduler exists.
+:::
+
+## Mental model: the cluster
+
+```text
+Your laptop
+   |
+   | ssh
+   v
+Login node  ---> prepare files, edit scripts, load modules, submit jobs
+   |
+   | sbatch
+   v
+SLURM scheduler ---> decides when and where your work runs
+   |
+   v
+Compute node(s) ---> actual execution
+```
+
+**Key idea:** most real computation happens on compute nodes, not on login nodes.
+
+::: notes
+This is the anchor slide for the whole workshop.
+Come back to this diagram several times.
+:::
+
+## Login nodes vs compute nodes
+
+| Login nodes | Compute nodes |
+|---|---|
+| edit files | run jobs |
+| inspect directories | use allocated resources |
+| move data | execute serious computation |
+| load modules | run batch or interactive workloads |
+| submit jobs | produce output |
+
+**Rule of thumb:** do setup on the login node; do computation on compute nodes.
+
+::: notes
+Ask: "What would be a bad use of a login node?"
+Good answers: long jobs, heavy analysis, training, large parallel runs.
+:::
+
+## The smallest Linux toolkit we need today
+
+Commands we will actually use:
+
+```bash
+pwd
+ls
+cd
+mkdir
+nano
+chmod +x
+```
+
+We are not trying to learn all of Linux today.
+We are learning just enough to complete one real workflow.
+
+::: notes
+Say explicitly that beginners do not need to master Linux before doing useful HPC work.
+This lowers anxiety.
+:::
+
+## Demo: make a working directory
+
+```bash
+mkdir hpc_workshop
+cd hpc_workshop
+pwd
+ls
+```
+
+Questions to ask:
+
+- Where am I?
+- What files are here?
+- What directory will my job run from?
+
+::: notes
+Do this live.
+Emphasize that many beginner errors are really directory errors.
+Suggested time: 4 minutes.
+:::
+
+## Permissions matter
+
+A common pattern:
+
+```bash
+nano hello.sh
+chmod +x hello.sh
+./hello.sh
+```
+
+Operational point:
+
+- a script may exist but not be executable
+- `chmod +x` fixes that for simple cases
+- `ls -l` helps diagnose it
+
+::: notes
+Do not go deep into Unix permissions.
+Teach only the operational point: if a script will not run, check permissions.
+:::
+
+## Quick permission check
+
+Example:
+
+```bash
+ls -l hello.sh
+```
+
+What to look for:
+
+- can you see the file?
+- does it have `x` in the permission string?
+- are you in the right directory?
+
+::: notes
+This slide replaces a crowded explanation slide.
+Keep it quick and practical.
+:::
+
+## Modules: software is part of the environment
+
+On clusters, software is often not globally available in the way users expect on a laptop.
+
+Instead, we load what we need into the current environment.
+
+Common commands:
+
+```bash
+module avail
+module load gcc
+module list
+which gcc
+gcc --version
+```
+
+::: notes
+This is a mindset shift slide.
+The conceptual point matters more than the exact compiler example.
+:::
+
+## Demo: load a compiler module
+
+```bash
+module load gcc
+which gcc
+gcc --version
+```
+
+What this demonstrates:
+
+- the environment changed
+- a command became available
+- the software path is now visible
+
+::: notes
+If module names differ on the actual system, adapt live.
+The important move is: load something, verify it, show that environment matters.
+Suggested time: 5 minutes.
+:::
+
+## Why a scheduler exists
+
+Without a scheduler:
+
+- users compete directly for resources
+- large jobs can overwhelm shared systems
+- there is no fair queueing or accounting
+
+With SLURM:
+
+- users request resources
+- jobs wait in a queue if needed
+- work runs on compute nodes when resources are available
+
+**Mental model:** a SLURM job script is a contract:
+
+> Here is what I want to run, and here are the resources I need.
+
+::: notes
+This is the transition from shell work to real HPC work.
+:::
+
+## Anatomy of a SLURM script
+
+```bash
+#!/bin/bash
+#SBATCH -J hello_job
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH -t 00:01:00
+#SBATCH -p normal
+
+hostname
+date
+```
+
+Two parts:
+
+1. resource requests and metadata
+2. commands to execute
+
+::: notes
+Read the script top to bottom.
+Do not assume students know what a shebang is.
+:::
+
+## What the directives mean
+
+| Line | Meaning |
+|---|---|
+| `#SBATCH -J hello_job` | readable job name |
+| `#SBATCH -N 1` | number of nodes |
+| `#SBATCH -n 1` | number of tasks |
+| `#SBATCH -t 00:01:00` | wall time limit |
+| `#SBATCH -p normal` | partition or queue |
+
+Then the shell commands run on the allocated compute resource.
+
+::: notes
+Keep this slow and explicit.
+New users often confuse tasks, nodes, and cores.
+For this workshop, do not overcomplicate the distinction.
+:::
+
+## Our first job script
+
+Save as `job.slurm`:
+
+```bash
+#!/bin/bash
+#SBATCH -J hello_job
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH -t 00:01:00
+#SBATCH -p normal
+
+echo "Hello from compute node"
+hostname
+date
+pwd
+```
+
+::: notes
+If you want, add `sleep 15` so the queue state is easier to observe live.
+:::
+
+## Why this is a good first job
+
+It is:
+
+- short
+- safe
+- easy to explain
+- easy to debug
+
+It also shows:
+
+- where the job ran
+- when it ran
+- which directory it used
+
+::: notes
+This used to be crowded onto the script slide.
+Splitting it keeps the code readable.
+:::
+
+## Submit and monitor
+
+Submit the job:
+
+```bash
+sbatch job.slurm
+```
+
+Monitor the queue:
+
+```bash
+squeue -u $USER
+```
+
+::: notes
+Explain that `sbatch` submits the job; it does not run it immediately on the login node.
+That misconception is extremely common.
+:::
+
+## Inspect completed work
+
+Read the output file:
+
+```bash
+cat slurm-*.out
+```
+
+Optional accounting check:
+
+```bash
+sacct
+```
+
+Think of the output file as your first debugging checkpoint.
+
+::: notes
+This split gives the commands room to breathe.
+:::
+
+## What the output tells us
+
+A typical output file might show:
+
+```text
+Hello from compute node
+c123-456
+Tue Apr 15 10:31:42 CDT 2026
+/home/username/hpc_workshop
+```
+
+Interpretation:
+
+- the script ran successfully
+- the hostname identifies the execution host
+- the date confirms runtime
+- `pwd` confirms the working directory
+
+::: notes
+Connect this back to the earlier mental model slide.
+"You were on the login node when you submitted; the work ran somewhere else."
+:::
+
+## Very common beginner mistakes I
+
+1. **Wrong directory**
+   - fix with `pwd` and `ls`
+2. **Script name typo**
+   - check `ls`
+3. **Job is pending**
+   - use `squeue -u $USER`
+
+::: notes
+This is where the workshop becomes realistic.
+Students trust the material more when it includes failure modes.
+:::
+
+## Very common beginner mistakes II
+
+4. **Bad command inside the script**
+   - inspect `slurm-*.out`
+5. **Forgot to load needed software**
+   - add `module load ...` in the job script when needed
+
+**Fast triage order:**
+
+1. `pwd`
+2. `ls`
+3. `squeue -u $USER`
+4. `cat slurm-*.out`
+
+::: notes
+This split should keep the slide from running off screen.
+It also gives you a simple troubleshooting sequence to emphasize.
+:::
+
+## Guided exercise
+
+Build and submit a job that prints:
+
+- a greeting
+- the compute node hostname
+- the current date
+- the working directory
+
+::: notes
+Let participants work for a few minutes.
+Circulate around directory problems and typos first; those are the most likely blockers.
+Suggested time: 8 minutes.
+:::
+
+## Exercise steps
+
+1. `mkdir practice_job`
+2. `cd practice_job`
+3. create `job.slurm`
+4. submit with `sbatch`
+5. monitor with `squeue -u $USER`
+6. inspect `slurm-*.out`
+
+Stretch goal:
+
+Add `sleep 20` so you can observe the job in the queue or running state.
+
+::: notes
+This used to be too dense on one slide.
+Now the task and the steps are separate.
+:::
+
+## Debrief: what you just did
+
+You:
+
+- worked safely on a login node
+- created a workspace
+- wrote a SLURM batch script
+- requested compute resources
+- submitted a job to the scheduler
+- inspected the output from a compute node
+
+That is the core beginner HPC workflow.
+
+::: notes
+This slide is important psychologically.
+Name the achievement clearly.
+:::
+
+## One-slide mental summary
+
+```text
+Login node:
+  prepare, edit, inspect, submit
+
+SLURM:
+  queue, schedule, allocate
+
+Compute node:
+  execute, generate output
+```
+
+If participants remember only one thing, let it be this workflow.
+
+::: notes
+Return to the core model one last time.
+:::
+
+## What comes next
+
+Natural follow-up workshops:
+
+- compiling and running C/C++ on LS6
+- reading more detailed job output and debugging failures
+- interactive jobs vs batch jobs
+- MPI and OpenMP basics
+- containers and reproducible workflows
+
+This workshop maps most directly to the book chapters on:
+
+- introduction to HPC
+- Linux fundamentals
+- SLURM job scheduling
+
+::: notes
+This slide connects the short workshop back to the larger curriculum.
+:::
+
+## Presenter checklist
+
+Before teaching, verify:
+
+- login instructions are correct
+- example partition names match the real system
+- module names match the real system
+- workshop directories are writable
+- `sbatch`, `squeue`, and `sacct` are available
+- you have a backup transcript or screenshots in case live demo fails
+
+::: notes
+This is mainly for you as instructor.
+Useful to keep in the deck or move to backup slides later.
+:::
+
+## Thank you
+
+**The Take Home:** You do not need to know all of HPC to do meaningful work.
+You just need one solid workflow and the confidence to run it.
+
+Questions?
