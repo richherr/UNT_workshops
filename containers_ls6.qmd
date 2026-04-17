@@ -411,14 +411,14 @@ http://localhost:10000/
 - You should see the login page - use the username and password that you exported to your environment
 
 ::: fragment
-![](/home/richherr/UNT_workshops/RStudio.png){.fragment width="860" height="425"}
+![](./RStudio.png){.fragment width="860" height="425"}
 :::
 
 ## Accessing the RStudio IDE on your Local Machine {.smaller style="font-size: 0.60em"}
 - Once you login you should see
 
 ::: fragment
-![](~/UNT_workshops/RStudio_IDE.png){.fragment width="860" height="425"}
+![](./RStudio_IDE.png){.fragment width="860" height="425"}
 :::
 
 ## Accessing the RStudio IDE on your Local Machine {.smaller style="font-size: 0.60em"}
@@ -427,8 +427,8 @@ http://localhost:10000/
 ::: fragment
 <table>
 <tr>
-<td><img src="/work/richherr/UNT_workshops/terminal.png" width="400" /></td>
-<td><img src="/work/richherr/UNT_workshops/rstudio_htop.png" width="400" /></td>
+<td><img src="./UNT_workshops/terminal.png" width="400" /></td>
+<td><img src="./UNT_workshops/rstudio_htop.png" width="400" /></td>
 </tr>
 </table>
 :::
@@ -439,7 +439,7 @@ http://localhost:10000/
 ::: fragment
 <table>
 <tr>
-<td><img src="/work/richherr/UNT_workshops/rstudio_version.png" width="400" /></td>
+<td><img src="./UNT_workshops/rstudio_version.png" width="400" /></td>
 </tr>
 </table>
 :::
