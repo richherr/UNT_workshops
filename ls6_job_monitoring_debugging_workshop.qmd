@@ -1,5 +1,5 @@
 ---
-title: "Workshop 2: Monitoring and Debugging SLURM Jobs on Lonestar6"
+title: "Monitoring and Debugging SLURM Jobs on Lonestar6"
 subtitle: "From submission to diagnosis"
 author: "Richard Herrington"
 format:
