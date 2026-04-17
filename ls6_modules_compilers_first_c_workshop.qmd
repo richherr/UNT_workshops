@@ -317,12 +317,4 @@ make
 sbatch run.slurm
 ```
 
-## Presenter checklist
 
-Before teaching, make sure you have:
-
-- a clean `hello.c`
-- a working `Makefile`
-- a known-good `run.slurm`
-- one typo example for debugging
-- one directory with a finished executable
