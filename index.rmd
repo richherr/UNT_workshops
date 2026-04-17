@@ -26,9 +26,9 @@ output:
 
 - **Materials**: [An Introduction to Containers on LS6](https://richherr.github.io/UNT_workshops/containers_ls6.html#/title-slide)
 
+## Fuller Length Courses 
 
-## Fuller Length Courses (Rich Herrington)
-
+### High Performance Computing on LoneStar6 (Rich Herrington)
 - **Materials**: [An Introduction to Containers on LS6](https://richherr.github.io/hpc-course/)
 
 
