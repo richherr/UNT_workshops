@@ -7,6 +7,7 @@ format:
     theme: white
     transition: slide
     self-contained: true
+    controls: true
 code-tools: true
 incremental: true
 title-slide-attributes: 
