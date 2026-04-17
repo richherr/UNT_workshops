@@ -1,7 +1,7 @@
 ---
 title: "Monitoring and Debugging SLURM Jobs on Lonestar6"
 subtitle: "From submission to diagnosis"
-author: "Richard Herrington"
+author: "Rich Herrington <br> DRI, Research Computing Services"
 format:
   revealjs:
     slide-number: true

@@ -1,7 +1,7 @@
 ---
 title: "Modules, Compilers, and Your First C Program on Lonestar6"
 subtitle: "From environment setup to a compiled executable"
-author: "Richard Herrington"
+author: "Rich Herrington <br> DRI, Research Computing Services"
 format:
   revealjs:
     theme: simple

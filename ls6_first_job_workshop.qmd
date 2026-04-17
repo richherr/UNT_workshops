@@ -1,7 +1,7 @@
 ---
 title: "Simple Workflows on Lonestar6"
 subtitle: "A 1-hour beginner workshop"
-author: "Richard Herrington"
+author: "Rich Herrington <br> DRI, Research Computing Services"
 format:
   revealjs:
     theme: simple
