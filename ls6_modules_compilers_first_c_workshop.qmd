@@ -1,0 +1,328 @@
+---
+title: "Modules, Compilers, and Your First C Program on Lonestar6"
+subtitle: "From environment setup to a compiled executable"
+author: "Richard Herrington"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    transition: fade
+    code-overflow: wrap
+    incremental: false
+    preview-links: auto
+    controls: true
+    navigation-mode: linear
+title-slide-attributes: 
+  data-background-image: unt.png
+  data-background-size: 23%
+  data-background-position: 2% 2%
+---
+
+## Workshop 3 in the course sequence
+
+- Workshop 1: first login, basic Linux, first SLURM job
+- Workshop 2: monitor, inspect, cancel, debug
+- **Workshop 3: modules, compilers, first C program**
+- Later: MPI/OpenMP, containers
+
+## Workshop outcomes
+
+By the end of this session, you should be able to:
+
+- explain what compilation does
+- load a compiler module
+- check which compiler you are using
+- compile a small C program with `gcc`
+- run the executable
+- prepare compiled code for a SLURM job
+
+## Mental model: from source code to executable
+
+```text
+source code (.c)
+      ↓
+compiler (gcc)
+      ↓
+executable (binary file)
+      ↓
+run on LS6
+```
+
+Key idea:
+
+- source code is human-readable
+- executables are what the system runs
+
+## Why compilation matters in HPC
+
+On HPC systems:
+
+- software is often not globally installed
+- compiler versions matter
+- toolchains affect behavior
+- performance depends on how code is built
+
+## Two compilers you will hear about
+
+- `gcc` → C
+- `g++` → C++
+
+Today we focus on **C with `gcc`**.
+
+## Modules first, then compilation
+
+Before compiling, load a compiler environment:
+
+```bash
+module avail
+module load gcc
+module list
+```
+
+Key idea:
+
+- on clusters, software is often environment-based
+
+## Check what compiler you are actually using
+
+```bash
+which gcc
+gcc --version
+```
+
+Why this matters:
+
+- confirms the command exists
+- confirms which version is active
+- avoids guessing
+
+## Your first C program
+
+Create a file:
+
+```bash
+nano hello.c
+```
+
+Add:
+
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Hello from C on LS6\n");
+    return 0;
+}
+```
+
+## Compile the program
+
+```bash
+gcc hello.c -o hello
+```
+
+What that means:
+
+- `hello.c` = source file
+- `-o hello` = name of the executable
+
+## Run the executable
+
+```bash
+./hello
+```
+
+Expected result:
+
+```text
+Hello from C on LS6
+```
+
+## Inspect what you created
+
+```bash
+ls -l
+```
+
+You should now see at least:
+
+- `hello.c`
+- `hello`
+
+Key idea:
+
+- source file and executable are different files
+
+## Mental model: what just happened?
+
+You:
+
+- wrote source code
+- used a compiler
+- created an executable
+- ran the executable from the shell
+
+That is the core compiled workflow.
+
+## Add a common optimization flag
+
+```bash
+gcc hello.c -o hello -O2
+```
+
+Useful levels:
+
+- `-O0` = no optimization
+- `-O2` = standard choice
+- `-O3` = more aggressive
+
+For beginners, `-O2` is a good default.
+
+## Very small C++ contrast
+
+```bash
+g++ hello.cpp -o hello_cpp
+```
+
+Key idea:
+
+- same overall workflow
+- different compiler for C++
+
+We are not going deep into C++ today.
+
+## Automating builds with a Makefile
+
+Create a file named `Makefile`:
+
+```make
+all:
+	gcc hello.c -o hello
+```
+
+Then run:
+
+```bash
+make
+```
+
+Why this matters:
+
+- avoids retyping build commands
+- scales to larger projects
+
+## Compiling on login nodes, running on compute nodes
+
+Good rule of thumb:
+
+- **compile on login nodes** for small builds
+- **run heavier workloads through SLURM**
+
+That keeps the workflow aligned with the earlier workshops.
+
+## Running compiled code through SLURM
+
+Example `run.slurm`:
+
+```bash
+#!/bin/bash
+#SBATCH -J compile_test
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH -t 00:05:00
+#SBATCH -p normal
+
+./hello
+```
+
+Submit with:
+
+```bash
+sbatch run.slurm
+```
+
+## Common beginner failures
+
+- forgot `module load gcc`
+- typo in source code
+- forgot `-o hello`
+- tried to run from the wrong directory
+- executable is missing because compile failed
+
+## Debug checklist for compilation
+
+Check in this order:
+
+```bash
+module list
+which gcc
+ls -l
+gcc hello.c -o hello
+./hello
+```
+
+If compilation fails, read the compiler message carefully.
+
+## Mini exercise
+
+1. create `hello.c`
+2. load `gcc`
+3. compile with `gcc hello.c -o hello`
+4. run `./hello`
+5. recompile with `-O2`
+6. submit through SLURM if time allows
+
+## Instructor demo options
+
+Choose one short demo:
+
+- compile successfully from scratch
+- introduce a small typo in C code
+- forget to load the compiler module
+- run from the wrong directory
+
+## What you accomplished
+
+You can now:
+
+- load a compiler module
+- verify your toolchain
+- compile a C program
+- run the executable
+- connect compiled code to SLURM
+
+## Bridge to Workshop 4
+
+**Next workshop: Parallel Computing with MPI and OpenMP on LS6**
+
+That continues the same course arc:
+
+- environment awareness
+- scheduler literacy
+- software building
+- then parallel execution
+
+## Quick reference
+
+```bash
+module avail
+module load gcc
+module list
+which gcc
+gcc --version
+gcc hello.c -o hello
+gcc hello.c -o hello -O2
+./hello
+make
+sbatch run.slurm
+```
+
+## Presenter checklist
+
+Before teaching, make sure you have:
+
+- a clean `hello.c`
+- a working `Makefile`
+- a known-good `run.slurm`
+- one typo example for debugging
+- one directory with a finished executable

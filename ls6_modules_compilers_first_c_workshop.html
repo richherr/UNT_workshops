@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="ls6_modules_compilers_first_c_workshop_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ls6_modules_compilers_first_c_workshop_files/libs/quarto-html/tabby.min.js"></script>
+<script src="ls6_modules_compilers_first_c_workshop_files/libs/quarto-html/popper.min.js"></script>
+<script src="ls6_modules_compilers_first_c_workshop_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="ls6_modules_compilers_first_c_workshop_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ls6_modules_compilers_first_c_workshop_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="ls6_modules_compilers_first_c_workshop_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <meta name="author" content="Richard Herrington">
+  <title>Modules, Compilers, and Your First C Program on Lonestar6</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/dist/theme/quarto-7262fb28817f0fdf3c802d565bf43787.css">
+  <link href="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="unt.png" data-background-position="2% 2%" data-background-size="23%" class="quarto-title-block center">
+  <h1 class="title">Modules, Compilers, and Your First C Program on Lonestar6</h1>
+  <p class="subtitle">From environment setup to a compiled executable</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Richard Herrington 
+</div>
+</div>
+</div>
+
+</section>
+<section id="workshop-3-in-the-course-sequence" class="slide level2">
+<h2>Workshop 3 in the course sequence</h2>
+<ul>
+<li>Workshop 1: first login, basic Linux, first SLURM job</li>
+<li>Workshop 2: monitor, inspect, cancel, debug</li>
+<li><strong>Workshop 3: modules, compilers, first C program</strong></li>
+<li>Later: MPI/OpenMP, containers</li>
+</ul>
+</section>
+<section id="workshop-outcomes" class="slide level2">
+<h2>Workshop outcomes</h2>
+<p>By the end of this session, you should be able to:</p>
+<ul>
+<li>explain what compilation does</li>
+<li>load a compiler module</li>
+<li>check which compiler you are using</li>
+<li>compile a small C program with <code>gcc</code></li>
+<li>run the executable</li>
+<li>prepare compiled code for a SLURM job</li>
+</ul>
+</section>
+<section id="mental-model-from-source-code-to-executable" class="slide level2">
+<h2>Mental model: from source code to executable</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href=""></a>source code (.c)</span>
+<span id="cb1-2"><a href=""></a>      ↓</span>
+<span id="cb1-3"><a href=""></a>compiler (gcc)</span>
+<span id="cb1-4"><a href=""></a>      ↓</span>
+<span id="cb1-5"><a href=""></a>executable (binary file)</span>
+<span id="cb1-6"><a href=""></a>      ↓</span>
+<span id="cb1-7"><a href=""></a>run on LS6</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Key idea:</p>
+<ul>
+<li>source code is human-readable</li>
+<li>executables are what the system runs</li>
+</ul>
+</section>
+<section id="why-compilation-matters-in-hpc" class="slide level2">
+<h2>Why compilation matters in HPC</h2>
+<p>On HPC systems:</p>
+<ul>
+<li>software is often not globally installed</li>
+<li>compiler versions matter</li>
+<li>toolchains affect behavior</li>
+<li>performance depends on how code is built</li>
+</ul>
+</section>
+<section id="two-compilers-you-will-hear-about" class="slide level2">
+<h2>Two compilers you will hear about</h2>
+<ul>
+<li><code>gcc</code> → C</li>
+<li><code>g++</code> → C++</li>
+</ul>
+<p>Today we focus on <strong>C with <code>gcc</code></strong>.</p>
+</section>
+<section id="modules-first-then-compilation" class="slide level2">
+<h2>Modules first, then compilation</h2>
+<p>Before compiling, load a compiler environment:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">module</span> avail</span>
+<span id="cb2-2"><a href=""></a><span class="ex">module</span> load gcc</span>
+<span id="cb2-3"><a href=""></a><span class="ex">module</span> list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Key idea:</p>
+<ul>
+<li>on clusters, software is often environment-based</li>
+</ul>
+</section>
+<section id="check-what-compiler-you-are-actually-using" class="slide level2">
+<h2>Check what compiler you are actually using</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">which</span> gcc</span>
+<span id="cb3-2"><a href=""></a><span class="fu">gcc</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Why this matters:</p>
+<ul>
+<li>confirms the command exists</li>
+<li>confirms which version is active</li>
+<li>avoids guessing</li>
+</ul>
+</section>
+<section id="your-first-c-program" class="slide level2">
+<h2>Your first C program</h2>
+<p>Create a file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="fu">nano</span> hello.c</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Add:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href=""></a>    printf<span class="op">(</span><span class="st">"Hello from C on LS6</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb5-5"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-6"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="compile-the-program" class="slide level2">
+<h2>Compile the program</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">gcc</span> hello.c <span class="at">-o</span> hello</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>What that means:</p>
+<ul>
+<li><code>hello.c</code> = source file</li>
+<li><code>-o hello</code> = name of the executable</li>
+</ul>
+</section>
+<section id="run-the-executable" class="slide level2">
+<h2>Run the executable</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="ex">./hello</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected result:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href=""></a>Hello from C on LS6</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="inspect-what-you-created" class="slide level2">
+<h2>Inspect what you created</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="fu">ls</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You should now see at least:</p>
+<ul>
+<li><code>hello.c</code></li>
+<li><code>hello</code></li>
+</ul>
+<p>Key idea:</p>
+<ul>
+<li>source file and executable are different files</li>
+</ul>
+</section>
+<section id="mental-model-what-just-happened" class="slide level2">
+<h2>Mental model: what just happened?</h2>
+<p>You:</p>
+<ul>
+<li>wrote source code</li>
+<li>used a compiler</li>
+<li>created an executable</li>
+<li>ran the executable from the shell</li>
+</ul>
+<p>That is the core compiled workflow.</p>
+</section>
+<section id="add-a-common-optimization-flag" class="slide level2">
+<h2>Add a common optimization flag</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="fu">gcc</span> hello.c <span class="at">-o</span> hello <span class="at">-O2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Useful levels:</p>
+<ul>
+<li><code>-O0</code> = no optimization</li>
+<li><code>-O2</code> = standard choice</li>
+<li><code>-O3</code> = more aggressive</li>
+</ul>
+<p>For beginners, <code>-O2</code> is a good default.</p>
+</section>
+<section id="very-small-c-contrast" class="slide level2">
+<h2>Very small C++ contrast</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="ex">g++</span> hello.cpp <span class="at">-o</span> hello_cpp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Key idea:</p>
+<ul>
+<li>same overall workflow</li>
+<li>different compiler for C++</li>
+</ul>
+<p>We are not going deep into C++ today.</p>
+</section>
+<section id="automating-builds-with-a-makefile" class="slide level2">
+<h2>Automating builds with a Makefile</h2>
+<p>Create a file named <code>Makefile</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource make number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a href=""></a>all:</span>
+<span id="cb12-2"><a href=""></a>    gcc hello.c -o hello</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="fu">make</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Why this matters:</p>
+<ul>
+<li>avoids retyping build commands</li>
+<li>scales to larger projects</li>
+</ul>
+</section>
+<section id="compiling-on-login-nodes-running-on-compute-nodes" class="slide level2">
+<h2>Compiling on login nodes, running on compute nodes</h2>
+<p>Good rule of thumb:</p>
+<ul>
+<li><strong>compile on login nodes</strong> for small builds</li>
+<li><strong>run heavier workloads through SLURM</strong></li>
+</ul>
+<p>That keeps the workflow aligned with the earlier workshops.</p>
+</section>
+<section id="running-compiled-code-through-slurm" class="slide level2">
+<h2>Running compiled code through SLURM</h2>
+<p>Example <code>run.slurm</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href=""></a><span class="co">#!/bin/bash</span></span>
+<span id="cb14-2"><a href=""></a><span class="co">#SBATCH -J compile_test</span></span>
+<span id="cb14-3"><a href=""></a><span class="co">#SBATCH -N 1</span></span>
+<span id="cb14-4"><a href=""></a><span class="co">#SBATCH -n 1</span></span>
+<span id="cb14-5"><a href=""></a><span class="co">#SBATCH -t 00:05:00</span></span>
+<span id="cb14-6"><a href=""></a><span class="co">#SBATCH -p normal</span></span>
+<span id="cb14-7"><a href=""></a></span>
+<span id="cb14-8"><a href=""></a><span class="ex">./hello</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Submit with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="ex">sbatch</span> run.slurm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="common-beginner-failures" class="slide level2">
+<h2>Common beginner failures</h2>
+<ul>
+<li>forgot <code>module load gcc</code></li>
+<li>typo in source code</li>
+<li>forgot <code>-o hello</code></li>
+<li>tried to run from the wrong directory</li>
+<li>executable is missing because compile failed</li>
+</ul>
+</section>
+<section id="debug-checklist-for-compilation" class="slide level2">
+<h2>Debug checklist for compilation</h2>
+<p>Check in this order:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="ex">module</span> list</span>
+<span id="cb16-2"><a href=""></a><span class="fu">which</span> gcc</span>
+<span id="cb16-3"><a href=""></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb16-4"><a href=""></a><span class="fu">gcc</span> hello.c <span class="at">-o</span> hello</span>
+<span id="cb16-5"><a href=""></a><span class="ex">./hello</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If compilation fails, read the compiler message carefully.</p>
+</section>
+<section id="mini-exercise" class="slide level2">
+<h2>Mini exercise</h2>
+<ol type="1">
+<li>create <code>hello.c</code></li>
+<li>load <code>gcc</code></li>
+<li>compile with <code>gcc hello.c -o hello</code></li>
+<li>run <code>./hello</code></li>
+<li>recompile with <code>-O2</code></li>
+<li>submit through SLURM if time allows</li>
+</ol>
+</section>
+<section id="instructor-demo-options" class="slide level2">
+<h2>Instructor demo options</h2>
+<p>Choose one short demo:</p>
+<ul>
+<li>compile successfully from scratch</li>
+<li>introduce a small typo in C code</li>
+<li>forget to load the compiler module</li>
+<li>run from the wrong directory</li>
+</ul>
+</section>
+<section id="what-you-accomplished" class="slide level2">
+<h2>What you accomplished</h2>
+<p>You can now:</p>
+<ul>
+<li>load a compiler module</li>
+<li>verify your toolchain</li>
+<li>compile a C program</li>
+<li>run the executable</li>
+<li>connect compiled code to SLURM</li>
+</ul>
+</section>
+<section id="bridge-to-workshop-4" class="slide level2">
+<h2>Bridge to Workshop 4</h2>
+<p><strong>Next workshop: Parallel Computing with MPI and OpenMP on LS6</strong></p>
+<p>That continues the same course arc:</p>
+<ul>
+<li>environment awareness</li>
+<li>scheduler literacy</li>
+<li>software building</li>
+<li>then parallel execution</li>
+</ul>
+</section>
+<section id="quick-reference" class="slide level2">
+<h2>Quick reference</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href=""></a><span class="ex">module</span> avail</span>
+<span id="cb17-2"><a href=""></a><span class="ex">module</span> load gcc</span>
+<span id="cb17-3"><a href=""></a><span class="ex">module</span> list</span>
+<span id="cb17-4"><a href=""></a><span class="fu">which</span> gcc</span>
+<span id="cb17-5"><a href=""></a><span class="fu">gcc</span> <span class="at">--version</span></span>
+<span id="cb17-6"><a href=""></a><span class="fu">gcc</span> hello.c <span class="at">-o</span> hello</span>
+<span id="cb17-7"><a href=""></a><span class="fu">gcc</span> hello.c <span class="at">-o</span> hello <span class="at">-O2</span></span>
+<span id="cb17-8"><a href=""></a><span class="ex">./hello</span></span>
+<span id="cb17-9"><a href=""></a><span class="fu">make</span></span>
+<span id="cb17-10"><a href=""></a><span class="ex">sbatch</span> run.slurm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="presenter-checklist" class="slide level2">
+<h2>Presenter checklist</h2>
+<p>Before teaching, make sure you have:</p>
+<ul>
+<li>a clean <code>hello.c</code></li>
+<li>a working <code>Makefile</code></li>
+<li>a known-good <code>run.slurm</code></li>
+<li>one typo example for debugging</li>
+<li>one directory with a finished executable</li>
+</ul>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="ls6_modules_compilers_first_c_workshop_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': false,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
