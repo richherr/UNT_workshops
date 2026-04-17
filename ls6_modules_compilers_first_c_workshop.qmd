@@ -18,7 +18,7 @@ title-slide-attributes:
   data-background-position: 2% 2%
 ---
 
-## Workshop 3 in the course sequence
+## This is Worshop 3 in the course sequence
 
 - Workshop 1: first login, basic Linux, first SLURM job
 - Workshop 2: monitor, inspect, cancel, debug
