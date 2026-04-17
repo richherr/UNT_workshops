@@ -12,6 +12,10 @@ format:
     preview-links: auto
     controls: true
     navigation-mode: linear
+title-slide-attributes: 
+  data-background-image: unt.png
+  data-background-size: 23%
+  data-background-position: 2% 2%
 ---
 
 ## Welcome
