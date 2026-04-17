@@ -12,6 +12,8 @@ output:
       css: themes.css
 ---
 
+## Workshops
+
 ### Simple Workflows on TACC LoneStar6 (Rich Herrington)
 
 - **Materials**: [Simple Workflows on LoneStar6 LS6](https://richherr.github.io/UNT_workshops/ls6_first_job_workshop.html#/title-slide)
@@ -25,5 +27,8 @@ output:
 - **Materials**: [An Introduction to Containers on LS6](https://richherr.github.io/UNT_workshops/containers_ls6.html#/title-slide)
 
 
+## Fuller Length Courses (Rich Herrington)
+
+- **Materials**: [An Introduction to Containers on LS6](https://richherr.github.io/hpc-course/)
 
 
