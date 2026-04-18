@@ -36,6 +36,6 @@ output:
 ## Fuller Length Courses 
 
 ### High Performance Computing on LoneStar6 (Rich Herrington)
-- **Materials**: [An Introduction to Containers on LS6](https://richherr.github.io/hpc-course/)
+- **Materials**: [High Performance Computing on LoneStar6](https://richherr.github.io/hpc-course/)
 
 
