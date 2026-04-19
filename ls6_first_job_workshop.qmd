@@ -526,21 +526,6 @@ This workshop maps most directly to the book chapters on:
 - SLURM job scheduling
 
 ::: notes
-This slide connects the short workshop back to the larger curriculum.
-:::
-
-## Presenter checklist
-
-Before teaching, verify:
-
-- login instructions are correct
-- example partition names match the real system
-- module names match the real system
-- workshop directories are writable
-- `sbatch`, `squeue`, and `sacct` are available
-- you have a backup transcript or screenshots in case live demo fails
-
-::: notes
 This is mainly for you as instructor.
 Useful to keep in the deck or move to backup slides later.
 :::
